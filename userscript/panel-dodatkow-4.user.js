@@ -45,7 +45,7 @@
             .then(responseText => {
                 const script = document.createElement('script');
                 script.textContent = responseText;
-                document.head.appendChild(script);
+                document.head.append(script);
             });
     }
 
