@@ -1,0 +1,105 @@
+﻿.host {
+    top: 0px;
+    left: 0px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.main_box {
+    position: absolute;
+
+    max-width: 500px;
+    max-height: 300px;
+    color: whitesmoke;
+    background-color: #101010AA;
+    border: 2px solid silver;
+    border-radius: 7px;
+    font-weight: bold;
+    font-family: arial;
+    font-size: 12px;
+    overflow: hidden;
+    user-select: none;
+    -ms-user-select: none;
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+
+    background-color: #101010CC;
+
+    padding-left: 4px;
+    padding-right: 5px;
+    padding-top: 3px;
+    padding-bottom: 4px;
+
+}
+
+
+.content {
+    border-top: 2px solid silver;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.close {
+    padding: 5px;
+    padding-right: 6px;
+    margin: -5px;
+    margin-right: -6px;
+}
+
+.content_left {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    width: 200px;
+    padding: 5px;
+    border-right: 2px solid silver;
+}
+
+.search {
+    height: 12px;
+
+    font-size: 12px;
+    background-color: #101010AA;
+
+
+}
+
+.content_label {
+    margin-top: 10px;
+}
+
+.content_list {
+    display: flex;
+    flex-direction: column;
+
+    max-height: 237px;
+
+    margin-top: 7px;
+    margin-left: -5px;
+    margin-right: -5px;
+    padding: 5px;
+
+    border-top: 2px solid silver;
+
+    overflow-y: scroll;
+    scrollbar-color: silver #101010AA;
+}
+
+.button {
+    border: 2px solid silver;
+    padding: 5px;
+    margin-top: 4px;
+    border-radius: 7px;
+}
+
+.content_right {
+    margin: 5px;
+}
+
