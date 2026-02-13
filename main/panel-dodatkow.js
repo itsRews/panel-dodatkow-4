@@ -1,4 +1,4 @@
-﻿(() => {
+﻿(async () => {
     ///------------\\\
     ///            \\\
     ///------------\\\
@@ -18,7 +18,7 @@
     css.href = "https://itsrews.github.io/panel-dodatkow-4/main/panel-dodatkow.css?v=" + DATE;
     document.head.append(css);
 
-    fetch(`https://itsrews.github.io/panel-dodatkow-4/utils/globals.js?v=${DATE}`)
+    await fetch(`https://itsrews.github.io/panel-dodatkow-4/utils/globals.js?v=${DATE}`)
         .then(response => response.text())
         .then(responseText => {
             const script = document.createElement('script');
