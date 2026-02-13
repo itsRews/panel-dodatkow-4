@@ -33,7 +33,7 @@
 
     const main_top = document.createElement("div");
     main_top.classList.add("top");
-    main.append(main_top);
+    mainBody.append(main_top);
 
     const main_title = document.createElement("label");
     main_title.textContent = "[REWS] Panel Dodatków 4";
