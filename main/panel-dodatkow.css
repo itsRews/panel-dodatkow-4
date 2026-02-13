@@ -7,7 +7,7 @@
     height: 100%;
 }
 
-.main_box {
+.REWS_PD4_main-body {
     position: absolute;
 
     max-width: 500px;
@@ -24,7 +24,7 @@
     -ms-user-select: none;
 }
 
-.top {
+.REWS_PD4_main-top {
     display: flex;
     justify-content: space-between;
 
@@ -38,7 +38,7 @@
 }
 
 
-.content {
+.REWS_PD4_main-content {
     border-top: 2px solid silver;
 
     display: flex;
@@ -46,14 +46,14 @@
     flex-wrap: nowrap;
 }
 
-.close {
+.REWS_PD4_main-close {
     padding: 5px;
     padding-right: 6px;
     margin: -5px;
     margin-right: -6px;
 }
 
-.content_left {
+.REWS_PD4_main-content_left {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -63,7 +63,7 @@
     border-right: 2px solid silver;
 }
 
-.search {
+.REWS_PD4_main-search {
     height: 12px;
 
     font-size: 12px;
@@ -72,11 +72,11 @@
 
 }
 
-.content_label {
+.REWS_PD4_main-content_label {
     margin-top: 10px;
 }
 
-.content_list {
+.REWS_PD4_main-content_list {
     display: flex;
     flex-direction: column;
 
@@ -93,14 +93,14 @@
     scrollbar-color: silver #101010AA;
 }
 
-.button {
+.REWS_PD4_main-button {
     border: 2px solid silver;
     padding: 5px;
     margin-top: 4px;
     border-radius: 7px;
 }
 
-.content_right {
+.REWS_PD4_main-content_right {
     margin: 5px;
 }
 
