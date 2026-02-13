@@ -38,8 +38,8 @@ REWS_PD4.functions.templates.makeDraggable = (parent, element, identifier, onCli
     const storedY = localStorage.getItem(identifier + "-y");
 
     if (storedX && storedY) {
-        parent.style.left = storedX + "px";
-        parent.style.top = storedY + "px";
+        parent.style.left = storedX;
+        parent.style.top = storedY;
     } else {
         parent.style.left = "50px";
         parent.style.top = "50px";
@@ -72,8 +72,8 @@ REWS_PD4.functions.templates.makeDraggable = (parent, element, identifier, onCli
         let newX = event.clientX - offsetX;
         let newY = event.clientY - offsetY;
 
-        const maxX = window.offsetWidth - parent.offsetWidth;
-        const maxY = window.offsetHeight - parent.offsetHeight;
+        const maxX = window.innerWidth - parent.offsetWidth;
+        const maxY = window.innerHeight - parent.offsetHeight;
 
         newX = Math.max(0, Math.min(newX, maxX));
         newY = Math.max(0, Math.min(newY, maxY));
