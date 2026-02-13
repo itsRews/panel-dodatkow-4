@@ -27,31 +27,12 @@
         });
 
 
-    const mainBody = document.createElement("div");
-    mainBody.classList.add(GLOBAL_IDENTIFIER + "main_box");
-    host.append(mainBody)
+    REWS_PD4.functions.templates.createBody(host, PRIVATE_IDENTIFIER, false);
 
-    const main_top = document.createElement("div");
-    main_top.classList.add("top");
-    mainBody.append(main_top);
-
-    const main_title = document.createElement("label");
-    main_title.textContent = "[REWS] Panel Dodatków 4";
-    main_top.append(main_title);
-
-    const main_close = document.createElement("label");
-    main_close.textContent = "X";
-    main_top.append(main_close);
-
-
-
-    const main_content = document.createElement("div");
-    main_content.classList.add("content");
-    mainBody.append(main_content);
 
     const main_content_left = document.createElement("div");
     main_content_left.classList.add("content_left");
-    main_content.append(main_content_left);
+    REWS_PD4.HTML.mainPanel.content.append(main_content_left);
 
     const addon_search = document.createElement("input");
     addon_search.type = "text";
@@ -100,7 +81,7 @@
 
     const main_content_right = document.createElement("div");
     main_content_right.classList.add("content_right");
-    main_content.append(main_content_right);
+    REWS_PD4.HTML.mainPanel.content.append(main_content_right);
 
     const fillerText = document.createElement("label");
     fillerText.textContent = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";

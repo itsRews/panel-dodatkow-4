@@ -1,6 +1,7 @@
-﻿.host {
-    top: 0px;
-    left: 0px;
+﻿.REWS_PD4-host {
+    z-index: 99999;
+    top: 0;
+    left: 0;
     position: absolute;
     width: 100%;
     height: 100%;

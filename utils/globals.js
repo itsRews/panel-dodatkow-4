@@ -130,16 +130,31 @@ REWS_PD4.functions.templates.createTop = (parent, identifier, contentToHide, clo
     top.classList.add(identifier + "-top");
     parent.append(top);
 
+    const title = document.createElement("label");
+    top.append(title);
+
+    const expanded = localStorage.getItem(identifier + "-expanded");
+
+    if (expanded === "false") {
+        title.textContent = "[R] PD4";
+    } else {
+        title.textContent = "[REWS] Panel Dodatków 4";
+
+        localStorage.setItem(identifier + "-expanded", "true");
+    }
+
 
     REWS_PD4.functions.templates.makeDraggable(parent, top, identifier, () => {
         const expanded = localStorage.getItem(identifier + "-expanded");
 
         if (expanded === "false") {
             contentToHide.style.display = "flex";
+            title.textContent = "[REWS] Panel Dodatków 4";
 
             localStorage.setItem(identifier + "-expanded", "true");
         } else {
             contentToHide.style.display = "none";
+            title.textContent = "[R] PD4";
 
             localStorage.setItem(identifier + "-expanded", "false");
         }
@@ -167,6 +182,8 @@ REWS_PD4.functions.templates.createContent = (parent, identifier) => {
 
         localStorage.setItem(identifier + "-expanded", "true");
     }
+
+    REWS_PD4.HTML.mainPanel.content = content;
 
     return content;
 }
