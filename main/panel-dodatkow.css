@@ -1,5 +1,4 @@
 ﻿.REWS_PD4-host {
-    z-index: 99999;
     top: 0;
     left: 0;
     position: absolute;
@@ -8,7 +7,12 @@
 }
 
 .REWS_PD4_main-body {
+    z-index: 99999;
+
     position: absolute;
+
+    display: flex;
+    flex-direction: column-reverse;
 
     max-width: 500px;
     max-height: 300px;

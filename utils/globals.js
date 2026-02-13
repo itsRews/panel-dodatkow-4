@@ -125,6 +125,34 @@ REWS_PD4.functions.templates.makeDraggable = (parent, element, identifier, onCli
 }
 
 
+REWS_PD4.functions.templates.createBody = (parent, identifier, closeable) => {
+    const body = document.createElement("div");
+    body.classList.add(identifier + "-body");
+    parent.append(body);
+
+    REWS_PD4.functions.templates.createContent(body, identifier);
+
+    REWS_PD4.functions.templates.createTop(body, identifier, REWS_PD4.HTML.mainPanel.content, closeable);
+}
+
+REWS_PD4.functions.templates.createContent = (parent, identifier) => {
+    const content = document.createElement("div");
+    content.classList.add(identifier + "-content");
+    parent.append(content);
+
+    const expanded = localStorage.getItem(identifier + "-expanded");
+    if (expanded === "false") {
+        content.style.display = "none";
+    } else {
+        content.style.display = "flex";
+
+        localStorage.setItem(identifier + "-expanded", "true");
+    }
+
+    REWS_PD4.HTML.mainPanel.content = content;
+}
+
+
 REWS_PD4.functions.templates.createTop = (parent, identifier, contentToHide, closeable) => {
     const top = document.createElement("div");
     top.classList.add(identifier + "-top");
@@ -134,7 +162,6 @@ REWS_PD4.functions.templates.createTop = (parent, identifier, contentToHide, clo
     top.append(title);
 
     const expanded = localStorage.getItem(identifier + "-expanded");
-
     if (expanded === "false") {
         title.textContent = "[R] PD4";
     } else {
@@ -146,7 +173,6 @@ REWS_PD4.functions.templates.createTop = (parent, identifier, contentToHide, clo
 
     REWS_PD4.functions.templates.makeDraggable(parent, top, identifier, () => {
         const expanded = localStorage.getItem(identifier + "-expanded");
-
         if (expanded === "false") {
             contentToHide.style.display = "flex";
             title.textContent = "[REWS] Panel Dodatków 4";
@@ -166,34 +192,4 @@ REWS_PD4.functions.templates.createTop = (parent, identifier, contentToHide, clo
         close.textContent = "X";
         top.append(close);
     }
-}
-
-REWS_PD4.functions.templates.createContent = (parent, identifier) => {
-    const content = document.createElement("div");
-    content.classList.add(identifier + "-content");
-    parent.append(content);
-
-    const expanded = localStorage.getItem(identifier + "-expanded");
-
-    if (expanded === "false") {
-        content.style.display = "none";
-    } else {
-        content.style.display = "flex";
-
-        localStorage.setItem(identifier + "-expanded", "true");
-    }
-
-    REWS_PD4.HTML.mainPanel.content = content;
-
-    return content;
-}
-
-REWS_PD4.functions.templates.createBody = (parent, identifier, closeable) => {
-    const body = document.createElement("div");
-    body.classList.add(identifier + "-body");
-    parent.append(body);
-
-    const content = REWS_PD4.functions.templates.createContent(parent, identifier);
-
-    REWS_PD4.functions.templates.createTop(body, identifier, content, closeable);
 }
