@@ -14,8 +14,8 @@
     display: flex;
     flex-direction: column-reverse;
 
-    max-width: 500px;
-    max-height: 310px;
+    max-width: 750px;
+    max-height: 395px;
     color: whitesmoke;
     background-color: #101010AA;
     border: 2px solid silver;
@@ -84,7 +84,8 @@
     display: flex;
     flex-direction: column;
 
-    max-height: 237px;
+    max-height: 322px;
+    width: 190px;
 
     margin-top: 7px;
     margin-left: -5px;
