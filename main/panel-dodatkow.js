@@ -124,25 +124,6 @@
     fillerButtons();
 
 
-
-
-
-
-
-
-
-    makeAddonWindowDraggable(
-        main,
-        main_top,
-        "myAddonWindow",
-        () => {
-            console.log("Header clicked (not dragged)");
-        }
-    );
-
-
-
-
 })();
 
 
