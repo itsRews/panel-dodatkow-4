@@ -47,7 +47,7 @@
 
     const main_content = document.createElement("div");
     main_content.classList.add("content");
-    main.append(main_content);
+    mainBody.append(main_content);
 
     const main_content_left = document.createElement("div");
     main_content_left.classList.add("content_left");
