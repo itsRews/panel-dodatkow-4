@@ -125,6 +125,25 @@
 
 
 
+        //
+        //
+
+        function fillerButtons() {
+            for (let i = 0; i < 10; i++) {
+                const keybinds_button = document.createElement("div");
+                keybinds_button.classList.add(PRIVATE_IDENTIFIER + "-button");
+                content_list.append(keybinds_button);
+
+                const keybinds_label = document.createElement("label");
+                keybinds_label.textContent = `> Addon${i}`;
+                keybinds_button.append(keybinds_label);
+            }
+
+        }
+        fillerButtons();
+
+        //
+        //
     }
 
     createMainPanel();
@@ -141,19 +160,7 @@
 
 
 
-    function fillerButtons() {
-        for (let i = 0; i < 10; i++) {
-            const keybinds_button = document.createElement("div");
-            keybinds_button.classList.add(PRIVATE_IDENTIFIER + "-button");
-            content_list.append(keybinds_button);
 
-            const keybinds_label = document.createElement("label");
-            keybinds_label.textContent = `> Addon${i}`;
-            keybinds_button.append(keybinds_label);
-        }
-
-    }
-    fillerButtons();
 
 
 })();
