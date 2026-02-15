@@ -70,7 +70,6 @@
         content_list.append(general_label);
 
         REWS_PD4.functions.templates.createButton(content_list, GLOBAL_IDENTIFIER, "> Aktualności", false, () => {
-            REWS_PD4.functions.removeAllChildren(main_content_right);
 
             REWS_PD4.HTML.mainPanel.rightContentTitle.textContent = "Aktualności";
 
@@ -86,7 +85,6 @@
         });
 
         REWS_PD4.functions.templates.createButton(content_list, GLOBAL_IDENTIFIER, "> Informacje", false, () => {
-            REWS_PD4.functions.removeAllChildren(main_content_right);
 
             REWS_PD4.HTML.mainPanel.rightContentTitle.textContent = "Informacje";
 
@@ -102,9 +100,7 @@
         });
 
         REWS_PD4.functions.templates.createButton(content_list, GLOBAL_IDENTIFIER, "> Keybindy", false, () => {
-            REWS_PD4.functions.removeAllChildren(main_content_right);
-
-            REWS_PD4.HTML.mainPanel.rightContentTitle.textContent = "Aktualności";
+            REWS_PD4.HTML.mainPanel.rightContentTitle.textContent = "Keybindy";
 
             const actual_content = document.createElement("div");
             actual_content.classList.add(PRIVATE_IDENTIFIER + "-right_content");
