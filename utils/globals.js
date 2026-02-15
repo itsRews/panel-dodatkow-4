@@ -193,3 +193,20 @@ REWS_PD4.functions.templates.createTop = (parent, identifier, contentToHide, clo
         top.append(close);
     }
 }
+
+REWS_PD4.functions.templates.createButton = (parent, identifier, text, checkbox, onClick) => {
+    const button = document.createElement("div");
+    button.classList.add(identifier + "-button");
+    parent.append(button);
+
+    const button_label = document.createElement("label");
+    button_label.textContent = text;
+    button.append(button_label);
+
+    function clicked() {
+        if (typeof onClick === "function") {
+            onClick();
+        }
+    }
+    button.addEventListener("click", clicked);
+}

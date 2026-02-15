@@ -27,65 +27,116 @@
         });
 
 
-    REWS_PD4.functions.templates.createBody(host, PRIVATE_IDENTIFIER, false);
+    function createMainPanel() {
+        REWS_PD4.functions.templates.createBody(host, PRIVATE_IDENTIFIER, false);
+
+        //Right side
+        const main_content_right = document.createElement("div");
+        main_content_right.classList.add(PRIVATE_IDENTIFIER + "-content_right");
+        REWS_PD4.HTML.mainPanel.content.append(main_content_right);
+
+        const fillerText = document.createElement("label");
+        fillerText.textContent = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+        main_content_right.append(fillerText);
+
+        REWS_PD4.HTML.mainPanel.rightContentTitle = document.createElement("label");
+        REWS_PD4.HTML.mainPanel.rightContentTitle.classList.add(PRIVATE_IDENTIFIER + "-right_title");
+        REWS_PD4.HTML.mainPanel.rightContentTitle.textContent = "Unloaded";
+        main_content_right.append(REWS_PD4.HTML.mainPanel.rightContentTitle);
+
+        REWS_PD4.HTML.mainPanel.rightContent = document.createElement("div");
+        REWS_PD4.HTML.mainPanel.rightContent.classList.add(PRIVATE_IDENTIFIER + "-right_content");
+        REWS_PD4.HTML.mainPanel.rightContent.textContent = "Unloaded";
+        main_content_right.append(REWS_PD4.HTML.mainPanel.rightContent);
 
 
-    const main_content_left = document.createElement("div");
-    main_content_left.classList.add(PRIVATE_IDENTIFIER + "-content_left");
-    REWS_PD4.HTML.mainPanel.content.append(main_content_left);
+        //Left side
+        const main_content_left = document.createElement("div");
+        main_content_left.classList.add(PRIVATE_IDENTIFIER + "-content_left");
+        REWS_PD4.HTML.mainPanel.content.append(main_content_left);
 
-    const addon_search = document.createElement("input");
-    addon_search.type = "text";
-    addon_search.classList.add(PRIVATE_IDENTIFIER + "-search");
-    addon_search.placeholder = "Wyszukaj...";
-    main_content_left.append(addon_search);
+        const addon_search = document.createElement("input");
+        addon_search.type = "text";
+        addon_search.classList.add(PRIVATE_IDENTIFIER + "-search");
+        addon_search.placeholder = "Wyszukaj...";
+        main_content_left.append(addon_search);
 
-    const content_list = document.createElement("div");
-    content_list.classList.add(PRIVATE_IDENTIFIER + "-content_list");
-    main_content_left.append(content_list);
+        const content_list = document.createElement("div");
+        content_list.classList.add(PRIVATE_IDENTIFIER + "-content_list");
+        main_content_left.append(content_list);
 
-    const general_label = document.createElement("label");
-    general_label.textContent = "Ogólne:";
-    content_list.append(general_label);
+        const general_label = document.createElement("label");
+        general_label.textContent = "Ogólne:";
+        content_list.append(general_label);
 
+        REWS_PD4.functions.templates.createButton(content_list, GLOBAL_IDENTIFIER, "> Aktualności", false, () => {
+            REWS_PD4.functions.removeAllChildren(main_content_right);
 
-    const news_button = document.createElement("div");
-    news_button.classList.add(PRIVATE_IDENTIFIER + "-button");
-    content_list.append(news_button);
+            REWS_PD4.HTML.mainPanel.rightContentTitle.textContent = "Aktualności";
 
-    const news_label = document.createElement("label");
-    news_label.textContent = "> Aktualności";
-    news_button.append(news_label);
+            const actual_content = document.createElement("div");
+            actual_content.classList.add(PRIVATE_IDENTIFIER + "-right_content");
 
-    const info_button = document.createElement("div");
-    info_button.classList.add(PRIVATE_IDENTIFIER + "-button");
-    content_list.append(info_button);
-
-    const info_label = document.createElement("label");
-    info_label.textContent = "> Informacje";
-    info_button.append(info_label);
-
-    const keybinds_button = document.createElement("div");
-    keybinds_button.classList.add(PRIVATE_IDENTIFIER + "-button");
-    content_list.append(keybinds_button);
-
-    const keybinds_label = document.createElement("label");
-    keybinds_label.textContent = "> Keybindy";
-    keybinds_button.append(keybinds_label);
-
-    const addons_label = document.createElement("label");
-    addons_label.textContent = "Dodatki:"
-    addons_label.classList.add(PRIVATE_IDENTIFIER + "-content_label");
-    content_list.append(addons_label);
+            const p = document.createElement("p");
+            p.textContent = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+            actual_content.append(p);
 
 
-    const main_content_right = document.createElement("div");
-    main_content_right.classList.add(PRIVATE_IDENTIFIER + "-content_right");
-    REWS_PD4.HTML.mainPanel.content.append(main_content_right);
+            REWS_PD4.HTML.mainPanel.rightContent = actual_content;
+        });
 
-    const fillerText = document.createElement("label");
-    fillerText.textContent = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
-    main_content_right.append(fillerText);
+        REWS_PD4.functions.templates.createButton(content_list, GLOBAL_IDENTIFIER, "> Informacje", false, () => {
+            REWS_PD4.functions.removeAllChildren(main_content_right);
+
+            REWS_PD4.HTML.mainPanel.rightContentTitle.textContent = "Informacje";
+
+            const actual_content = document.createElement("div");
+            actual_content.classList.add(PRIVATE_IDENTIFIER + "-right_content");
+
+            const p = document.createElement("p");
+            p.textContent = "2 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+            actual_content.append(p);
+
+
+            REWS_PD4.HTML.mainPanel.rightContent = actual_content;
+        });
+
+        REWS_PD4.functions.templates.createButton(content_list, GLOBAL_IDENTIFIER, "> Keybindy", false, () => {
+            REWS_PD4.functions.removeAllChildren(main_content_right);
+
+            REWS_PD4.HTML.mainPanel.rightContentTitle.textContent = "Aktualności";
+
+            const actual_content = document.createElement("div");
+            actual_content.classList.add(PRIVATE_IDENTIFIER + "-right_content");
+
+            const p = document.createElement("p");
+            p.textContent = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+            actual_content.append(p);
+
+
+            REWS_PD4.HTML.mainPanel.rightContent = actual_content;
+        });
+
+        const addons_label = document.createElement("label");
+        addons_label.textContent = "Dodatki:"
+        addons_label.classList.add(PRIVATE_IDENTIFIER + "-content_label");
+        content_list.append(addons_label);
+
+
+
+
+    }
+
+    createMainPanel();
+
+
+
+
+
+
+
+
+
 
 
 

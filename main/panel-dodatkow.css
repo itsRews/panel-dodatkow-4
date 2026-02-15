@@ -46,7 +46,7 @@
     border-top: 2px solid silver;
 
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
     flex-wrap: nowrap;
 }
 
@@ -107,5 +107,13 @@
 
 .REWS_PD4_main-content_right {
     margin: 5px;
+}
+
+.REWS_PD4_main-right-content {
+
+}
+
+.REWS_PD4_main-right-title {
+
 }
 
