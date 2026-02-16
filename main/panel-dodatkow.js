@@ -43,6 +43,7 @@
 
             const buttonColumn = document.createElement("div");
             buttonColumn.classList.add(IDENTIFIER + "-button_column");
+            buttonColumn.addEventListener("wheel", e => e.stopPropagation(), { passive: false });
             leftSide.append(buttonColumn);
 
             const generalTitle = document.createElement("span");
