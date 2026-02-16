@@ -1,162 +1,158 @@
-﻿(async () => {
-    ///------------\\\
-    ///            \\\
-    ///------------\\\
+﻿(async() => {
+    let IDENTIFIER;
 
-    const GLOBAL_IDENTIFIER = "REWS_PD4";
-    const PRIVATE_IDENTIFIER = "REWS_PD4_main";
-    const DATE = new Date().getTime();
+    (async function initialize() {
+        const host = document.createElement("div");
 
-    ///-------------\\\
+        await fetch(`https://itsrews.github.io/panel-dodatkow-4/utils/globals.js?v=${new Date().getTime()}`)
+            .then(response => response.text())
+            .then(responseText => {
+                const script = document.createElement('script');
+                script.textContent = responseText;
+                host.append(script);
+            });
 
-    const host = document.createElement("div");
-    host.classList.add(GLOBAL_IDENTIFIER + "-host");
-    document.body.append(host);
+        const css = document.createElement("link");
+        css.rel = "stylesheet";
+        css.href = `${REWS_PD4.globals.url}/main/panel-dodatkow.css?v=${REWS_PD4.globals.date}`;
+        host.append(css);
 
-    const css = document.createElement("link");
-    css.rel = "stylesheet";
-    css.href = "https://itsrews.github.io/panel-dodatkow-4/main/panel-dodatkow.css?v=" + DATE;
-    document.head.append(css);
+        IDENTIFIER = REWS_PD4.globals.identifier + "-main";
+        REWS_PD4.HTML.host = host;
+        host.classList.add(REWS_PD4.globals.identifier + "-host");
+        document.body.append(REWS_PD4.HTML.host);
+    })();
 
-    await fetch(`https://itsrews.github.io/panel-dodatkow-4/utils/globals.js?v=${DATE}`)
-        .then(response => response.text())
-        .then(responseText => {
-            const script = document.createElement('script');
-            script.textContent = responseText;
-            host.append(script);
-        });
+    (function setupMainPanel() {
+        REWS_PD4.functions.templates.createBody(REWS_PD4.HTML.host, IDENTIFIER, "[REWS] Panel Dodatków 4", "[R] PD4", false);
 
+        const mainPanelContent = document.getElementById(IDENTIFIER + "-content");
 
-    function createMainPanel() {
-        REWS_PD4.functions.templates.createBody(host, PRIVATE_IDENTIFIER, false);
+        (function setupLeftSide() {
+            const leftSide = document.createElement("div");
+            leftSide.classList.add(IDENTIFIER + "-left_side");
+            mainPanelContent.append(leftSide);
 
-        //Right side
-        const main_content_right = document.createElement("div");
-        main_content_right.classList.add(PRIVATE_IDENTIFIER + "-content_right");
-        REWS_PD4.HTML.mainPanel.content.append(main_content_right);
-
-        REWS_PD4.HTML.mainPanel.rightContentTitle = document.createElement("label");
-        REWS_PD4.HTML.mainPanel.rightContentTitle.classList.add(PRIVATE_IDENTIFIER + "-right_title");
-        REWS_PD4.HTML.mainPanel.rightContentTitle.textContent = "Unloaded";
-        main_content_right.append(REWS_PD4.HTML.mainPanel.rightContentTitle);
-
-        REWS_PD4.HTML.mainPanel.rightContent = document.createElement("div");
-        REWS_PD4.HTML.mainPanel.rightContent.classList.add(PRIVATE_IDENTIFIER + "-right_content");
-        REWS_PD4.HTML.mainPanel.rightContent.textContent = "Unloaded";
-        main_content_right.append(REWS_PD4.HTML.mainPanel.rightContent);
+            const search = document.createElement("input");
+            search.classList.add(IDENTIFIER + "-search");
+            search.placeholder = "Wyszukaj...";
+            search.type = "text";
+            leftSide.append(search);
 
 
-        //Left side
-        const main_content_left = document.createElement("div");
-        main_content_left.classList.add(PRIVATE_IDENTIFIER + "-content_left");
-        REWS_PD4.HTML.mainPanel.content.append(main_content_left);
+            const buttonColumn = document.createElement("div");
+            buttonColumn.classList.add(IDENTIFIER + "-button_column");
+            leftSide.append(buttonColumn);
 
-        const addon_search = document.createElement("input");
-        addon_search.type = "text";
-        addon_search.classList.add(PRIVATE_IDENTIFIER + "-search");
-        addon_search.placeholder = "Wyszukaj...";
-        main_content_left.append(addon_search);
+            const generalTitle = document.createElement("span");
+            generalTitle.textContent = "Ogólne:";
+            buttonColumn.append(generalTitle);
 
-        const content_list = document.createElement("div");
-        content_list.classList.add(PRIVATE_IDENTIFIER + "-content_list");
-        main_content_left.append(content_list);
+            REWS_PD4.functions.templates.createButton(buttonColumn, "> Aktualności", false, rightSideContents("Aktualności"));
 
-        const general_label = document.createElement("label");
-        general_label.textContent = "Ogólne:";
-        content_list.append(general_label);
+            REWS_PD4.functions.templates.createButton(buttonColumn, "> Informacje", false, rightSideContents("Informacje"));
 
-        REWS_PD4.functions.templates.createButton(content_list, GLOBAL_IDENTIFIER, "> Aktualności", false, () => {
-
-            REWS_PD4.HTML.mainPanel.rightContentTitle.textContent = "Aktualności";
-
-            const actual_content = document.createElement("div");
-            actual_content.classList.add(PRIVATE_IDENTIFIER + "-right_content");
-
-            const p = document.createElement("p");
-            p.textContent = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
-            actual_content.append(p);
+            REWS_PD4.functions.templates.createButton(buttonColumn, "> Keybindy", false, rightSideContents("Keybindy"));
 
 
-            REWS_PD4.HTML.mainPanel.rightContent = actual_content;
-        });
+            const addonsTitle = document.createElement("span");
+            addonsTitle.textContent = "Dodatki:";
+            addonsTitle.classList.add(IDENTIFIER + "-addons_title");
+            buttonColumn.append(addonsTitle);
 
-        REWS_PD4.functions.templates.createButton(content_list, GLOBAL_IDENTIFIER, "> Informacje", false, () => {
+            //
+            //
+            function fillerButtons() {
+                for (let i = 0; i < 10; i++) {
+                    const keybinds_button = document.createElement("div");
+                    keybinds_button.classList.add(REWS_PD4.globals.identifier + "-button");
+                    buttonColumn.append(keybinds_button);
 
-            REWS_PD4.HTML.mainPanel.rightContentTitle.textContent = "Informacje";
+                    const keybinds_label = document.createElement("label");
+                    keybinds_label.textContent = `> Addon${i}`;
+                    keybinds_button.append(keybinds_label);
+                }
 
-            const actual_content = document.createElement("div");
-            actual_content.classList.add(PRIVATE_IDENTIFIER + "-right_content");
-
-            const p = document.createElement("p");
-            p.textContent = "2 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
-            actual_content.append(p);
-
-
-            REWS_PD4.HTML.mainPanel.rightContent = actual_content;
-        });
-
-        REWS_PD4.functions.templates.createButton(content_list, GLOBAL_IDENTIFIER, "> Keybindy", false, () => {
-            REWS_PD4.HTML.mainPanel.rightContentTitle.textContent = "Keybindy";
-
-            const actual_content = document.createElement("div");
-            actual_content.classList.add(PRIVATE_IDENTIFIER + "-right_content");
-
-            const p = document.createElement("p");
-            p.textContent = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
-            actual_content.append(p);
-
-
-            REWS_PD4.HTML.mainPanel.rightContent = actual_content;
-        });
-
-        const addons_label = document.createElement("label");
-        addons_label.textContent = "Dodatki:"
-        addons_label.classList.add(PRIVATE_IDENTIFIER + "-content_label");
-        content_list.append(addons_label);
-
-
-
-
-        //
-        //
-
-        function fillerButtons() {
-            for (let i = 0; i < 10; i++) {
-                const keybinds_button = document.createElement("div");
-                keybinds_button.classList.add(PRIVATE_IDENTIFIER + "-button");
-                content_list.append(keybinds_button);
-
-                const keybinds_label = document.createElement("label");
-                keybinds_label.textContent = `> Addon${i}`;
-                keybinds_button.append(keybinds_label);
             }
+            fillerButtons();
+            //
+        })();
 
+        (function setupRightSide() {
+            const rightSide = document.createElement("div");
+            rightSide.classList.add(IDENTIFIER + "-right_side");
+            mainPanelContent.append(rightSide);
+
+            const contentTitle = document.createElement("span");
+            contentTitle.classList.add(IDENTIFIER + "-content_title");
+            contentTitle.textContent = "TitleUnloaded";
+            rightSide.append(contentTitle);
+
+            let pageContent =  document.createElement("div");
+            pageContent.classList.add(IDENTIFIER + "-page_content");
+            pageContent.textContent = "ContentUnloaded";
+            rightSide.append(pageContent);
+        })();
+
+        function rightSideContents(page) {
+
+            switch (page) {
+                case "Aktualności": setupNews(); break;
+
+                case "Informacje": setupInfo(); break;
+
+                case "Keybindy": setupKeybinds(); break;
+            }
         }
-        fillerButtons();
+        rightSideContents("Aktualności");
 
-        //
-        //
+    })();
+
+    function setupNews() {
+        /*
+                REWS_PD4.HTML.mainPanel.rightContentTitle.textContent = "Aktualności";
+
+                const actual_content = document.createElement("div");
+                actual_content.classList.add(PRIVATE_IDENTIFIER + "-right_content");
+
+                const p = document.createElement("p");
+                p.textContent = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+                actual_content.append(p);
+
+
+                REWS_PD4.HTML.mainPanel.rightContent = actual_content;
+                */
     }
 
-    createMainPanel();
+    function setupInfo() {
+        /*
+                  REWS_PD4.HTML.mainPanel.rightContentTitle.textContent = "Informacje";
+
+                const actual_content = document.createElement("div");
+                actual_content.classList.add(PRIVATE_IDENTIFIER + "-right_content");
+
+                const p = document.createElement("p");
+                p.textContent = "2 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+                actual_content.append(p);
 
 
+                REWS_PD4.HTML.mainPanel.rightContent = actual_content;*/
+    }
+
+    function setupKeybinds() {
+        /*
+                REWS_PD4.HTML.mainPanel.rightContentTitle.textContent = "Keybindy";
+
+                const actual_content = document.createElement("div");
+                actual_content.classList.add(PRIVATE_IDENTIFIER + "-right_content");
+
+                const p = document.createElement("p");
+                p.textContent = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+                actual_content.append(p);
 
 
-
-
-
-
-
-
-
-
-
-
-
+                REWS_PD4.HTML.mainPanel.rightContent = actual_content;
+                */
+    }
 
 })();
-
-
-
-

@@ -1,36 +1,89 @@
 ﻿.REWS_PD4-host {
-    top: 0;
-    left: 0;
     position: absolute;
+
+    top: 0px;
+    left: 0px;
+
     width: 100%;
     height: 100%;
 }
 
-.REWS_PD4_main-body {
-    z-index: 99999;
 
+.REWS_PD4-main-body {
     position: absolute;
 
     display: flex;
     flex-direction: column-reverse;
 
     max-width: 750px;
-    max-height: 395px;
+    max-height: 400px;
+
     color: whitesmoke;
-    background-color: #101010AA;
-    border: 2px solid silver;
-    border-radius: 7px;
-    font-weight: bold;
+
     font-family: arial;
     font-size: 12px;
+    font-weight: bold;
+
+    background-color: #101010AA;
+
+    border: 2px solid silver;
+    border-radius: 10px;
+
     overflow: hidden;
+
     user-select: none;
     -ms-user-select: none;
+
+    z-index: 99999;
 }
 
-.REWS_PD4_main-top {
+.REWS_PD4-addons-body {
+    position: absolute;
+
+    display: flex;
+    flex-direction: column;
+
+    color: whitesmoke;
+
+    font-family: arial;
+    font-size: 12px;
+    font-weight: bold;
+
+    background-color: #101010AA;
+
+    border: 2px solid silver;
+    border-radius: 10px;
+
+    overflow: hidden;
+
+    user-select: none;
+    -ms-user-select: none;
+
+    z-index: 99999;
+}
+
+.REWS_PD4-main-content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    border-top: 2px solid silver;
+}
+
+.REWS_PD4-addons-content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    border-top: 2px solid silver;
+}
+
+.REWS_PD4-top {
     display: flex;
     justify-content: space-between;
+
+    min-height: 14px;
+    max-height: 14px;
 
     background-color: #101010CC;
 
@@ -38,82 +91,99 @@
     padding-right: 5px;
     padding-top: 3px;
     padding-bottom: 4px;
-
 }
 
-
-.REWS_PD4_main-content {
-    border-top: 2px solid silver;
-
-    display: flex;
-    flex-direction: row-reverse;
-    flex-wrap: nowrap;
-}
-
-.REWS_PD4_main-close {
+.REWS_PD4-close {
     padding: 5px;
     padding-right: 6px;
+
     margin: -5px;
     margin-right: -6px;
 }
 
-.REWS_PD4_main-content_left {
+.REWS_PD4-button {
+    border: 2px solid silver;
+    border-radius: 10px;
+
+    padding: 5px;
+
+    margin-top: 4px;
+}
+
+
+
+.REWS_PD4-main-left_side {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    align-items: stretch;
-    width: 200px;
-    padding: 5px;
+
     border-right: 2px solid silver;
+
+    width: 200px;
+    max-width: 200px;
+
+    max-height: 367px;
+
+    padding: 5px;
+    padding-bottom: 0px;
 }
 
-.REWS_PD4_main-search {
+.REWS_PD4-main-search {
     height: 12px;
 
     font-size: 12px;
+
     background-color: #101010AA;
-
-
 }
 
-.REWS_PD4_main-content_label {
-    margin-top: 10px;
-}
-
-.REWS_PD4_main-content_list {
+.REWS_PD4-main-button_column {
     display: flex;
     flex-direction: column;
 
     max-height: 322px;
     width: 190px;
 
-    margin-top: 7px;
+    margin-top: 5px;
     margin-left: -5px;
     margin-right: -5px;
-    padding: 5px;
+    padding: 10px;
 
     border-top: 2px solid silver;
 
     overflow-y: scroll;
     scrollbar-color: silver #101010AA;
+
 }
 
-.REWS_PD4-button {
-    border: 2px solid silver;
-    padding: 5px;
-    margin-top: 4px;
-    border-radius: 7px;
+.REWS_PD4-main-addons_title {
+    margin-top: 10px;
 }
 
-.REWS_PD4_main-content_right {
+
+
+.REWS_PD4-main-right_side {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+
+    width: 550px;
+    max-width: 550px;
+
+    max-height: 400px;
+
     margin: 5px;
 }
 
-.REWS_PD4_main-right-content {
+.REWS_PD4-main-content_title {
+    border-bottom: solid 2px silver;
 
+    font-size: 21px;
+    text-align: center;
+
+    margin: -1px -5px;
 }
 
-.REWS_PD4_main-right-title {
-
+.REWS_PD4-main-page_content {
+    align-self: center;
 }
-

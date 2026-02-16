@@ -1,25 +1,22 @@
 ﻿const REWS_PD4 = {};
 
+
 REWS_PD4.globals = {};
 
-REWS_PD4.globals.storageKey = "REWS_PD4";
+REWS_PD4.globals.identifier = "REWS_PD4";
+REWS_PD4.globals.url = "https://itsrews.github.io/panel-dodatkow-4";
+REWS_PD4.globals.date = new Date().getTime();
 
 REWS_PD4.HTML = {};
-
-REWS_PD4.HTML.mainPanel = {};
-REWS_PD4.HTML.addons = {};
+REWS_PD4.HTML.host = {};
 
 
 REWS_PD4.functions = {};
+
 REWS_PD4.functions.removeAllChildren = element => {
     while (element.firstChild) {
         element.removeChild(element.firstChild);
     }
-}
-
-REWS_PD4.functions.removeAllChildrenWithSelf = element => {
-    REWS_PD4.functions.removeAllChildren(element);
-    element.parentNode.removeChild(element);
 }
 
 
@@ -124,20 +121,26 @@ REWS_PD4.functions.templates.makeDraggable = (parent, element, identifier, onCli
     });
 }
 
-
-REWS_PD4.functions.templates.createBody = (parent, identifier, closeable) => {
+REWS_PD4.functions.templates.createBody = (parent, identifier, titleOpen, titleClose, isCloseable) => {
     const body = document.createElement("div");
-    body.classList.add(identifier + "-body");
+
+    if (identifier == REWS_PD4.globals.identifier + "-main") body.classList.add(identifier + "-body");
+    else body.classList.add(REWS_PD4.globals.identifier + "-addons-body");
+
     parent.append(body);
 
     REWS_PD4.functions.templates.createContent(body, identifier);
 
-    REWS_PD4.functions.templates.createTop(body, identifier, REWS_PD4.HTML.mainPanel.content, closeable);
+    REWS_PD4.functions.templates.createTop(body, identifier, titleOpen, titleClose, isCloseable);
 }
 
 REWS_PD4.functions.templates.createContent = (parent, identifier) => {
     const content = document.createElement("div");
-    content.classList.add(identifier + "-content");
+
+    if (identifier == REWS_PD4.globals.identifier + "-main") content.classList.add(identifier + "-content");
+    else content.classList.add(REWS_PD4.globals.identifier + "-addons-content");
+
+    content.id = identifier + "-content";
     parent.append(content);
 
     const expanded = localStorage.getItem(identifier + "-expanded");
@@ -148,14 +151,14 @@ REWS_PD4.functions.templates.createContent = (parent, identifier) => {
 
         localStorage.setItem(identifier + "-expanded", "true");
     }
-
-    REWS_PD4.HTML.mainPanel.content = content;
 }
 
 
-REWS_PD4.functions.templates.createTop = (parent, identifier, contentToHide, closeable) => {
+
+
+REWS_PD4.functions.templates.createTop = (parent, identifier, titleOpen, titleClose, isCloseable) => {
     const top = document.createElement("div");
-    top.classList.add(identifier + "-top");
+    top.classList.add(REWS_PD4.globals.identifier + "-top");
     parent.append(top);
 
     const title = document.createElement("label");
@@ -163,50 +166,60 @@ REWS_PD4.functions.templates.createTop = (parent, identifier, contentToHide, clo
 
     const expanded = localStorage.getItem(identifier + "-expanded");
     if (expanded === "false") {
-        title.textContent = "[R] PD4";
+        title.textContent = titleClose;
     } else {
-        title.textContent = "[REWS] Panel Dodatków 4";
+        title.textContent = titleOpen;
 
         localStorage.setItem(identifier + "-expanded", "true");
     }
 
-
+    let contentToHide = document.getElementById(identifier + "-content");
     REWS_PD4.functions.templates.makeDraggable(parent, top, identifier, () => {
         const expanded = localStorage.getItem(identifier + "-expanded");
         if (expanded === "false") {
             contentToHide.style.display = "flex";
-            title.textContent = "[REWS] Panel Dodatków 4";
+            title.textContent = titleOpen;
 
             localStorage.setItem(identifier + "-expanded", "true");
         } else {
             contentToHide.style.display = "none";
-            title.textContent = "[R] PD4";
+            title.textContent = titleClose;
 
             localStorage.setItem(identifier + "-expanded", "false");
         }
     });
 
-    if (closeable) {
+    if (isCloseable) {
         const close = document.createElement("label");
-        close.classList.add(identifier + "-close");
+        close.classList.add(REWS_PD4.globals.identifier + "-close");
         close.textContent = "X";
         top.append(close);
     }
 }
 
-REWS_PD4.functions.templates.createButton = (parent, identifier, text, checkbox, onClick) => {
+REWS_PD4.functions.templates.createButton = (parent, text, checkbox, onClick) => {
     const button = document.createElement("div");
-    button.classList.add(identifier + "-button");
+    button.classList.add(REWS_PD4.globals.identifier + "-button");
     parent.append(button);
 
     const button_label = document.createElement("label");
     button_label.textContent = text;
     button.append(button_label);
 
-    function clicked() {
+    if (typeof checkbox == "Object") {
+        const host = document.getElementById(REWS_PD4.globals.identifier + "-host")
+        fetch(`${REWS_PD4.globals.url}/addons/${text}.js?v=${DATE}`)
+            .then(response => response.text())
+            .then(responseText => {
+                const script = document.createElement('script');
+                script.textContent = responseText;
+                host.append(script);
+            });
+    }
+
+    button.addEventListener("click", () => {
         if (typeof onClick === "function") {
             onClick();
         }
-    }
-    button.addEventListener("click", clicked);
+    });
 }
