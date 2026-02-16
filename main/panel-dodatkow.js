@@ -11,7 +11,7 @@
                 script.textContent = responseText;
                 host.append(script);
             });
-        document.append(host);
+        document.body.append(host);
 
         const css = document.createElement("link");
         css.rel = "stylesheet";
