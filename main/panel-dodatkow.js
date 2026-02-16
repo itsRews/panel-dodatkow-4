@@ -1,7 +1,7 @@
 ﻿(async() => {
     let IDENTIFIER;
 
-    (async function initialize() {
+    await (async function initialize() {
         const host = document.createElement("div");
 
         await fetch(`https://itsrews.github.io/panel-dodatkow-4/utils/globals.js?v=${new Date().getTime()}`)
@@ -48,11 +48,17 @@
             generalTitle.textContent = "Ogólne:";
             buttonColumn.append(generalTitle);
 
-            REWS_PD4.functions.templates.createButton(buttonColumn, "> Aktualności", false, rightSideContents("Aktualności"));
+            REWS_PD4.functions.templates.createButton(buttonColumn, "> Aktualności", false, () => {
+                rightSideContents("Aktualności")
+            });
 
-            REWS_PD4.functions.templates.createButton(buttonColumn, "> Informacje", false, rightSideContents("Informacje"));
+            REWS_PD4.functions.templates.createButton(buttonColumn, "> Informacje", false, () => {
+                rightSideContents("Informacje")
+            });
 
-            REWS_PD4.functions.templates.createButton(buttonColumn, "> Keybindy", false, rightSideContents("Keybindy"));
+            REWS_PD4.functions.templates.createButton(buttonColumn, "> Keybindy", false, () => {
+                rightSideContents("Keybindy")
+            });
 
 
             const addonsTitle = document.createElement("span");
