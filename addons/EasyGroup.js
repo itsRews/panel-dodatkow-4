@@ -5,6 +5,7 @@
     const IDENTIFIER = REWS_PD4.globals.identifier + `-${ADDON_NAME}`;
     let SETTINGS_BODY = null;
     let ADDON_WINDOW_BODY = null;
+    let PROFESSION_WINDOW_INTERVAL = null;
 
 
     REWS_PD4.addons["EasyGroup"] = {
@@ -89,7 +90,10 @@
                 "enabled": false,
                 "inviteUnknown": false,
                 "inviteClanEnemies": false,
-                "showMessages": false
+                "showMessages": false,
+                "showInviteButtons": true,
+                "showProfessionButtons": true,
+                "showEnemies": false
             }
             localStorage.setItem(IDENTIFIER + "-settings", JSON.stringify(REWS_PD4.addons[ADDON_NAME].settings));
         } else {
@@ -110,68 +114,13 @@
         rightSide.classList.add(REWS_PD4.globals.identifier + "-addons" + "-settings_right_side");
         content.append(rightSide);
 
-
-        const enabledTitle = document.createElement("span");
-        enabledTitle.classList.add(REWS_PD4.globals.identifier + "-addons" + "-settings_title");
-        enabledTitle.textContent = "Włącz:";
-        leftSide.append(enabledTitle);
-
-        const enabledCheckbox = document.createElement("input");
-        enabledCheckbox.classList.add(IDENTIFIER + "-settings_checkbox");
-        enabledCheckbox.type = "checkbox";
-        enabledCheckbox.checked = REWS_PD4.addons[ADDON_NAME].settings.enabled;
-        enabledCheckbox.addEventListener("change", () => {
-            REWS_PD4.addons[ADDON_NAME].settings.enabled = enabledCheckbox.checked;
-            localStorage.setItem(IDENTIFIER + "-settings", JSON.stringify(REWS_PD4.addons[ADDON_NAME].settings));
-        });
-        rightSide.append(enabledCheckbox);
-
-
-        const inviteUnknownTitle = document.createElement("span");
-        inviteUnknownTitle.classList.add(REWS_PD4.globals.identifier + "-addons" + "-settings_title");
-        inviteUnknownTitle.textContent = "Zapraszaj obcych:";
-        leftSide.append(inviteUnknownTitle);
-
-        const inviteUnknownCheckbox = document.createElement("input");
-        inviteUnknownCheckbox.classList.add(IDENTIFIER + "-settings_checkbox");
-        inviteUnknownCheckbox.type = "checkbox";
-        inviteUnknownCheckbox.checked = REWS_PD4.addons[ADDON_NAME].settings.inviteUnknown;
-        inviteUnknownCheckbox.addEventListener("change", () => {
-            REWS_PD4.addons[ADDON_NAME].settings.inviteUnknown = inviteUnknownCheckbox.checked;
-            localStorage.setItem(IDENTIFIER + "-settings", JSON.stringify(REWS_PD4.addons[ADDON_NAME].settings));
-        });
-        rightSide.append(inviteUnknownCheckbox);
-
-
-        const inviteClanEnemiesTitle = document.createElement("span");
-        inviteClanEnemiesTitle.classList.add(REWS_PD4.globals.identifier + "-addons" + "-settings_title");
-        inviteClanEnemiesTitle.textContent = "Dodawaj wrogów klanu";
-        leftSide.append(inviteClanEnemiesTitle);
-
-        const inviteClanEnemiesCheckbox = document.createElement("input");
-        inviteClanEnemiesCheckbox.classList.add(IDENTIFIER + "-settings_checkbox");
-        inviteClanEnemiesCheckbox.type = "checkbox";
-        inviteClanEnemiesCheckbox.checked = REWS_PD4.addons[ADDON_NAME].settings.inviteClanEnemies;
-        inviteClanEnemiesCheckbox.addEventListener("change", () => {
-            REWS_PD4.addons[ADDON_NAME].settings.inviteClanEnemies = inviteClanEnemiesCheckbox.checked;
-            localStorage.setItem(IDENTIFIER + "-settings", JSON.stringify(REWS_PD4.addons[ADDON_NAME].settings));
-        });
-        rightSide.append(inviteClanEnemiesCheckbox);
-
-        const showMessagesTitle = document.createElement("span");
-        showMessagesTitle.classList.add(REWS_PD4.globals.identifier + "-addons" + "-settings_title");
-        showMessagesTitle.textContent = "Pokazuj komunikaty:";
-        leftSide.append(showMessagesTitle);
-
-        const showMessagesCheckbox = document.createElement("input");
-        showMessagesCheckbox.classList.add(IDENTIFIER + "-settings_checkbox");
-        showMessagesCheckbox.type = "checkbox";
-        showMessagesCheckbox.checked = REWS_PD4.addons[ADDON_NAME].settings.showMessages;
-        showMessagesCheckbox.addEventListener("change", () => {
-            REWS_PD4.addons[ADDON_NAME].settings.showMessages = showMessagesCheckbox.checked;
-            localStorage.setItem(IDENTIFIER + "-settings", JSON.stringify(REWS_PD4.addons[ADDON_NAME].settings));
-        });
-        rightSide.append(showMessagesCheckbox);
+        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(leftSide, rightSide, "Włącz:", IDENTIFIER, ADDON_NAME);
+        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(leftSide, rightSide, "Zapraszaj obcych:", IDENTIFIER, ADDON_NAME);
+        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(leftSide, rightSide, "Dodawaj wrogów klanu:", IDENTIFIER, ADDON_NAME);
+        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(leftSide, rightSide, "Pokazuj komunikaty:", IDENTIFIER, ADDON_NAME);
+        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(leftSide, rightSide, "Okienko - Pokazuj przycisk dodawania:", IDENTIFIER, ADDON_NAME);
+        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(leftSide, rightSide, "Okienko - Pokazuj przyciski profesji:", IDENTIFIER, ADDON_NAME);
+        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(leftSide, rightSide, "Okienko - Pokazuj wrogów:", IDENTIFIER, ADDON_NAME);
 
     }
 
@@ -179,6 +128,38 @@
         ADDON_WINDOW_BODY = REWS_PD4.functions.templates.createBody(REWS_PD4.HTML.host, IDENTIFIER + "-addon_window", `[REWS] ${ADDON_NAME}`, `[R] ${ADDON_SHORTCUT}`, true);
 
         const content = document.getElementById(IDENTIFIER + "-addon_window" + "-content");
+
+        if (REWS_PD4.addons[ADDON_NAME].settings.showInviteButtons) {
+            const twoButtons = document.createElement("div");
+            twoButtons.classList.add(IDENTIFIER + "-buttons_row");
+            content.append(twoButtons);
+
+            REWS_PD4.functions.templates.createButton(twoButtons, "> Zaproś wszystkich", false, () => {
+                invitePlayers("map");
+            });
+
+            REWS_PD4.functions.templates.createButton(twoButtons, "> Zaproś graczy obok", false, () => {
+                invitePlayers("nearby");
+            });
+        }
+
+        if (REWS_PD4.addons[ADDON_NAME].settings.showProfessionButtons) {
+            const buttonsRow = document.createElement("div");
+            buttonsRow.classList.add(IDENTIFIER + "-buttons_row");
+            content.append(buttonsRow);
+
+            const professions = ["w", "p", "b", "m", "h", "t"];
+            for (let profession of professions) {
+                REWS_PD4.functions.templates.createButton(buttonsRow, `> ${profession}`, false, () => {
+                    if (PROFESSION_WINDOW_INTERVAL !== null) clearInterval(PROFESSION_WINDOW_INTERVAL);
+
+                    renderPlayersByProfession(buttonsRow, profession);
+
+                    PROFESSION_WINDOW_INTERVAL = setInterval(renderPlayersByProfession, 500, buttonsRow, profession);
+                });
+            }
+            renderPlayersByProfession(buttonsRow, "w");
+        }
     }
 
     function closeSettingsBody() {
@@ -196,92 +177,100 @@
     }
 
 
-
-
-
-
-
     (function initialize() {
         if (localStorage.getItem(IDENTIFIER + "-settings" + "-isCreated") === "true") createSettingsBody();
         if (localStorage.getItem(IDENTIFIER + "-addon_window" + "-isCreated") === "true") createAddonWindowBody();
     })();
 
+    //profession buttons
+    function renderPlayersByProfession(parent, profession) {
+        REWS_PD4.functions.removeAllChildren(parent);
 
+        Object.values(Engine.others.check()).forEach(player => {
+            if (player.d.prof !== profession) return;
+            if (player.d.relation === 3) return;
+            if (player.d.stasis === 1) return;
 
-
-    (function addon() {
-
-
-        document.addEventListener("keyup", event => {
-            if (["INPUT", "TEXTAREA", "MAGIC_INPUT"].includes(event.target.tagName)) return;
-            if (!REWS_PD4.addons[ADDON_NAME].settings.enabled) return;
-
-            if (
-                event.code === REWS_PD4.addons[ADDON_NAME].keybinds["mapInvite"].code &&
-                event.shiftKey === REWS_PD4.addons[ADDON_NAME].keybinds["mapInvite"].shift &&
-                event.ctrlKey === REWS_PD4.addons[ADDON_NAME].keybinds["mapInvite"].ctrl &&
-                event.altKey === REWS_PD4.addons[ADDON_NAME].keybinds["mapInvite"].alt
-            ) checkPermissions("map");
-            else if (
-                event.code === REWS_PD4.addons[ADDON_NAME].keybinds["nearbyInvite"].code &&
-                event.shiftKey === REWS_PD4.addons[ADDON_NAME].keybinds["nearbyInvite"].shift &&
-                event.ctrlKey === REWS_PD4.addons[ADDON_NAME].keybinds["nearbyInvite"].ctrl &&
-                event.altKey === REWS_PD4.addons[ADDON_NAME].keybinds["nearbyInvite"].alt
-            ) checkPermissions("nearby");
-        });
-
-        function checkPermissions(inviteType) {
-            const groupExists = Engine.party !== undefined && Engine.party.isParty();
-
-            if (groupExists) {
-                let isLeader = false;
-                let playerCount = 0;
-
-                Engine.party.getMembers().forEach(member => {
-                    if (member.isHero && member.leader) isLeader = true;
-                    playerCount++;
-                });
-
-                if (!isLeader) {
-                    if (REWS_PD4.addons[ADDON_NAME].settings.showMessages) message("[R] EG: Nie jesteś dowódcą grupy.");
-                    return;
-                }
-
-                if (playerCount === 10) {
-                    if (REWS_PD4.addons[ADDON_NAME].settings.showMessages) message("[R] EG: Grupa jest pełna.");
-                    return;
-                }
+            if (!REWS_PD4.addons[ADDON_NAME].settings.showEnemies) {
+                if (player.d.relation === 1 || player.d.relation === 7 || player.d.relation === 6) return;
             }
 
-            invitePlayers(inviteType);
-        }
-
-        function invitePlayers(inviteType) {
-            if (REWS_PD4.addons[ADDON_NAME].settings.showMessages) message("[R] EG: Rozpoczęto zapraszanie graczy...");
-            Object.values(Engine.others.check()).forEach(player => {
-                let cancelInviting = false;
-
-                if (player.getKind() === "group") return;
-
-                if (player.getEmoLength() > 0) {
-                    Object.values(player.getOnSelfEmoList()).forEach(emotion => {
-                        if (emotion.name === 'battle' || emotion.name === "stasis") cancelInviting = true;
-                    });
-                    if (cancelInviting) return;
-                }
-
-                let playerDistance = Math.abs(Engine.hero.d.x - player.d.x) + Math.abs(Engine.hero.d.y - player.d.y);
-
-                if (player.d.relation === 2 || player.d.relation === 4 || player.d.relation === 5) {
-                    if (inviteType === "nearby" && playerDistance > 1) return;
-                    _g(`party&a=inv&id=${player.d.id}`);
-                } else {
-                    if (playerDistance > 1) return;
-
-                    if (REWS_PD4.addons[ADDON_NAME].settings.inviteUnknown && (player.d.relation === 1 || player.d.relation === 7)) _g(`party&a=inv&id=${player.d.id}`);
-                    if (REWS_PD4.addons[ADDON_NAME].settings.inviteClanEnemies && player.d.relation === 6) _g(`party&a=inv&id=${player.d.id}`);
-                }
+            REWS_PD4.functions.templates.createButton(parent, `> ${player.d.nick} ${player.d.lvl}${player.d.prof}`, false, () => {
+                _g(`party&a=inv&id=${player.d.id}`);
             });
+        });
+    }
+
+    //addon
+    document.addEventListener("keyup", event => {
+        if (["INPUT", "TEXTAREA", "MAGIC_INPUT"].includes(event.target.tagName)) return;
+        if (!REWS_PD4.addons[ADDON_NAME].settings.enabled) return;
+
+        if (
+            event.code === REWS_PD4.addons[ADDON_NAME].keybinds["mapInvite"].code &&
+            event.shiftKey === REWS_PD4.addons[ADDON_NAME].keybinds["mapInvite"].shift &&
+            event.ctrlKey === REWS_PD4.addons[ADDON_NAME].keybinds["mapInvite"].ctrl &&
+            event.altKey === REWS_PD4.addons[ADDON_NAME].keybinds["mapInvite"].alt
+        ) checkPermissions("map");
+        else if (
+            event.code === REWS_PD4.addons[ADDON_NAME].keybinds["nearbyInvite"].code &&
+            event.shiftKey === REWS_PD4.addons[ADDON_NAME].keybinds["nearbyInvite"].shift &&
+            event.ctrlKey === REWS_PD4.addons[ADDON_NAME].keybinds["nearbyInvite"].ctrl &&
+            event.altKey === REWS_PD4.addons[ADDON_NAME].keybinds["nearbyInvite"].alt
+        ) checkPermissions("nearby");
+    });
+
+    function checkPermissions(inviteType) {
+        const groupExists = Engine.party !== undefined && Engine.party.isParty();
+
+        if (groupExists) {
+            let isLeader = false;
+            let playerCount = 0;
+
+            Engine.party.getMembers().forEach(member => {
+                if (member.isHero && member.leader) isLeader = true;
+                playerCount++;
+            });
+
+            if (!isLeader) {
+                if (REWS_PD4.addons[ADDON_NAME].settings.showMessages) message("[R] EG: Nie jesteś dowódcą grupy.");
+                return;
+            }
+
+            if (playerCount === 10) {
+                if (REWS_PD4.addons[ADDON_NAME].settings.showMessages) message("[R] EG: Grupa jest pełna.");
+                return;
+            }
         }
-    })();
+
+        invitePlayers(inviteType);
+    }
+
+    function invitePlayers(inviteType) {
+        if (REWS_PD4.addons[ADDON_NAME].settings.showMessages) message("[R] EG: Rozpoczęto zapraszanie graczy...");
+        Object.values(Engine.others.check()).forEach(player => {
+            let cancelInviting = false;
+
+            if (player.getKind() === "group") return;
+
+            if (player.getEmoLength() > 0) {
+                Object.values(player.getOnSelfEmoList()).forEach(emotion => {
+                    if (emotion.name === 'battle' || emotion.name === "stasis") cancelInviting = true;
+                });
+                if (cancelInviting) return;
+            }
+
+            let playerDistance = Math.abs(Engine.hero.d.x - player.d.x) + Math.abs(Engine.hero.d.y - player.d.y);
+
+            if (player.d.relation === 2 || player.d.relation === 4 || player.d.relation === 5) {
+                if (inviteType === "nearby" && playerDistance > 1) return;
+                _g(`party&a=inv&id=${player.d.id}`);
+            } else {
+                if (playerDistance > 1) return;
+
+                if (REWS_PD4.addons[ADDON_NAME].settings.inviteUnknown && (player.d.relation === 1 || player.d.relation === 7)) _g(`party&a=inv&id=${player.d.id}`);
+                if (REWS_PD4.addons[ADDON_NAME].settings.inviteClanEnemies && player.d.relation === 6) _g(`party&a=inv&id=${player.d.id}`);
+            }
+        });
+    }
 })();

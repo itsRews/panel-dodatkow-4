@@ -343,3 +343,10 @@ table.REWS_PD4-table {
 .REWS_PD4-addons-settings_checkbox {
     padding: 3px 2px 3px 0;
 }
+
+.REWS_PD4-EasyGroup-invite_buttons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+}
