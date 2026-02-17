@@ -421,6 +421,7 @@ REWS_PD4.functions.templates.createKeybindsTable = (parent, headers, data) => {
                         }
 
                         config.key = input.value.toUpperCase();
+                        localStorage.setItem(REWS_PD4.globals.identifier + `-${addonName}` + "-keybinds", JSON.stringify(addon));
                     });
 
                     cell.append(input);
