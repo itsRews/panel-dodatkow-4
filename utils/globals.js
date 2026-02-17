@@ -405,24 +405,34 @@ REWS_PD4.functions.templates.createKeybindsTable = (parent, headers, data) => {
                     cell.append(checkbox);
                     row.appendChild(cell);
                 })();
-
+                //
                 (function createKeyCell() {
                     const cell = document.createElement("td");
                     cell.classList.add(REWS_PD4.globals.identifier + "-table");
 
                     const input = document.createElement("input");
                     input.type = "text";
-                    input.maxLength = 1;
-                    input.value = config.key.toUpperCase();
-                    input.addEventListener("change", (event) => {
-                        if (input.value.length > 1) {
-                            input.value = input.value.slice(0, 1);
-                            return;
-                        }
+                    input.readOnly = true;
+                    input.value = config.code;
 
-                        config.key = input.value.toUpperCase();
-                        localStorage.setItem(REWS_PD4.globals.identifier + `-${addonName}` + "-keybinds", JSON.stringify(addon));
+                    input.addEventListener("focus", () => {
+                        input.value = "...";
                     });
+
+                    input.addEventListener("keydown", (event) => {
+                        event.preventDefault();
+
+                        config.key = event.code;
+                        input.value = event.code;
+
+                        localStorage.setItem(REWS_PD4.globals.identifier + `-${addonName}` + "-keybinds", JSON.stringify(addon));
+
+                        input.blur();
+                    });
+
+                    input.addEventListener("blur", () => {
+                        input.value = config.key;
+                    })
 
                     cell.append(input);
                     row.appendChild(cell);

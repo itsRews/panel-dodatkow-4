@@ -66,7 +66,7 @@
                     "shift": false,
                     "ctrl": false,
                     "alt": false,
-                    "key": "v"
+                    "code": "KeyV"
                 }
             }
             localStorage.setItem(IDENTIFIER + "-keybinds", JSON.stringify(REWS_PD4.addons.keybinds[ADDON_NAME]));
