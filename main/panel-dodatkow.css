@@ -116,6 +116,26 @@
     background-color: #353535CC;
 }
 
+.REWS_PD4-addon_button {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+
+    background-color: #101010CC;
+
+    border: 2px solid silver;
+    border-radius: 10px;
+
+    padding: 5px;
+
+    margin-top: 4px;
+}
+
+.REWS_PD4-addon_button:hover {
+    background-color: #353535CC;
+}
+
 
 
 .REWS_PD4-main-left_side {
@@ -288,9 +308,9 @@ table.REWS_PD4-table {
 }
 
 
-
 .REWS_PD4-addons-button_bundle {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
+    justify-content: space-around;
 }

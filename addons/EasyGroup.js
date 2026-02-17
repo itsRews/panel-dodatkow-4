@@ -27,7 +27,7 @@
             buttonBundle.classList.add(REWS_PD4.globals.identifier + "-addons" + "-button_bundle");
             content.append(buttonBundle);
 
-            REWS_PD4.functions.templates.createButton(buttonBundle, "> Ustawienia dodatku", false, () => {
+            REWS_PD4.functions.templates.createAddonButton(buttonBundle, "> Ustawienia dodatku", () => {
                 const settingsIsCreated = localStorage.getItem(IDENTIFIER + "-settings" + "-isCreated");
                 if (settingsIsCreated === "true") {
                     localStorage.setItem(IDENTIFIER + "-settings" + "-isCreated", "false");
@@ -40,7 +40,7 @@
                 }
             });
 
-            REWS_PD4.functions.templates.createButton(buttonBundle, "> Okno dodatku", false, () => {
+            REWS_PD4.functions.templates.createButton(buttonBundle, "> Okno dodatku", () => {
                 const addonWindowIsCreated = localStorage.getItem(IDENTIFIER + "-addon_window" + "-isCreated");
                 if (addonWindowIsCreated === "true") {
                     localStorage.setItem(IDENTIFIER + "-addon_window" + "-isCreated", "false");

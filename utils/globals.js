@@ -263,6 +263,22 @@ REWS_PD4.functions.templates.createButton = (parent, text, checkbox, onClick) =>
     });
 }
 
+REWS_PD4.functions.templates.createAddonButton = (parent, text, onClick) => {
+    const button = document.createElement("div");
+    button.classList.add(REWS_PD4.globals.identifier + "-addon_button");
+    parent.append(button);
+
+    const button_label = document.createElement("label");
+    button_label.textContent = text;
+    button.append(button_label);
+
+    button.addEventListener("mousedown", () => {
+        if (typeof onClick === "function") {
+            onClick();
+        }
+    });
+}
+
 REWS_PD4.functions.templates.createTable = (parent, headers, data) => {
     const table = document.createElement("table");
     table.classList.add(REWS_PD4.globals.identifier + "-table");

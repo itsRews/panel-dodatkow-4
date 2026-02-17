@@ -193,11 +193,6 @@
         const newContent = document.createElement("div");
         newContent.classList.add(IDENTIFIER + "-page_layout");
 
-        const aboutTitle = document.createElement("span");
-        aboutTitle.classList.add(IDENTIFIER + "-page_text");
-        aboutTitle.textContent = "Przykład1 (do edycji w przyszlości)";
-        newContent.append(aboutTitle);
-
         const headers = ["Dodatek", "Akcja", "Shift", "Ctrl", "Alt", "Przycisk"];
         const keybindData = REWS_PD4.addons.keybinds;
 
