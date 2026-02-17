@@ -114,13 +114,22 @@
         rightSide.classList.add(REWS_PD4.globals.identifier + "-addons" + "-settings_right_side");
         content.append(rightSide);
 
+        const generalSettingsTitle = document.createElement("span");
+        generalSettingsTitle.textContent = "- Ogólne -";
+        leftSide.append(generalSettingsTitle);
+
         REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(leftSide, rightSide, "Włącz:", IDENTIFIER, ADDON_NAME);
         REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(leftSide, rightSide, "Zapraszaj obcych:", IDENTIFIER, ADDON_NAME);
         REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(leftSide, rightSide, "Dodawaj wrogów klanu:", IDENTIFIER, ADDON_NAME);
         REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(leftSide, rightSide, "Pokazuj komunikaty:", IDENTIFIER, ADDON_NAME);
-        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(leftSide, rightSide, "Okienko - Pokazuj przycisk dodawania:", IDENTIFIER, ADDON_NAME);
-        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(leftSide, rightSide, "Okienko - Pokazuj przyciski profesji:", IDENTIFIER, ADDON_NAME);
-        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(leftSide, rightSide, "Okienko - Pokazuj wrogów:", IDENTIFIER, ADDON_NAME);
+
+        const windowSettingsTitle = document.createElement("span");
+        windowSettingsTitle.textContent = "- Ustawienia okienka -";
+        leftSide.append(windowSettingsTitle);
+
+        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(leftSide, rightSide, "Pokazuj przycisk dodawania:", IDENTIFIER, ADDON_NAME);
+        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(leftSide, rightSide, "Pokazuj przyciski profesji:", IDENTIFIER, ADDON_NAME);
+        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(leftSide, rightSide, "Pokazuj wrogów:", IDENTIFIER, ADDON_NAME);
 
     }
 
