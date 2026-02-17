@@ -27,6 +27,7 @@
         IDENTIFIER = REWS_PD4.globals.identifier + "-main";
         REWS_PD4.HTML.host = host;
         host.classList.add(REWS_PD4.globals.identifier + "-host");
+        host.id = REWS_PD4.globals.identifier + "-host";
         document.body.append(REWS_PD4.HTML.host);
 
     })();
