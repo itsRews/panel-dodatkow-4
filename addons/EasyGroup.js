@@ -1,6 +1,7 @@
 ﻿(() => {
     const IDENTIFIER = REWS_PD4.globals.identifier + "-EasyGroup";
-    let BODY = null;
+    let SETTINGS_BODY = null;
+    let ADDON_WINDOW_BODY = null;
 
     REWS_PD4.addons["EasyGroup"] = {
         clickedOnMainPanel() {
@@ -18,16 +19,29 @@
             const descriptionText = "Dodatek który ułatwia tworzenie grupy z wszystkich osób na mapie."
             REWS_PD4.functions.templates.createPageSection(newContent, descriptionTitle, descriptionText);
 
-            REWS_PD4.functions.templates.createButton(content, "> Okno dodatku", false, () => {
-                const isCreated = localStorage.getItem(IDENTIFIER + "-isCreated");
-                if (isCreated === "true") {
-                    localStorage.setItem(IDENTIFIER + "-isCreated", "false");
+            REWS_PD4.functions.templates.createButton(content, "> Ustawienia dodatku", false, () => {
+                const settingsIsCreated = localStorage.getItem(IDENTIFIER + "-settingsIsCreated");
+                if (settingsIsCreated === "true") {
+                    localStorage.setItem(IDENTIFIER + "-settingsIsCreated", "false");
 
-                    closeBody();
+                    closeBody(SETTINGS_BODY);
                 } else {
-                    localStorage.setItem(IDENTIFIER + "-isCreated", "true");
+                    localStorage.setItem(IDENTIFIER + "-settingsIsCreated", "true");
 
-                    createBody();
+                    createSettingsBody();
+                }
+            });
+
+            REWS_PD4.functions.templates.createButton(content, "> Okno dodatku", false, () => {
+                const addonWindowIsCreated = localStorage.getItem(IDENTIFIER + "-addonWindowIsCreated");
+                if (addonWindowIsCreated === "true") {
+                    localStorage.setItem(IDENTIFIER + "-addonWindowIsCreated", "false");
+
+                    closeBody(ADDON_WINDOW_BODY);
+                } else {
+                    localStorage.setItem(IDENTIFIER + "-addonWindowIsCreated", "true");
+
+                    createAddonWindowBody();
                 }
             });
 
@@ -35,18 +49,26 @@
         }
     };
 
-    function createBody() {
-        BODY = REWS_PD4.functions.templates.createBody(REWS_PD4.HTML.host, IDENTIFIER, "[REWS] EasyGroup", "[R] EG", true);
+    function createSettingsBody() {
+        SETTINGS_BODY = REWS_PD4.functions.templates.createBody(REWS_PD4.HTML.host, REWS_PD4.globals.identifier + "-addons" + "-settings", "[REWS] EasyGroup - Ustawienia", "[R] EG-U", true);
+
+        const content = document.getElementById(IDENTIFIER + "-content");
+
+    }
+
+    function createAddonWindowBody() {
+        ADDON_WINDOW_BODY = REWS_PD4.functions.templates.createBody(REWS_PD4.HTML.host, IDENTIFIER + "-addon_window", "[REWS] EasyGroup", "[R] EG", true);
 
         const content = document.getElementById(IDENTIFIER + "-content");
     }
 
-    function closeBody() {
-        if (BODY === null) return;
+    function closeBody(bodyType) {
+        if (bodyType === null) return;
 
-        BODY.remove();
-        BODY = null;
+        bodyType.remove();
+        bodyType = null;
     }
+
 
 
 
@@ -54,7 +76,8 @@
 
 
     (function initialize() {
-        if (localStorage.getItem(IDENTIFIER + "-isCreated") === "true") createBody();
+        if (localStorage.getItem(IDENTIFIER + "-settingsIsCreated") === "true") createSettingsBody();
+        if (localStorage.getItem(IDENTIFIER + "-addonWindowIsCreated") === "true") createAddonWindowBody();
 
 
     })();
