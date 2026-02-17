@@ -253,13 +253,18 @@ REWS_PD4.functions.templates.createButton = (parent, text, checkbox, onClick) =>
 
 REWS_PD4.functions.templates.createTable = (parent, headers, data) => {
     const table = document.createElement("table");
+    table.classList.add(REWS_PD4.globals.identifier + "-table");
 
     (function createHeaders() {
         const header = document.createElement("thead");
+        header.classList.add(REWS_PD4.globals.identifier + "-table");
         const row = document.createElement("tr");
+        row.classList.add(REWS_PD4.globals.identifier + "-row");
 
         headers.forEach(text => {
             const header = document.createElement("th");
+            header.classList.add(REWS_PD4.globals.identifier + "-table");
+
             header.textContent = text;
             row.appendChild(header);
         });
@@ -270,12 +275,15 @@ REWS_PD4.functions.templates.createTable = (parent, headers, data) => {
 
     (function createRows() {
         const body = document.createElement("tbody");
+        body.classList.add(REWS_PD4.globals.identifier + "-table");
 
         data.forEach(item => {
             const row = document.createElement("tr");
+            row.classList.add(REWS_PD4.globals.identifier + "-table");
 
             Object.values(item).forEach(value => {
                 const cell = document.createElement("td");
+                cell.classList.add(REWS_PD4.globals.identifier + "-table");
                 cell.textContent = value;
                 row.appendChild(cell);
             });
