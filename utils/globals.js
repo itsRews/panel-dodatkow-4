@@ -204,9 +204,7 @@ REWS_PD4.functions.templates.createTop = (parent, identifier, titleOpen, titleCl
         close.textContent = "X";
         top.append(close);
 
-        close.removeEventListener("mousedown", () => {});
-
-        close.addEventListener("mousedown", () => {
+        close.addEventListener("pointerdown", () => {
             localStorage.setItem(identifier + "-isCreated", "false");
             parent.remove();
         });
