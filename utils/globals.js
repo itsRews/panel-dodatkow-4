@@ -214,7 +214,7 @@ REWS_PD4.functions.templates.createButton = (parent, text, checkbox, onClick) =>
 
     if (checkbox === true) {
         let identifier = REWS_PD4.globals.identifier + "-" + text.replace("> ", "");
-        const enabled = localStorage.getItem(identifier);
+        const enabled = localStorage.getItem(identifier + "-enabled");
 
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";

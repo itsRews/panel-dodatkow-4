@@ -102,6 +102,11 @@
 }
 
 .REWS_PD4-button {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+
     background-color: #101010CC;
 
     border: 2px solid silver;
