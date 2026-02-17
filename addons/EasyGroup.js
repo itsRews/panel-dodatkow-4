@@ -7,7 +7,7 @@
     let ADDON_WINDOW_BODY = null;
 
 
-    REWS_PD4.addons.addonList["EasyGroup"] = {
+    REWS_PD4.addons["EasyGroup"] = {
         clickedOnMainPanel() {
             //sets up the right-side content page.
             const title = document.getElementById(REWS_PD4.globals.identifier + "-main" + "-page_title");
