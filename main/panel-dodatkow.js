@@ -194,7 +194,7 @@
         newContent.classList.add(IDENTIFIER + "-page_layout");
 
         const headers = ["Dodatek", "Akcja", "Shift", "Ctrl", "Alt", "Przycisk"];
-        const keybindData = REWS_PD4.addons
+        const keybindData = REWS_PD4.addons;
 
         REWS_PD4.functions.templates.createKeybindsTable(newContent, headers, keybindData);
 
