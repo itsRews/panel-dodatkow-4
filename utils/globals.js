@@ -176,7 +176,8 @@ REWS_PD4.functions.templates.createTop = (parent, identifier, titleOpen, titleCl
     }
 
     let contentToHide = document.getElementById(identifier + "-content");
-    REWS_PD4.functions.templates.makeDraggable(parent, top, identifier, () => {
+    REWS_PD4.functions.templates.makeDraggable(parent, top, identifier, (event) => {
+        console.log(event);
         const expanded = localStorage.getItem(identifier + "-expanded");
         if (expanded === "false") {
             contentToHide.style.display = "flex";
@@ -219,7 +220,7 @@ REWS_PD4.functions.templates.createButton = (parent, text, checkbox, onClick) =>
             });
     }
 
-    button.addEventListener("click", () => {
+    button.addEventListener("mousedown", () => {
         if (typeof onClick === "function") {
             onClick();
         }
