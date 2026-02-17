@@ -208,7 +208,7 @@
     height: 100%;
 }
 
-.REWS_PD4-main-page_layout {
+.REWS_PD4-page_layout {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
