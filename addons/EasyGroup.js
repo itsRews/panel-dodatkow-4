@@ -12,7 +12,7 @@
             title.textContent = "EasyGroup";
 
             const newContent = document.createElement("div");
-            newContent.classList.add(IDENTIFIER + "-page_layout");
+            newContent.classList.add(REWS_PD4.globals.identifier + "-main" + "-page_layout");
 
             const descriptionTitle = "Opis"
             const descriptionText = "Dodatek który ułatwia tworzenie grupy z wszystkich osób na mapie."
