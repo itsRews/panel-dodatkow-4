@@ -69,7 +69,7 @@
                     "code": "KeyV"
                 },
                 "nearbyInvite": {
-                    "action": "Zaprasza do grupy sojuszników koło twojej postaci.",
+                    "action": "Zaprasza do grupy sojuszników obok twojej postaci.",
                     "shift": true,
                     "ctrl": false,
                     "alt": false,
@@ -123,6 +123,7 @@
             REWS_PD4.addons[ADDON_NAME].settings.enabled = enabledCheckbox.checked;
             localStorage.setItem(IDENTIFIER + "-settings", JSON.stringify(REWS_PD4.addons[ADDON_NAME].settings));
         });
+        rightSide.append(enabledCheckbox);
 
 
         const inviteUnknownTitle = document.createElement("span");
@@ -137,6 +138,7 @@
             REWS_PD4.addons[ADDON_NAME].settings.inviteUnknown = inviteUnknownCheckbox.checked;
             localStorage.setItem(IDENTIFIER + "-settings", JSON.stringify(REWS_PD4.addons[ADDON_NAME].settings));
         });
+        rightSide.append(inviteUnknownCheckbox);
 
 
         const inviteClanEnemiesTitle = document.createElement("span");
@@ -151,6 +153,7 @@
             REWS_PD4.addons[ADDON_NAME].settings.inviteClanEnemies = inviteClanEnemiesCheckbox.checked;
             localStorage.setItem(IDENTIFIER + "-settings", JSON.stringify(REWS_PD4.addons[ADDON_NAME].settings));
         });
+        rightSide.append(inviteClanEnemiesCheckbox);
 
         const showMessagesTitle = document.createElement("span");
         showMessagesTitle.classList.add(REWS_PD4.globals.identifier + "-addons" + "-settings_title");
@@ -164,6 +167,7 @@
             REWS_PD4.addons[ADDON_NAME].settings.showMessages = showMessagesCheckbox.checked;
             localStorage.setItem(IDENTIFIER + "-settings", JSON.stringify(REWS_PD4.addons[ADDON_NAME].settings));
         });
+        rightSide.append(showMessagesCheckbox);
 
     }
 
