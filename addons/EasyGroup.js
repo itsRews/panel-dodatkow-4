@@ -60,7 +60,7 @@
     (function setupKeybinds() {
         const keybindsJson = localStorage.getItem(IDENTIFIER + "-keybinds");
         if (keybindsJson === null) {
-            REWS_PD4.addons.keybinds["EasyGroup"] = {
+            REWS_PD4.addons.keybinds[ADDON_NAME] = {
                 "invite": {
                     "action": "EasyGroup: Zaproś graczy do grupy",
                     "shift": false,
@@ -71,7 +71,7 @@
             }
             localStorage.setItem(IDENTIFIER + "-keybinds", JSON.stringify(REWS_PD4.addons.keybinds));
         } else {
-            REWS_PD4.addons.keybinds["EasyGroup"] = JSON.parse(keybindsJson);
+            REWS_PD4.addons.keybinds[ADDON_NAME] = JSON.parse(keybindsJson[ADDON_NAME]);
         }
     })();
 
