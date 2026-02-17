@@ -1,8 +1,8 @@
 ﻿.REWS_PD4-host {
     position: absolute;
 
-    top: 0px;
-    left: 0px;
+    top: 0;
+    left: 0;
 
     width: 100%;
     height: 100%;
@@ -20,7 +20,7 @@
 
     color: whitesmoke;
 
-    font-family: arial;
+    font-family: arial, serif;
     font-size: 12px;
     font-weight: bold;
 
@@ -45,7 +45,7 @@
 
     color: whitesmoke;
 
-    font-family: arial;
+    font-family: arial, serif;
     font-size: 12px;
     font-weight: bold;
 
@@ -113,7 +113,7 @@
 }
 
 .REWS_PD4-button:hover {
-    background-color: #353535FF;
+    background-color: #353535CC;
 }
 
 
@@ -131,7 +131,7 @@
     max-height: 367px;
 
     padding: 5px;
-    padding-bottom: 0px;
+    padding-bottom: 0;
 }
 
 .REWS_PD4-main-search {
@@ -183,7 +183,7 @@
     margin: 5px;
 }
 
-.REWS_PD4-main-content_title {
+.REWS_PD4-main-page_title {
     border-bottom: solid 2px silver;
 
     font-size: 21px;
@@ -191,9 +191,61 @@
 
     padding-bottom: 6px;
 
-    margin: 8px -5px;
+    margin: 1px -5px;
 }
 
 .REWS_PD4-main-page_content {
     align-self: center;
+
+    width: 100%;
+    height: 100%;
+}
+
+.REWS_PD4-main-page_layout {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+
+    width: 100%;
+    height: 100%;
+
+    padding: 0 5px;
+}
+
+.REWS_PD4-main-page_header {
+    font-size: 18px;
+
+    margin-top: 8px;
+}
+
+.REWS_PD4-main-page_text {
+    font-weight: normal;
+
+    margin-top: 5px;
+    margin-right: 5px;
+}
+
+table {
+    width: 98%;
+
+    border: solid 2px silver;
+    border-collapse: collapse;
+
+    margin-top: 5px;
+}
+
+th {
+    font-weight: bold;
+
+    border: solid 1px silver;
+
+    padding: 5px;
+}
+
+td {
+    font-weight: normal;
+
+    border: solid 1px silver;
+
+    padding: 5px;
 }

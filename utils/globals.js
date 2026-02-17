@@ -126,7 +126,7 @@ REWS_PD4.functions.templates.makeDraggable = (parent, element, identifier, onCli
 REWS_PD4.functions.templates.createBody = (parent, identifier, titleOpen, titleClose, isCloseable) => {
     const body = document.createElement("div");
 
-    if (identifier == REWS_PD4.globals.identifier + "-main") body.classList.add(identifier + "-body");
+    if (identifier === REWS_PD4.globals.identifier + "-main") body.classList.add(identifier + "-body");
     else body.classList.add(REWS_PD4.globals.identifier + "-addons-body");
 
     parent.append(body);
@@ -139,7 +139,7 @@ REWS_PD4.functions.templates.createBody = (parent, identifier, titleOpen, titleC
 REWS_PD4.functions.templates.createContent = (parent, identifier) => {
     const content = document.createElement("div");
 
-    if (identifier == REWS_PD4.globals.identifier + "-main") content.classList.add(identifier + "-content");
+    if (identifier === REWS_PD4.globals.identifier + "-main") content.classList.add(identifier + "-content");
     else content.classList.add(REWS_PD4.globals.identifier + "-addons-content");
 
     content.id = identifier + "-content";
@@ -210,7 +210,7 @@ REWS_PD4.functions.templates.createButton = (parent, text, checkbox, onClick) =>
     button_label.textContent = text;
     button.append(button_label);
 
-    if (typeof checkbox == "Object") {
+    if (typeof checkbox == "object") {
         const host = document.getElementById(REWS_PD4.globals.identifier + "-host")
         fetch(`${REWS_PD4.globals.url}/addons/${text}.js?v=${DATE}`)
             .then(response => response.text())
@@ -226,4 +226,42 @@ REWS_PD4.functions.templates.createButton = (parent, text, checkbox, onClick) =>
             onClick();
         }
     });
+}
+
+REWS_PD4.functions.templates.createTable = (parent, headers, data) => {
+    const table = document.createElement("table");
+
+    (function createHeaders() {
+        const header = document.createElement("thead");
+        const row = document.createElement("tr");
+
+        headers.forEach(text => {
+            const header = document.createElement("th");
+            header.textContent = text;
+            row.appendChild(header);
+        });
+
+        header.append(row);
+        table.append(header);
+    })();
+
+    (function createRows() {
+        const body = document.createElement("tbody");
+
+        data.forEach(item => {
+            const row = document.createElement("tr");
+
+            Object.values(item).forEach(value => {
+                const cell = document.createElement("td");
+                cell.textContent = value;
+                row.appendChild(cell);
+            });
+
+            body.append(row);
+        });
+
+        table.appendChild(body);
+    })();
+
+    parent.append(table);
 }

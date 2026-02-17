@@ -13,15 +13,22 @@
             });
         document.body.append(host);
 
+        await fetch(`${REWS_PD4.globals.url}/updates/${REWS_PD4.globals.version}.json?v=${REWS_PD4.globals.date}`)
+            .then(response => response.json())
+            .then(responseJson => {
+                REWS_PD4.globals.updateData = responseJson;
+            });
+
         const css = document.createElement("link");
         css.rel = "stylesheet";
-        css.href = `${REWS_PD4.globals.url}/main/panel-dodatkow.css?v=${REWS_PD4.globals.date}`;
+        //css.href = `${REWS_PD4.globals.url}/main/panel-dodatkow.css?v=${REWS_PD4.globals.date}`;
         host.append(css);
 
         IDENTIFIER = REWS_PD4.globals.identifier + "-main";
         REWS_PD4.HTML.host = host;
         host.classList.add(REWS_PD4.globals.identifier + "-host");
         document.body.append(REWS_PD4.HTML.host);
+
     })();
 
     (function setupMainPanel() {
@@ -58,8 +65,8 @@
                 rightSideContents("Informacje")
             });
 
-            REWS_PD4.functions.templates.createButton(buttonColumn, "> Keybindy", false, () => {
-                rightSideContents("Keybindy")
+            REWS_PD4.functions.templates.createButton(buttonColumn, "> Skróty klawiszowe", false, () => {
+                rightSideContents("Skróty klawiszowe")
             });
 
 
@@ -92,12 +99,14 @@
             mainPanelContent.append(rightSide);
 
             const contentTitle = document.createElement("span");
-            contentTitle.classList.add(IDENTIFIER + "-content_title");
+            contentTitle.classList.add(IDENTIFIER + "-page_title");
+            contentTitle.id = IDENTIFIER + "-page_title";
             contentTitle.textContent = "TitleUnloaded";
             rightSide.append(contentTitle);
 
-            let pageContent =  document.createElement("div");
+            const pageContent =  document.createElement("div");
             pageContent.classList.add(IDENTIFIER + "-page_content");
+            pageContent.id = IDENTIFIER + "-page_content";
             pageContent.textContent = "ContentUnloaded";
             rightSide.append(pageContent);
         })();
@@ -109,7 +118,7 @@
 
                 case "Informacje": setupInfo(); break;
 
-                case "Keybindy": setupKeybinds(); break;
+                case "Skróty klawiszowe": setupKeybinds(); break;
             }
         }
         rightSideContents("Aktualności");
@@ -117,50 +126,107 @@
     })();
 
     function setupNews() {
-        /*
-                REWS_PD4.HTML.mainPanel.rightContentTitle.textContent = "Aktualności";
+        const title = document.getElementById(IDENTIFIER + "-page_title");
+        const content = document.getElementById(IDENTIFIER + "-page_content");
+        REWS_PD4.functions.removeAllChildren(content);
 
-                const actual_content = document.createElement("div");
-                actual_content.classList.add(PRIVATE_IDENTIFIER + "-right_content");
+        title.textContent = "Aktualności";
 
-                const p = document.createElement("p");
-                p.textContent = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
-                actual_content.append(p);
+        const newContent = document.createElement("div");
+        newContent.classList.add(IDENTIFIER + "-page_layout");
 
+        const versionHeader = document.createElement("span");
+        versionHeader.classList.add(IDENTIFIER + "-page_header");
+        versionHeader.textContent = REWS_PD4.globals.version;
+        newContent.append(versionHeader);
 
-                REWS_PD4.HTML.mainPanel.rightContent = actual_content;
-                */
+        const headers = ["Dodatek", "Zmiany"];
+        const updateData = REWS_PD4.globals.updateData;
+        REWS_PD4.functions.templates.createTable(newContent, headers, updateData);
+
+        content.append(newContent);
     }
 
     function setupInfo() {
-        /*
-                  REWS_PD4.HTML.mainPanel.rightContentTitle.textContent = "Informacje";
+        const title = document.getElementById(IDENTIFIER + "-page_title");
+        const content = document.getElementById(IDENTIFIER + "-page_content");
+        REWS_PD4.functions.removeAllChildren(content);
 
-                const actual_content = document.createElement("div");
-                actual_content.classList.add(PRIVATE_IDENTIFIER + "-right_content");
+        title.textContent = "Informacje";
 
-                const p = document.createElement("p");
-                p.textContent = "2 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
-                actual_content.append(p);
+        const newContent = document.createElement("div");
+        newContent.classList.add(IDENTIFIER + "-page_layout");
 
+        const aboutTitle = document.createElement("span");
+        aboutTitle.classList.add(IDENTIFIER + "-page_header");
+        aboutTitle.textContent = "Czym jest Panel Dodatków 4";
+        newContent.append(aboutTitle);
 
-                REWS_PD4.HTML.mainPanel.rightContent = actual_content;*/
+        const about = document.createElement("span");
+        about.classList.add(IDENTIFIER + "-page_text");
+        about.textContent = "Zbiórka dodatków stworzona przez itsRews. Pierwsze iteracje stworzone dla klanu w 2023 roku, po kilku przerwach od gry panel i czterech głównych wersjach panelu, zostaje on publicznie udostępniony na forum w celu udostępnienia dodatków które można łatwo zrobić \"pod siebie\", zmodyfikować, naprawić (w przypadku braku aktualizacji), albo po prostu jako materiał do nauki dla osób które dopiero zaczynają tworzyć dodatki.";
+        newContent.append(about);
+
+        const qualityAndPricingTitle = document.createElement("span");
+        qualityAndPricingTitle.classList.add(IDENTIFIER + "-page_header");
+        qualityAndPricingTitle.textContent = "Jakość oraz cena dodatków";
+        newContent.append(qualityAndPricingTitle);
+
+        const qualityAndPricing = document.createElement("span");
+        qualityAndPricing.classList.add(IDENTIFIER + "-page_text");
+        qualityAndPricing.textContent = "Dodatki zawsze robiłem dla siebie, dlatego też zawsze były (i będą) w pełni darmowe. Z tego też powodu nie gwarantuje najlepiej zoptymizowanych dodatków, zrobionych w najlepszy możliwy sposób, lecz staram się robić je najlepiej jak potrafie.";
+        newContent.append(qualityAndPricing);
+
+        const limitationsTitle = document.createElement("span");
+        limitationsTitle.classList.add(IDENTIFIER + "-page_header");
+        limitationsTitle.textContent = "Ograniczenia dodatków";
+        newContent.append(limitationsTitle);
+
+        const limitations = document.createElement("span");
+        limitations.classList.add(IDENTIFIER + "-page_text");
+        limitations.textContent = "Wszystkie dodatki są robione w szczególną myślą legalności do gry na świecie prywatnym Nubes. Z tego też powodu nigdy nie będzie tutaj dodatków typu Auto X (który różni się od dobijary), boty itd.";
+        newContent.append(limitations);
+
+        const contactTitle = document.createElement("span");
+        contactTitle.classList.add(IDENTIFIER + "-page_header");
+        contactTitle.textContent = "Kontakt";
+        newContent.append(contactTitle);
+
+        const contact = document.createElement("span");
+        contact.classList.add(IDENTIFIER + "-page_text");
+        contact.textContent = "W przypadku jakichkolwiek propozycji polecaną metodą kontaktu jest forum. Może w przyszłości stworze Discord jeżeli będzie do tego potrzeba.";
+        newContent.append(contact);
+
+        content.append(newContent);
     }
 
     function setupKeybinds() {
-        /*
-                REWS_PD4.HTML.mainPanel.rightContentTitle.textContent = "Keybindy";
+        const title = document.getElementById(IDENTIFIER + "-page_title");
+        const content = document.getElementById(IDENTIFIER + "-page_content");
+        REWS_PD4.functions.removeAllChildren(content);
 
-                const actual_content = document.createElement("div");
-                actual_content.classList.add(PRIVATE_IDENTIFIER + "-right_content");
+        title.textContent = "Skróty klawiszowe";
 
-                const p = document.createElement("p");
-                p.textContent = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
-                actual_content.append(p);
+        const newContent = document.createElement("div");
+        newContent.classList.add(IDENTIFIER + "-page_layout");
 
+        const aboutTitle = document.createElement("span");
+        aboutTitle.classList.add(IDENTIFIER + "-page_text");
+        aboutTitle.textContent = "Przykład1 (do edycji w przyszlości)";
+        newContent.append(aboutTitle);
 
-                REWS_PD4.HTML.mainPanel.rightContent = actual_content;
-                */
+        const headers = ["Shift", "Ctrl", "Alt", "Klawisz"];
+        const keybindData = [
+            {
+                "shift": "true",
+                "ctrl": "false",
+                "alt": "false",
+                "key": "s",
+            }
+        ];
+
+        REWS_PD4.functions.templates.createTable(newContent, headers, keybindData);
+
+        content.append(newContent);
     }
-
 })();
