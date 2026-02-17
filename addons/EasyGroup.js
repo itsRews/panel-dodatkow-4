@@ -203,9 +203,12 @@
 
 
     (function addon() {
-        if (!REWS_PD4.addons[ADDON_NAME].settings.enabled) return;
+
 
         document.addEventListener("keyup", event => {
+            if (["INPUT", "TEXTAREA", "MAGIC_INPUT"].includes(event.target.tagName)) return;
+            if (!REWS_PD4.addons[ADDON_NAME].settings.enabled) return;
+
             if (
                 event.key === REWS_PD4.addons[ADDON_NAME].keybinds["mapInvite"].code &&
                 event.shiftKey === REWS_PD4.addons[ADDON_NAME].keybinds["mapInvite"].shift &&
