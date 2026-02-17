@@ -335,87 +335,94 @@ REWS_PD4.functions.templates.createKeybindsTable = (parent, headers, data) => {
         const body = document.createElement("tbody");
         body.classList.add(REWS_PD4.globals.identifier + "-table");
 
+        //
         for (let addonName in data) {
-            const row = document.createElement("tr");
-            row.classList.add(REWS_PD4.globals.identifier + "-table");
+            const addon = data[addonName];
 
-            (function createActionCell() {
-                const cell = document.createElement("td");
-                cell.classList.add(REWS_PD4.globals.identifier + "-table");
-                cell.textContent = data[addonName]["action"];
-                row.appendChild(cell);
-            })();
+            for (let actionName in addon) {
+                const config = addon[actionName];
 
-            (function createShiftCell() {
-                const cell = document.createElement("td");
-                cell.classList.add(REWS_PD4.globals.identifier + "-table");
+                const row = document.createElement("tr");
+                row.classList.add(REWS_PD4.globals.identifier + "-table");
 
-                const checkbox = document.createElement("input");
-                checkbox.type = "checkbox";
-                checkbox.checked = data[addonName]["shift"];
-                checkbox.addEventListener("change", () => {
-                    data[addonName]["shift"] = checkbox.checked;
-                    localStorage.setItem(REWS_PD4.globals.identifier + `-${addonName}` + "-keybinds", JSON.stringify(data));
-                });
+                (function createActionCell() {
+                    const cell = document.createElement("td");
+                    cell.classList.add(REWS_PD4.globals.identifier + "-table");
+                    cell.textContent = config.action;
+                    row.appendChild(cell);
+                })();
 
-                cell.append(checkbox);
-                row.appendChild(cell);
-            })();
+                (function createShiftCell() {
+                    const cell = document.createElement("td");
+                    cell.classList.add(REWS_PD4.globals.identifier + "-table");
 
-            (function createCtrlCell() {
-                const cell = document.createElement("td");
-                cell.classList.add(REWS_PD4.globals.identifier + "-table");
+                    const checkbox = document.createElement("input");
+                    checkbox.type = "checkbox";
+                    checkbox.checked = config.shift === true;
+                    checkbox.addEventListener("change", () => {
+                        config.shift = checkbox.checked;
+                        localStorage.setItem(REWS_PD4.globals.identifier + `-${addonName}` + "-keybinds", JSON.stringify(data));
+                    });
 
-                const checkbox = document.createElement("input");
-                checkbox.type = "checkbox";
-                checkbox.checked = data[addonName]["ctrl"];
-                checkbox.addEventListener("change", () => {
-                    data[addonName]["ctrl"] = checkbox.checked;
-                    localStorage.setItem(REWS_PD4.globals.identifier + `-${addonName}` + "-keybinds", JSON.stringify(data));
-                });
+                    cell.append(checkbox);
+                    row.appendChild(cell);
+                })();
 
-                cell.append(checkbox);
-                row.appendChild(cell);
-            })();
+                (function createCtrlCell() {
+                    const cell = document.createElement("td");
+                    cell.classList.add(REWS_PD4.globals.identifier + "-table");
 
-            (function createAltCell() {
-                const cell = document.createElement("td");
-                cell.classList.add(REWS_PD4.globals.identifier + "-table");
+                    const checkbox = document.createElement("input");
+                    checkbox.type = "checkbox";
+                    checkbox.checked = config.ctrl === true;
+                    checkbox.addEventListener("change", () => {
+                        config.ctrl = checkbox.checked;
+                        localStorage.setItem(REWS_PD4.globals.identifier + `-${addonName}` + "-keybinds", JSON.stringify(data));
+                    });
 
-                const checkbox = document.createElement("input");
-                checkbox.type = "checkbox";
-                checkbox.checked = data[addonName]["alt"];
-                checkbox.addEventListener("change", () => {
-                    data[addonName]["alt"] = checkbox.checked;
-                    localStorage.setItem(REWS_PD4.globals.identifier + `-${addonName}` + "-keybinds", JSON.stringify(data));
-                });
+                    cell.append(checkbox);
+                    row.appendChild(cell);
+                })();
 
-                cell.append(checkbox);
-                row.appendChild(cell);
-            })();
+                (function createAltCell() {
+                    const cell = document.createElement("td");
+                    cell.classList.add(REWS_PD4.globals.identifier + "-table");
 
-            (function createKeyCell() {
-                const cell = document.createElement("td");
-                cell.classList.add(REWS_PD4.globals.identifier + "-table");
+                    const checkbox = document.createElement("input");
+                    checkbox.type = "checkbox";
+                    checkbox.checked = config.alt === true;
+                    checkbox.addEventListener("change", () => {
+                        config.alt = checkbox.checked;
+                        localStorage.setItem(REWS_PD4.globals.identifier + `-${addonName}` + "-keybinds", JSON.stringify(data));
+                    });
 
-                const input = document.createElement("input");
-                input.type = "text";
-                input.maxLength = 1;
-                input.value = data[addonName]["key"];
-                input.addEventListener("change", (event) => {
-                    if (input.value.length > 1) {
-                        input.value = input.value.slice(0, 1);
-                        return;
-                    }
+                    cell.append(checkbox);
+                    row.appendChild(cell);
+                })();
 
-                    data[addonName]["key"] = input.value;
-                });
+                (function createKeyCell() {
+                    const cell = document.createElement("td");
+                    cell.classList.add(REWS_PD4.globals.identifier + "-table");
 
-                cell.append(input);
-                row.appendChild(cell);
-            })();
+                    const input = document.createElement("input");
+                    input.type = "text";
+                    input.maxLength = 1;
+                    input.value = config.key.toUpperCase();
+                    input.addEventListener("change", (event) => {
+                        if (input.value.length > 1) {
+                            input.value = input.value.slice(0, 1);
+                            return;
+                        }
 
-            body.append(row);
+                        config.key = input.value.toUpperCase();
+                    });
+
+                    cell.append(input);
+                    row.appendChild(cell);
+                })();
+
+                body.append(row);
+            }
         }
 
         table.appendChild(body);
