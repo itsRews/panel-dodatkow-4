@@ -138,10 +138,10 @@
         title.textContent = "Aktualności";
 
         const newContent = document.createElement("div");
-        newContent.classList.add(REWS_PD4.globals.identifier + "-page_layout");
+        newContent.classList.add(IDENTIFIER + "-page_layout");
 
         const versionHeader = document.createElement("span");
-        versionHeader.classList.add(REWS_PD4.globals.identifier + "-page_header");
+        versionHeader.classList.add(IDENTIFIER + "-page_header");
         versionHeader.textContent = REWS_PD4.globals.version;
         newContent.append(versionHeader);
 
@@ -153,8 +153,8 @@
     }
 
     function setupInfo() {
-        const title = document.getElementById(REWS_PD4.globals.identifier + "-page_title");
-        const content = document.getElementById(REWS_PD4.globals.identifier + "-page_content");
+        const title = document.getElementById(IDENTIFIER + "-page_title");
+        const content = document.getElementById(IDENTIFIER + "-page_content");
         REWS_PD4.functions.removeAllChildren(content);
 
         title.textContent = "Informacje";
@@ -183,17 +183,17 @@
     }
 
     function setupKeybinds() {
-        const title = document.getElementById(REWS_PD4.globals.identifier + "-page_title");
-        const content = document.getElementById(REWS_PD4.globals.identifier + "-page_content");
+        const title = document.getElementById(IDENTIFIER + "-page_title");
+        const content = document.getElementById(IDENTIFIER + "-page_content");
         REWS_PD4.functions.removeAllChildren(content);
 
         title.textContent = "Skróty klawiszowe";
 
         const newContent = document.createElement("div");
-        newContent.classList.add(REWS_PD4.globals.identifier + "-page_layout");
+        newContent.classList.add(IDENTIFIER + "-page_layout");
 
         const aboutTitle = document.createElement("span");
-        aboutTitle.classList.add(REWS_PD4.globals.identifier + "-page_text");
+        aboutTitle.classList.add(IDENTIFIER + "-page_text");
         aboutTitle.textContent = "Przykład1 (do edycji w przyszlości)";
         newContent.append(aboutTitle);
 

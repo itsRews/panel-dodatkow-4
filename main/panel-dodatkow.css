@@ -208,7 +208,7 @@
     height: 100%;
 }
 
-.REWS_PD4-page_layout {
+.REWS_PD4-main-page_layout {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -219,13 +219,13 @@
     padding: 0 5px;
 }
 
-.REWS_PD4-page_header {
+.REWS_PD4-main-page_header {
     font-size: 18px;
 
     margin-top: 8px;
 }
 
-.REWS_PD4-page_text {
+.REWS_PD4-main-page_text {
     font-weight: normal;
 
     margin-top: 5px;

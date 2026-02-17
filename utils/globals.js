@@ -308,12 +308,12 @@ REWS_PD4.functions.templates.createTable = (parent, headers, data) => {
 
 REWS_PD4.functions.templates.createPageSection = (parent, title, text) => {
     const header = document.createElement("span");
-    header.classList.add(REWS_PD4.globals.identifier + "-page_header");
+    header.classList.add(REWS_PD4.globals.identifier + "-main" + "-page_header");
     header.textContent = title;
     parent.append(header);
 
     const description = document.createElement("span");
-    description.classList.add(REWS_PD4.globals.identifier + "-page_text");
+    description.classList.add(REWS_PD4.globals.identifier + "-main" + "-page_text");
     description.textContent = text;
     parent.append(description);
 }
