@@ -117,6 +117,7 @@
         leftSide.append(enabledTitle);
 
         const enabledCheckbox = document.createElement("input");
+        enabledCheckbox.id = IDENTIFIER + "-settings_checkbox";
         enabledCheckbox.type = "checkbox";
         enabledCheckbox.checked = REWS_PD4.addons[ADDON_NAME].settings.enabled;
         enabledCheckbox.addEventListener("change", () => {
@@ -132,6 +133,7 @@
         leftSide.append(inviteUnknownTitle);
 
         const inviteUnknownCheckbox = document.createElement("input");
+        enabledCheckbox.id = IDENTIFIER + "-settings_checkbox";
         inviteUnknownCheckbox.type = "checkbox";
         inviteUnknownCheckbox.checked = REWS_PD4.addons[ADDON_NAME].settings.inviteUnknown;
         inviteUnknownCheckbox.addEventListener("change", () => {
@@ -147,6 +149,7 @@
         leftSide.append(inviteClanEnemiesTitle);
 
         const inviteClanEnemiesCheckbox = document.createElement("input");
+        enabledCheckbox.id = IDENTIFIER + "-settings_checkbox";
         inviteClanEnemiesCheckbox.type = "checkbox";
         inviteClanEnemiesCheckbox.checked = REWS_PD4.addons[ADDON_NAME].settings.inviteClanEnemies;
         inviteClanEnemiesCheckbox.addEventListener("change", () => {
@@ -161,6 +164,7 @@
         leftSide.append(showMessagesTitle);
 
         const showMessagesCheckbox = document.createElement("input");
+        enabledCheckbox.id = IDENTIFIER + "-settings_checkbox";
         showMessagesCheckbox.type = "checkbox";
         showMessagesCheckbox.checked = REWS_PD4.addons[ADDON_NAME].settings.showMessages;
         showMessagesCheckbox.addEventListener("change", () => {
