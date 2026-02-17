@@ -55,7 +55,7 @@
                     if (!button.classList.contains(REWS_PD4.globals.identifier + "-button")) return;
 
                     const buttonText = button.textContent.toLowerCase();
-                    if (buttonText.includes(value)) button.style.display = "block";
+                    if (buttonText.includes(value)) button.style.display = "flex";
                     else button.style.display = "none";
                 })
             }
@@ -199,17 +199,9 @@
         newContent.append(aboutTitle);
 
         const headers = ["Akcja", "Shift", "Ctrl", "Alt", "Przycisk"];
-        const keybindData = [
-            {
-                "action": "RandomDodatek: costam do zrobienia",
-                "shift": "true",
-                "ctrl": "false",
-                "alt": "false",
-                "key": "s",
-            }
-        ];
+        const keybindData = REWS_PD4.addons.keybinds;
 
-        REWS_PD4.functions.templates.createTable(newContent, headers, keybindData);
+        REWS_PD4.functions.templates.createKeybindsTable(newContent, headers, keybindData);
 
         content.append(newContent);
     }

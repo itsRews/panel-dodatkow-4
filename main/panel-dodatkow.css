@@ -87,19 +87,13 @@
 
     background-color: #101010CC;
 
-    padding-left: 4px;
-    padding-right: 5px;
-    padding-top: 3px;
-    padding-bottom: 4px;
+    padding: 3px 5px 4px 4px;
 }
 
 .REWS_PD4-close {
-    padding: 5px;
-    padding-right: 6px;
+    padding: 5px 6px 5px 5px;
 
-    margin: -5px;
-    margin-right: -6px;
-    margin-left: 10px;
+    margin: -5px -6px -5px 10px;
 }
 
 .REWS_PD4-button {
@@ -137,8 +131,7 @@
     min-height: 367px;
     max-height: 367px;
 
-    padding: 5px;
-    padding-bottom: 0;
+    padding: 5px 5px 0;
 }
 
 .REWS_PD4-main-search {
@@ -190,8 +183,7 @@
 
     max-height: 400px;
 
-    margin: 5px;
-    margin-right: 0;
+    margin: 5px 0 5px 5px;
 }
 
 .REWS_PD4-main-page_title {
