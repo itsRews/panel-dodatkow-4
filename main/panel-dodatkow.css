@@ -230,7 +230,7 @@
     margin-right: 5px;
 }
 
-table .REWS_PD4-table {
+table.REWS_PD4-table {
     width: 98%;
 
     border: solid 2px silver;
@@ -239,7 +239,7 @@ table .REWS_PD4-table {
     margin-top: 5px;
 }
 
-th .REWS_PD4-table {
+.REWS_PD4-table th {
     font-weight: bold;
 
     border: solid 1px silver;
@@ -247,7 +247,7 @@ th .REWS_PD4-table {
     padding: 5px;
 }
 
-td .REWS_PD4-table {
+.REWS_PD4-table td {
     font-weight: normal;
 
     border: solid 1px silver;
