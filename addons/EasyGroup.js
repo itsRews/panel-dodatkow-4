@@ -5,8 +5,8 @@
     REWS_PD4.addons["EasyGroup"] = {
         clickedOnMainPanel() {
             //sets up the right-side content page.
-            const title = document.getElementById(IDENTIFIER + "-page_title");
-            const content = document.getElementById(IDENTIFIER + "-page_content");
+            const title = document.getElementById(REWS_PD4.globals.identifier + "-main" + "-page_title");
+            const content = document.getElementById(REWS_PD4.globals.identifier + "-main" + "-page_content");
             REWS_PD4.functions.removeAllChildren(content);
 
             title.textContent = "EasyGroup";
