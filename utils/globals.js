@@ -10,10 +10,7 @@ REWS_PD4.globals.version = "4.0.0";
 REWS_PD4.globals.updateData = [];
 REWS_PD4.globals.addonList = ["EasyGroup"];
 
-REWS_PD4.addons = {};
-
-REWS_PD4.addons.addonList = REWS_PD4.addons.addonList || {};
-REWS_PD4.addons.keybinds = REWS_PD4.addons.keybinds || {};
+REWS_PD4.addons = REWS_PD4.addons || {};
 
 REWS_PD4.HTML = {};
 REWS_PD4.HTML.host = {};
@@ -354,114 +351,112 @@ REWS_PD4.functions.templates.createKeybindsTable = (parent, headers, data) => {
         for (let addonName in data) {
             const addon = data[addonName];
 
-            for (let actionName in addon) {
-                const config = addon[actionName];
+            const config = addon.keybinds;
 
-                const row = document.createElement("tr");
-                row.classList.add(REWS_PD4.globals.identifier + "-table");
+            const row = document.createElement("tr");
+            row.classList.add(REWS_PD4.globals.identifier + "-table");
 
-                (function createAddonNameCell() {
-                    const cell = document.createElement("td");
-                    cell.classList.add(REWS_PD4.globals.identifier + "-table");
-                    cell.classList.add(REWS_PD4.globals.identifier + "-keybinds_table-addon_name");
-                    cell.textContent = addonName;
-                    row.appendChild(cell);
-                })();
+            (function createAddonNameCell() {
+                const cell = document.createElement("td");
+                cell.classList.add(REWS_PD4.globals.identifier + "-table");
+                cell.classList.add(REWS_PD4.globals.identifier + "-keybinds_table-addon_name");
+                cell.textContent = addonName;
+                row.appendChild(cell);
+            })();
 
-                (function createActionCell() {
-                    const cell = document.createElement("td");
-                    cell.classList.add(REWS_PD4.globals.identifier + "-table");
-                    cell.textContent = config.action;
-                    row.appendChild(cell);
-                })();
+            (function createActionCell() {
+                const cell = document.createElement("td");
+                cell.classList.add(REWS_PD4.globals.identifier + "-table");
+                cell.textContent = config.action;
+                row.appendChild(cell);
+            })();
 
-                (function createShiftCell() {
-                    const cell = document.createElement("td");
-                    cell.classList.add(REWS_PD4.globals.identifier + "-table");
-                    cell.classList.add(REWS_PD4.globals.identifier + "-keybinds_table-checkbox");
+            (function createShiftCell() {
+                const cell = document.createElement("td");
+                cell.classList.add(REWS_PD4.globals.identifier + "-table");
+                cell.classList.add(REWS_PD4.globals.identifier + "-keybinds_table-checkbox");
 
-                    const checkbox = document.createElement("input");
-                    checkbox.type = "checkbox";
-                    checkbox.checked = config.shift === true;
-                    checkbox.addEventListener("change", () => {
-                        config.shift = checkbox.checked;
-                        localStorage.setItem(REWS_PD4.globals.identifier + `-${addonName}` + "-keybinds", JSON.stringify(addon));
-                    });
+                const checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+                checkbox.checked = config.shift === true;
+                checkbox.addEventListener("change", () => {
+                    config.shift = checkbox.checked;
+                    localStorage.setItem(REWS_PD4.globals.identifier + `-${addonName}` + "-keybinds", JSON.stringify(addon));
+                });
 
-                    cell.append(checkbox);
-                    row.appendChild(cell);
-                })();
+                cell.append(checkbox);
+                row.appendChild(cell);
+            })();
 
-                (function createCtrlCell() {
-                    const cell = document.createElement("td");
-                    cell.classList.add(REWS_PD4.globals.identifier + "-table");
-                    cell.classList.add(REWS_PD4.globals.identifier + "-keybinds_table-checkbox");
+            (function createCtrlCell() {
+                const cell = document.createElement("td");
+                cell.classList.add(REWS_PD4.globals.identifier + "-table");
+                cell.classList.add(REWS_PD4.globals.identifier + "-keybinds_table-checkbox");
 
-                    const checkbox = document.createElement("input");
-                    checkbox.type = "checkbox";
-                    checkbox.checked = config.ctrl === true;
-                    checkbox.addEventListener("change", () => {
-                        config.ctrl = checkbox.checked;
-                        localStorage.setItem(REWS_PD4.globals.identifier + `-${addonName}` + "-keybinds", JSON.stringify(addon));
-                    });
+                const checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+                checkbox.checked = config.ctrl === true;
+                checkbox.addEventListener("change", () => {
+                    config.ctrl = checkbox.checked;
+                    localStorage.setItem(REWS_PD4.globals.identifier + `-${addonName}` + "-keybinds", JSON.stringify(addon));
+                });
 
-                    cell.append(checkbox);
-                    row.appendChild(cell);
-                })();
+                cell.append(checkbox);
+                row.appendChild(cell);
+            })();
 
-                (function createAltCell() {
-                    const cell = document.createElement("td");
-                    cell.classList.add(REWS_PD4.globals.identifier + "-table");
-                    cell.classList.add(REWS_PD4.globals.identifier + "-keybinds_table-checkbox");
+            (function createAltCell() {
+                const cell = document.createElement("td");
+                cell.classList.add(REWS_PD4.globals.identifier + "-table");
+                cell.classList.add(REWS_PD4.globals.identifier + "-keybinds_table-checkbox");
 
-                    const checkbox = document.createElement("input");
-                    checkbox.type = "checkbox";
-                    checkbox.checked = config.alt === true;
-                    checkbox.addEventListener("change", () => {
-                        config.alt = checkbox.checked;
-                        localStorage.setItem(REWS_PD4.globals.identifier + `-${addonName}` + "-keybinds", JSON.stringify(addon));
-                    });
+                const checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+                checkbox.checked = config.alt === true;
+                checkbox.addEventListener("change", () => {
+                    config.alt = checkbox.checked;
+                    localStorage.setItem(REWS_PD4.globals.identifier + `-${addonName}` + "-keybinds", JSON.stringify(addon));
+                });
 
-                    cell.append(checkbox);
-                    row.appendChild(cell);
-                })();
+                cell.append(checkbox);
+                row.appendChild(cell);
+            })();
 
-                (function createKeyCell() {
-                    const cell = document.createElement("td");
-                    cell.classList.add(REWS_PD4.globals.identifier + "-table");
-                    cell.classList.add(REWS_PD4.globals.identifier + "-keybinds_table-key");
+            (function createKeyCell() {
+                const cell = document.createElement("td");
+                cell.classList.add(REWS_PD4.globals.identifier + "-table");
+                cell.classList.add(REWS_PD4.globals.identifier + "-keybinds_table-key");
 
-                    const input = document.createElement("input");
-                    input.classList.add(REWS_PD4.globals.identifier + "-text_input");
-                    input.type = "text";
-                    input.readOnly = true;
+                const input = document.createElement("input");
+                input.classList.add(REWS_PD4.globals.identifier + "-text_input");
+                input.type = "text";
+                input.readOnly = true;
+                input.value = config.code;
+
+                input.addEventListener("focus", () => {
+                    input.value = "...";
+                });
+
+                input.addEventListener("keydown", (event) => {
+                    event.preventDefault();
+
+                    config.code = event.code;
+                    input.value = event.code;
+
+                    localStorage.setItem(REWS_PD4.globals.identifier + `-${addonName}` + "-keybinds", JSON.stringify(addon));
+
+                    input.blur();
+                });
+
+                input.addEventListener("blur", () => {
                     input.value = config.code;
+                })
 
-                    input.addEventListener("focus", () => {
-                        input.value = "...";
-                    });
+                cell.append(input);
+                row.appendChild(cell);
+            })();
 
-                    input.addEventListener("keydown", (event) => {
-                        event.preventDefault();
-
-                        config.code = event.code;
-                        input.value = event.code;
-
-                        localStorage.setItem(REWS_PD4.globals.identifier + `-${addonName}` + "-keybinds", JSON.stringify(addon));
-
-                        input.blur();
-                    });
-
-                    input.addEventListener("blur", () => {
-                        input.value = config.code;
-                    })
-
-                    cell.append(input);
-                    row.appendChild(cell);
-                })();
-
-                body.append(row);
-            }
+            body.append(row);
         }
 
         table.appendChild(body);

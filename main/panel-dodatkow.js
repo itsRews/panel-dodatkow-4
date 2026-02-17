@@ -92,7 +92,7 @@
             (function listAddons() {
                 REWS_PD4.globals.addonList.forEach(addon => {
                     REWS_PD4.functions.templates.createButton(buttonColumn, `> ${addon}`, true, () => {
-                        REWS_PD4.addons.addonList[addon].clickedOnMainPanel();
+                        REWS_PD4.addons[addon].clickedOnMainPanel();
                     });
                 });
             })();
@@ -194,7 +194,7 @@
         newContent.classList.add(IDENTIFIER + "-page_layout");
 
         const headers = ["Dodatek", "Akcja", "Shift", "Ctrl", "Alt", "Przycisk"];
-        const keybindData = REWS_PD4.addons.keybinds;
+        const keybindData = REWS_PD4.addons
 
         REWS_PD4.functions.templates.createKeybindsTable(newContent, headers, keybindData);
 

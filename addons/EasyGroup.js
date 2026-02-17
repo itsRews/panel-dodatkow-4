@@ -60,7 +60,7 @@
     (function setupKeybinds() {
         const keybindsJson = localStorage.getItem(IDENTIFIER + "-keybinds");
         if (keybindsJson === null) {
-            REWS_PD4.addons.keybinds[ADDON_NAME] = {
+            REWS_PD4.addons[ADDON_NAME].keybinds = {
                 "invite": {
                     "action": "Zaproś graczy do grupy",
                     "shift": false,
@@ -104,7 +104,10 @@
     (function initialize() {
         if (localStorage.getItem(IDENTIFIER + "-settings" + "-isCreated") === "true") createSettingsBody();
         if (localStorage.getItem(IDENTIFIER + "-addon_window" + "isCreated") === "true") createAddonWindowBody();
+    })();
 
+
+    (function addon() {
 
     })();
 })();
