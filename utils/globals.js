@@ -177,7 +177,8 @@ REWS_PD4.functions.templates.createTop = (parent, identifier, titleOpen, titleCl
 
     let contentToHide = document.getElementById(identifier + "-content");
     REWS_PD4.functions.templates.makeDraggable(parent, top, identifier, (event) => {
-        console.log(event);
+        if (event.button !== 0) return;
+
         const expanded = localStorage.getItem(identifier + "-expanded");
         if (expanded === "false") {
             contentToHide.style.display = "flex";
