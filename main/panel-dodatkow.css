@@ -272,3 +272,9 @@ table.REWS_PD4-table {
 
     padding: 5px;
 }
+
+.REWS_PD4-addons-button_bundle {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
