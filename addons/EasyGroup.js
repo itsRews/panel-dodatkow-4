@@ -113,7 +113,7 @@
 
         const enabledTitle = document.createElement("span");
         enabledTitle.classList.add(REWS_PD4.globals.identifier + "-addons" + "-settings_title");
-        enabledTitle.textContent = "Włącz:"
+        enabledTitle.textContent = "Włącz:";
         leftSide.append(enabledTitle);
 
         const enabledCheckbox = document.createElement("input");
@@ -127,7 +127,7 @@
 
         const inviteUnknownTitle = document.createElement("span");
         inviteUnknownTitle.classList.add(REWS_PD4.globals.identifier + "-addons" + "-settings_title");
-        inviteUnknownTitle.textContent = "Zapraszaj obcych:"
+        inviteUnknownTitle.textContent = "Zapraszaj obcych:";
         leftSide.append(inviteUnknownTitle);
 
         const inviteUnknownCheckbox = document.createElement("input");
@@ -141,7 +141,7 @@
 
         const inviteClanEnemiesTitle = document.createElement("span");
         inviteClanEnemiesTitle.classList.add(REWS_PD4.globals.identifier + "-addons" + "-settings_title");
-        inviteClanEnemiesTitle.textContent("Dodawaj wrogów klanu");
+        inviteClanEnemiesTitle.textContent = "Dodawaj wrogów klanu";
         leftSide.append(inviteClanEnemiesTitle);
 
         const inviteClanEnemiesCheckbox = document.createElement("input");
@@ -154,6 +154,7 @@
 
         const showMessagesTitle = document.createElement("span");
         showMessagesTitle.classList.add(REWS_PD4.globals.identifier + "-addons" + "-settings_title");
+        showMessagesTitle.textContent = "Pokazuj komunikaty:";
         leftSide.append(showMessagesTitle);
 
         const showMessagesCheckbox = document.createElement("input");
