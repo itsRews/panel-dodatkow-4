@@ -33,7 +33,7 @@
                 if (settingsIsCreated === "true") {
                     localStorage.setItem(IDENTIFIER + "-settings" + "-isCreated", "false");
 
-                    closeSettingsBody;
+                    closeSettingsBody();
                 } else {
                     localStorage.setItem(IDENTIFIER + "-settings" + "-isCreated", "true");
 
