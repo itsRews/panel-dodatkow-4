@@ -9,6 +9,8 @@ REWS_PD4.globals.date = new Date().getTime();
 REWS_PD4.globals.version = "4.0.0";
 REWS_PD4.globals.updateData = [];
 
+REWS_PD4.globals.addonList = ["EasyGroup"];
+
 REWS_PD4.HTML = {};
 REWS_PD4.HTML.host = {};
 
@@ -206,20 +208,43 @@ REWS_PD4.functions.templates.createButton = (parent, text, checkbox, onClick) =>
     button.classList.add(REWS_PD4.globals.identifier + "-button");
     parent.append(button);
 
+
+
+    if (checkbox === true) {
+        let identifier = REWS_PD4.globals.identifier + "-" + text;
+        const enabled = localStorage.getItem(identifier);
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.checked = enabled === "true";
+        button.append(checkbox);
+
+        checkbox.addEventListener("change", () => {
+            if (checkbox.checked) {
+                localStorage.setItem(identifier + "-enabled", "true");
+            } else {
+                localStorage.setItem(identifier + "-enabled", "false");
+            }
+        });
+
+        if (enabled === "true") {
+            const host = document.getElementById(REWS_PD4.globals.identifier + "-host");
+
+            fetch(`${REWS_PD4.globals.url}/addons/${text}.js?v=${DATE}`)
+                .then(response => response.text())
+                .then(responseText => {
+                    const script = document.createElement('script');
+                    script.textContent = responseText;
+                    host.append(script);
+                });
+        } else {
+            localStorage.setItem(identifier + "-expanded", "false");
+        }
+    }
+
     const button_label = document.createElement("label");
     button_label.textContent = text;
     button.append(button_label);
-
-    if (typeof checkbox == "object") {
-        const host = document.getElementById(REWS_PD4.globals.identifier + "-host")
-        fetch(`${REWS_PD4.globals.url}/addons/${text}.js?v=${DATE}`)
-            .then(response => response.text())
-            .then(responseText => {
-                const script = document.createElement('script');
-                script.textContent = responseText;
-                host.append(script);
-            });
-    }
 
     button.addEventListener("mousedown", () => {
         if (typeof onClick === "function") {

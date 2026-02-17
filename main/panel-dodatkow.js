@@ -75,6 +75,13 @@
             addonsTitle.classList.add(IDENTIFIER + "-addons_title");
             buttonColumn.append(addonsTitle);
 
+            (function listAddons() {
+                REWS_PD4.globals.addonList.forEach(addon => {
+                    REWS_PD4.functions.templates.createButton(buttonColumn, `> ${addon}`, true, () => {
+
+                    });
+                });
+            })();
             //
             //
             function fillerButtons() {
