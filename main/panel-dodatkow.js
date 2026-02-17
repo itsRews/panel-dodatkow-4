@@ -45,6 +45,19 @@
             search.classList.add(IDENTIFIER + "-search");
             search.placeholder = "Wyszukaj...";
             search.type = "text";
+            search.onkeyup = event => {
+                const value = event.target.value.toLowerCase();
+
+                const column = document.getElementsByClassName(IDENTIFIER + "-button_column")[0];
+
+                Object.values(column.children).forEach(button => {
+                    if (!button.classList.contains(REWS_PD4.globals.identifier + "-button")) return;
+
+                    const buttonText = button.textContent.toLowerCase();
+                    if (buttonText.includes(value)) button.style.display = "block";
+                    else button.style.display = "none";
+                })
+            }
             leftSide.append(search);
 
 

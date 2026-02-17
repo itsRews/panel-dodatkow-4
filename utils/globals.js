@@ -221,7 +221,8 @@ REWS_PD4.functions.templates.createButton = (parent, text, checkbox, onClick) =>
     button.append(button_label);
 
     if (checkbox === true) {
-        let identifier = REWS_PD4.globals.identifier + "-" + text.replace("> ", "");
+        let addonIdentifier = text.replace("> ", "");
+        let identifier = REWS_PD4.globals.identifier + "-" + addonIdentifier;
         const enabled = localStorage.getItem(identifier + "-enabled");
 
         const checkbox = document.createElement("input");
@@ -240,7 +241,7 @@ REWS_PD4.functions.templates.createButton = (parent, text, checkbox, onClick) =>
         if (enabled === "true") {
             const host = document.getElementById(REWS_PD4.globals.identifier + "-host");
 
-            fetch(`${REWS_PD4.globals.url}/addons/${identifier}.js?v=${REWS_PD4.globals.date}`)
+            fetch(`${REWS_PD4.globals.url}/addons/${addonIdentifier}.js?v=${REWS_PD4.globals.date}`)
                 .then(response => response.text())
                 .then(responseText => {
                     const script = document.createElement('script');
