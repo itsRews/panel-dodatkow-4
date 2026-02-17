@@ -78,26 +78,10 @@
             (function listAddons() {
                 REWS_PD4.globals.addonList.forEach(addon => {
                     REWS_PD4.functions.templates.createButton(buttonColumn, `> ${addon}`, true, () => {
-
+                        REWS_PD4.addons[addon].clickedOnMainPanel();
                     });
                 });
             })();
-            //
-            //
-            function fillerButtons() {
-                for (let i = 0; i < 10; i++) {
-                    const keybinds_button = document.createElement("div");
-                    keybinds_button.classList.add(REWS_PD4.globals.identifier + "-button");
-                    buttonColumn.append(keybinds_button);
-
-                    const keybinds_label = document.createElement("label");
-                    keybinds_label.textContent = `> Addon${i}`;
-                    keybinds_button.append(keybinds_label);
-                }
-
-            }
-            fillerButtons();
-            //
         })();
 
         (function setupRightSide() {
@@ -164,45 +148,22 @@
         const newContent = document.createElement("div");
         newContent.classList.add(IDENTIFIER + "-page_layout");
 
-        const aboutTitle = document.createElement("span");
-        aboutTitle.classList.add(IDENTIFIER + "-page_header");
-        aboutTitle.textContent = "Czym jest Panel Dodatków 4";
-        newContent.append(aboutTitle);
+        let aboutTitle = "Czym jest Panel Dodatków 4";
+        let aboutText = "Zbiórka dodatków stworzona przez itsRews. Pierwsze iteracje stworzone dla klanu w 2023 roku, po kilku przerwach od gry panel i czterech głównych wersjach panelu, zostaje on publicznie udostępniony na forum w celu udostępnienia dodatków które można łatwo zrobić \"pod siebie\", zmodyfikować, naprawić (w przypadku braku aktualizacji), albo po prostu jako materiał do nauki dla osób które dopiero zaczynają tworzyć dodatki.";
+        REWS_PD4.functions.templates.createPageSection(newContent, aboutTitle, aboutText);
 
-        const about = document.createElement("span");
-        about.classList.add(IDENTIFIER + "-page_text");
-        about.textContent = "Zbiórka dodatków stworzona przez itsRews. Pierwsze iteracje stworzone dla klanu w 2023 roku, po kilku przerwach od gry panel i czterech głównych wersjach panelu, zostaje on publicznie udostępniony na forum w celu udostępnienia dodatków które można łatwo zrobić \"pod siebie\", zmodyfikować, naprawić (w przypadku braku aktualizacji), albo po prostu jako materiał do nauki dla osób które dopiero zaczynają tworzyć dodatki.";
-        newContent.append(about);
+        let qualityAndPricingTitle = "Jakość oraz cena dodatków";
+        let qualityAndPricingText = "Dodatki zawsze robiłem dla siebie, dlatego też zawsze były (i będą) w pełni darmowe. Z tego też powodu nie gwarantuje najlepiej zoptymizowanych dodatków, zrobionych w najlepszy możliwy sposób, lecz staram się robić je najlepiej jak potrafie.";
+        REWS_PD4.functions.templates.createPageSection(newContent, qualityAndPricingTitle, qualityAndPricingText);
 
-        const qualityAndPricingTitle = document.createElement("span");
-        qualityAndPricingTitle.classList.add(IDENTIFIER + "-page_header");
-        qualityAndPricingTitle.textContent = "Jakość oraz cena dodatków";
-        newContent.append(qualityAndPricingTitle);
+        let limitationsTitle = "Ograniczenia dodatków";
+        let limitationsText = "Wszystkie dodatki są robione w szczególną myślą legalności do gry na świecie prywatnym Nubes. Z tego też powodu nigdy nie będzie tutaj dodatków typu Auto X (który różni się od dobijary), boty itd.";
+        REWS_PD4.functions.templates.createPageSection(newContent, limitationsTitle, limitationsText);
 
-        const qualityAndPricing = document.createElement("span");
-        qualityAndPricing.classList.add(IDENTIFIER + "-page_text");
-        qualityAndPricing.textContent = "Dodatki zawsze robiłem dla siebie, dlatego też zawsze były (i będą) w pełni darmowe. Z tego też powodu nie gwarantuje najlepiej zoptymizowanych dodatków, zrobionych w najlepszy możliwy sposób, lecz staram się robić je najlepiej jak potrafie.";
-        newContent.append(qualityAndPricing);
+        let contactTitle = "Kontakt";
+        let contactText = "W przypadku jakichkolwiek propozycji polecaną metodą kontaktu jest forum. Może w przyszłości stworze Discord jeżeli będzie do tego potrzeba.";
+        REWS_PD4.functions.templates.createPageSection(newContent, contactTitle, contactText);
 
-        const limitationsTitle = document.createElement("span");
-        limitationsTitle.classList.add(IDENTIFIER + "-page_header");
-        limitationsTitle.textContent = "Ograniczenia dodatków";
-        newContent.append(limitationsTitle);
-
-        const limitations = document.createElement("span");
-        limitations.classList.add(IDENTIFIER + "-page_text");
-        limitations.textContent = "Wszystkie dodatki są robione w szczególną myślą legalności do gry na świecie prywatnym Nubes. Z tego też powodu nigdy nie będzie tutaj dodatków typu Auto X (który różni się od dobijary), boty itd.";
-        newContent.append(limitations);
-
-        const contactTitle = document.createElement("span");
-        contactTitle.classList.add(IDENTIFIER + "-page_header");
-        contactTitle.textContent = "Kontakt";
-        newContent.append(contactTitle);
-
-        const contact = document.createElement("span");
-        contact.classList.add(IDENTIFIER + "-page_text");
-        contact.textContent = "W przypadku jakichkolwiek propozycji polecaną metodą kontaktu jest forum. Może w przyszłości stworze Discord jeżeli będzie do tego potrzeba.";
-        newContent.append(contact);
 
         content.append(newContent);
     }

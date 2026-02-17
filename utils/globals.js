@@ -8,8 +8,9 @@ REWS_PD4.globals.url = "https://itsrews.github.io/panel-dodatkow-4";
 REWS_PD4.globals.date = new Date().getTime();
 REWS_PD4.globals.version = "4.0.0";
 REWS_PD4.globals.updateData = [];
-
 REWS_PD4.globals.addonList = ["EasyGroup"];
+
+REWS_PD4.addons = REWS_PD4.addons || {};
 
 REWS_PD4.HTML = {};
 REWS_PD4.HTML.host = {};
@@ -136,6 +137,8 @@ REWS_PD4.functions.templates.createBody = (parent, identifier, titleOpen, titleC
     REWS_PD4.functions.templates.createContent(body, identifier);
 
     REWS_PD4.functions.templates.createTop(body, identifier, titleOpen, titleClose, isCloseable);
+
+    return body;
 }
 
 REWS_PD4.functions.templates.createContent = (parent, identifier) => {
@@ -200,6 +203,11 @@ REWS_PD4.functions.templates.createTop = (parent, identifier, titleOpen, titleCl
         close.classList.add(REWS_PD4.globals.identifier + "-close");
         close.textContent = "X";
         top.append(close);
+
+        close.addEventListener("mousedown", () => {
+            localStorage.setItem(identifier + "-isCreated", "false");
+            parent.remove();
+        });
     }
 }
 
@@ -295,4 +303,16 @@ REWS_PD4.functions.templates.createTable = (parent, headers, data) => {
     })();
 
     parent.append(table);
+}
+
+REWS_PD4.functions.templates.createPageSection = (parent, title, text) => {
+    const header = document.createElement("span");
+    header.classList.add(REWS_PD4.globals.identifier + "-page_header");
+    header.textContent = title;
+    parent.append(header);
+
+    const description = document.createElement("span");
+    description.classList.add(REWS_PD4.globals.identifier + "-page_text");
+    description.textContent = text;
+    parent.append(description);
 }
