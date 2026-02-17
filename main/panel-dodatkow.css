@@ -145,6 +145,15 @@
     margin: 3px 2px;
 }
 
+.REWS_PD4-text_input {
+    width: 100%;
+
+    color: whitesmoke;
+    font-size: 12px;
+
+    background-color: #101010AA;
+}
+
 .REWS_PD4-main-button_column {
     display: flex;
     flex-direction: column;
@@ -264,6 +273,21 @@ table.REWS_PD4-table {
 
     padding: 5px;
 }
+
+.REWS_PD4-keybinds_table-addon_name {
+    width: 90px;
+}
+
+.REWS_PD4-keybinds_table-checkbox {
+    width: 28px;
+    text-align: center;
+}
+
+.REWS_PD4-keybinds_table-key {
+    width: 80px;
+}
+
+
 
 .REWS_PD4-addons-button_bundle {
     display: flex;

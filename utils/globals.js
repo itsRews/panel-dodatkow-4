@@ -347,6 +347,7 @@ REWS_PD4.functions.templates.createKeybindsTable = (parent, headers, data) => {
                 (function createAddonNameCell() {
                     const cell = document.createElement("td");
                     cell.classList.add(REWS_PD4.globals.identifier + "-table");
+                    cell.classList.add(REWS_PD4.globals.identifier + "-keybinds_table-addon_name");
                     cell.textContent = addonName;
                     row.appendChild(cell);
                 })();
@@ -361,6 +362,7 @@ REWS_PD4.functions.templates.createKeybindsTable = (parent, headers, data) => {
                 (function createShiftCell() {
                     const cell = document.createElement("td");
                     cell.classList.add(REWS_PD4.globals.identifier + "-table");
+                    cell.classList.add(REWS_PD4.globals.identifier + "-keybinds_table-checkbox");
 
                     const checkbox = document.createElement("input");
                     checkbox.type = "checkbox";
@@ -377,6 +379,7 @@ REWS_PD4.functions.templates.createKeybindsTable = (parent, headers, data) => {
                 (function createCtrlCell() {
                     const cell = document.createElement("td");
                     cell.classList.add(REWS_PD4.globals.identifier + "-table");
+                    cell.classList.add(REWS_PD4.globals.identifier + "-keybinds_table-checkbox");
 
                     const checkbox = document.createElement("input");
                     checkbox.type = "checkbox";
@@ -393,6 +396,7 @@ REWS_PD4.functions.templates.createKeybindsTable = (parent, headers, data) => {
                 (function createAltCell() {
                     const cell = document.createElement("td");
                     cell.classList.add(REWS_PD4.globals.identifier + "-table");
+                    cell.classList.add(REWS_PD4.globals.identifier + "-keybinds_table-checkbox");
 
                     const checkbox = document.createElement("input");
                     checkbox.type = "checkbox";
@@ -405,12 +409,14 @@ REWS_PD4.functions.templates.createKeybindsTable = (parent, headers, data) => {
                     cell.append(checkbox);
                     row.appendChild(cell);
                 })();
-                //
+
                 (function createKeyCell() {
                     const cell = document.createElement("td");
                     cell.classList.add(REWS_PD4.globals.identifier + "-table");
+                    cell.classList.add(REWS_PD4.globals.identifier + "-keybinds_table-key");
 
                     const input = document.createElement("input");
+                    input.classList.add(REWS_PD4.globals.identifier + "-text_input");
                     input.type = "text";
                     input.readOnly = true;
                     input.value = config.code;
