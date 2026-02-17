@@ -208,10 +208,12 @@ REWS_PD4.functions.templates.createButton = (parent, text, checkbox, onClick) =>
     button.classList.add(REWS_PD4.globals.identifier + "-button");
     parent.append(button);
 
-
+    const button_label = document.createElement("label");
+    button_label.textContent = text;
+    button.append(button_label);
 
     if (checkbox === true) {
-        let identifier = REWS_PD4.globals.identifier + "-" + text;
+        let identifier = REWS_PD4.globals.identifier + "-" + text.replace("> ", "");
         const enabled = localStorage.getItem(identifier);
 
         const checkbox = document.createElement("input");
@@ -241,10 +243,6 @@ REWS_PD4.functions.templates.createButton = (parent, text, checkbox, onClick) =>
             localStorage.setItem(identifier + "-expanded", "false");
         }
     }
-
-    const button_label = document.createElement("label");
-    button_label.textContent = text;
-    button.append(button_label);
 
     button.addEventListener("mousedown", () => {
         if (typeof onClick === "function") {
