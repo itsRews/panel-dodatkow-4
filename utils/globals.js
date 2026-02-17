@@ -232,7 +232,7 @@ REWS_PD4.functions.templates.createButton = (parent, text, checkbox, onClick) =>
         if (enabled === "true") {
             const host = document.getElementById(REWS_PD4.globals.identifier + "-host");
 
-            fetch(`${REWS_PD4.globals.url}/addons/${text}.js?v=${DATE}`)
+            fetch(`${REWS_PD4.globals.url}/addons/${text}.js?v=${REWS_PD4.globals.date}`)
                 .then(response => response.text())
                 .then(responseText => {
                     const script = document.createElement('script');
