@@ -69,9 +69,9 @@
                     "code": "KeyV"
                 }
             }
-            localStorage.setItem(IDENTIFIER + "-keybinds", JSON.stringify(REWS_PD4.addons.keybinds[ADDON_NAME]));
+            localStorage.setItem(IDENTIFIER + "-keybinds", JSON.stringify(REWS_PD4.addons[ADDON_NAME].keybinds));
         } else {
-            REWS_PD4.addons.keybinds[ADDON_NAME] = JSON.parse(keybindsJson);
+            REWS_PD4.addons[ADDON_NAME].keybinds = JSON.parse(keybindsJson);
         }
     })();
 
