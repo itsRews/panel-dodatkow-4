@@ -206,10 +206,6 @@
         if (!REWS_PD4.addons[ADDON_NAME].settings.enabled) return;
 
         document.addEventListener("keyup", event => {
-            event.preventDefault();
-            event.stopPropagation();
-            event.stopImmediatePropagation();
-
             if (
                 event.key === REWS_PD4.addons[ADDON_NAME].keybinds["mapInvite"].code &&
                 event.shiftKey === REWS_PD4.addons[ADDON_NAME].keybinds["mapInvite"].shift &&

@@ -52,8 +52,6 @@ REWS_PD4.functions.templates.makeDraggable = (parent, element, identifier, onCli
 
     element.setAttribute("draggable", "false");
     element.addEventListener("pointerdown", (event) => {
-        event.preventDefault();
-
         isDragging = true;
 
         startX = event.clientX;
@@ -440,7 +438,6 @@ REWS_PD4.functions.templates.createKeybindsTable = (parent, headers, data) => {
                     });
 
                     input.addEventListener("keydown", (event) => {
-                        event.preventDefault();
 
                         config.code = event.code;
                         input.value = event.code;
