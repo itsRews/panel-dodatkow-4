@@ -69,9 +69,9 @@
                     "key": "v"
                 }
             }
-            localStorage.setItem(IDENTIFIER + "-keybinds", JSON.stringify(REWS_PD4.addons.keybinds));
+            localStorage.setItem(IDENTIFIER + "-keybinds", JSON.stringify(REWS_PD4.addons.keybinds[ADDON_NAME]));
         } else {
-            REWS_PD4.addons.keybinds[ADDON_NAME] = JSON.parse(keybindsJson)[ADDON_NAME];
+            REWS_PD4.addons.keybinds[ADDON_NAME] = JSON.parse(keybindsJson);
         }
     })();
 
