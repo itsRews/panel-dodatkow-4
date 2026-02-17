@@ -444,7 +444,7 @@ REWS_PD4.functions.templates.createKeybindsTable = (parent, headers, data) => {
                     input.addEventListener("keydown", (event) => {
                         event.preventDefault();
 
-                        config.key = event.code;
+                        config.code = event.code;
                         input.value = event.code;
 
                         localStorage.setItem(REWS_PD4.globals.identifier + `-${addonName}` + "-keybinds", JSON.stringify(addon));
