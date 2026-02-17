@@ -41,7 +41,7 @@
     position: absolute;
 
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
 
     color: whitesmoke;
 
@@ -76,6 +76,8 @@
     flex-wrap: nowrap;
 
     border-top: 2px solid silver;
+
+    padding: 10px;
 }
 
 .REWS_PD4-top {
@@ -318,18 +320,26 @@ table.REWS_PD4-table {
 }
 
 .REWS_PD4-addons-settings_left_side {
-
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: flex-end;
 }
 
 .REWS_PD4-addons-settings_right_side {
-
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
 
 .REWS_PD4-addons-settings_title {
-
+    padding: 3px 2px 3px 0;
 }
 
 .REWS_PD4-addons-settings_checkbox {
-
+    padding: 3px 2px 3px 0;
 }
