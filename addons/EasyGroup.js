@@ -40,7 +40,7 @@
                 }
             });
 
-            REWS_PD4.functions.templates.createButton(buttonBundle, "> Okno dodatku", () => {
+            REWS_PD4.functions.templates.createAddonButton(buttonBundle, "> Okno dodatku", () => {
                 const addonWindowIsCreated = localStorage.getItem(IDENTIFIER + "-addon_window" + "-isCreated");
                 if (addonWindowIsCreated === "true") {
                     localStorage.setItem(IDENTIFIER + "-addon_window" + "-isCreated", "false");
