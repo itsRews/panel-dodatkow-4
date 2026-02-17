@@ -1,9 +1,13 @@
 ﻿(() => {
-    const IDENTIFIER = REWS_PD4.globals.identifier + "-EasyGroup";
+    const ADDON_NAME = "EasyGroup";
+    const ADDON_SHORTCUT = "EG";
+
+    const IDENTIFIER = REWS_PD4.globals.identifier + `-${ADDON_NAME}`;
     let SETTINGS_BODY = null;
     let ADDON_WINDOW_BODY = null;
 
-    REWS_PD4.addons["EasyGroup"] = {
+
+    REWS_PD4.addons.addonList["EasyGroup"] = {
         clickedOnMainPanel() {
             //sets up the right-side content page.
             const title = document.getElementById(REWS_PD4.globals.identifier + "-main" + "-page_title");
@@ -30,7 +34,7 @@
 
                     closeBody(SETTINGS_BODY);
                 } else {
-                    localStorage.setItem(IDENTIFIER + "-settings" + "isCreated", "true");
+                    localStorage.setItem(IDENTIFIER + "-settings" + "-isCreated", "true");
 
                     createSettingsBody();
                 }
@@ -53,15 +57,19 @@
         }
     };
 
+    REWS_PD4.addons.keybinds["EasyGroup"] = {
+
+    }
+
     function createSettingsBody() {
-        SETTINGS_BODY = REWS_PD4.functions.templates.createBody(REWS_PD4.HTML.host, IDENTIFIER + "-settings", "[REWS] EasyGroup - Ustawienia", "[R] EG-U", true);
+        SETTINGS_BODY = REWS_PD4.functions.templates.createBody(REWS_PD4.HTML.host, IDENTIFIER + "-settings", `[REWS] ${ADDON_NAME} - Ustawienia`, `[R] ${ADDON_SHORTCUT}-U`, true);
 
         const content = document.getElementById(IDENTIFIER + "-settings" + "-content");
 
     }
 
     function createAddonWindowBody() {
-        ADDON_WINDOW_BODY = REWS_PD4.functions.templates.createBody(REWS_PD4.HTML.host, IDENTIFIER + "-addon_window", "[REWS] EasyGroup", "[R] EG", true);
+        ADDON_WINDOW_BODY = REWS_PD4.functions.templates.createBody(REWS_PD4.HTML.host, IDENTIFIER + "-addon_window", `[REWS] ${ADDON_NAME}`, `[R] ${ADDON_SHORTCUT}`, true);
 
         const content = document.getElementById(IDENTIFIER + "-addon_window" + "-content");
     }
@@ -80,8 +88,8 @@
 
 
     (function initialize() {
-        if (localStorage.getItem(IDENTIFIER + "-settingsIsCreated") === "true") createSettingsBody();
-        if (localStorage.getItem(IDENTIFIER + "-addonWindowIsCreated") === "true") createAddonWindowBody();
+        if (localStorage.getItem(IDENTIFIER + "-settings" + "-isCreated") === "true") createSettingsBody();
+        if (localStorage.getItem(IDENTIFIER + "-addon_window" + "isCreated") === "true") createAddonWindowBody();
 
 
     })();

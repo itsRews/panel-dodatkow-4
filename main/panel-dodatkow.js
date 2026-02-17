@@ -92,7 +92,7 @@
             (function listAddons() {
                 REWS_PD4.globals.addonList.forEach(addon => {
                     REWS_PD4.functions.templates.createButton(buttonColumn, `> ${addon}`, true, () => {
-                        REWS_PD4.addons[addon].clickedOnMainPanel();
+                        REWS_PD4.addons.addonList[addon].clickedOnMainPanel();
                     });
                 });
             })();
@@ -198,9 +198,10 @@
         aboutTitle.textContent = "Przykład1 (do edycji w przyszlości)";
         newContent.append(aboutTitle);
 
-        const headers = ["Shift", "Ctrl", "Alt", "Klawisz"];
+        const headers = ["Akcja", "Shift", "Ctrl", "Alt", "Przycisk"];
         const keybindData = [
             {
+                "action": "RandomDodatek: costam do zrobienia",
                 "shift": "true",
                 "ctrl": "false",
                 "alt": "false",

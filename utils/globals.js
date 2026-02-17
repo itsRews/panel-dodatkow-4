@@ -10,7 +10,10 @@ REWS_PD4.globals.version = "4.0.0";
 REWS_PD4.globals.updateData = [];
 REWS_PD4.globals.addonList = ["EasyGroup"];
 
-REWS_PD4.addons = REWS_PD4.addons || {};
+REWS_PD4.addons = {};
+
+REWS_PD4.addons.addonList = REWS_PD4.addons.addonList || {};
+REWS_PD4.addons.keybinds = REWS_PD4.addons.keybinds || {};
 
 REWS_PD4.HTML = {};
 REWS_PD4.HTML.host = {};
