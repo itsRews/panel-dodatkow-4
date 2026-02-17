@@ -21,7 +21,7 @@
 
         const css = document.createElement("link");
         css.rel = "stylesheet";
-        //css.href = `${REWS_PD4.globals.url}/main/panel-dodatkow.css?v=${REWS_PD4.globals.date}`;
+        css.href = `${REWS_PD4.globals.url}/main/panel-dodatkow.css?v=${REWS_PD4.globals.date}`;
         host.append(css);
 
         IDENTIFIER = REWS_PD4.globals.identifier + "-main";
