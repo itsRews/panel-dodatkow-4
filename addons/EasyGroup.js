@@ -32,7 +32,7 @@
                 if (settingsIsCreated === "true") {
                     localStorage.setItem(IDENTIFIER + "-settings" + "-isCreated", "false");
 
-                    closeBody(SETTINGS_BODY);
+                    closeSettingsBody;
                 } else {
                     localStorage.setItem(IDENTIFIER + "-settings" + "-isCreated", "true");
 
@@ -45,7 +45,7 @@
                 if (addonWindowIsCreated === "true") {
                     localStorage.setItem(IDENTIFIER + "-addon_window" + "-isCreated", "false");
 
-                    closeBody(ADDON_WINDOW_BODY);
+                    closeAddonWindowBody();
                 } else {
                     localStorage.setItem(IDENTIFIER + "-addon_window" + "-isCreated", "true");
 
@@ -181,11 +181,18 @@
         const content = document.getElementById(IDENTIFIER + "-addon_window" + "-content");
     }
 
-    function closeBody(bodyType) {
-        if (bodyType === null) return;
+    function closeSettingsBody() {
+        if (SETTINGS_BODY === null) return;
 
-        bodyType.remove();
-        bodyType = null;
+        SETTINGS_BODY.remove();
+        SETTINGS_BODY = null;
+    }
+
+    function closeAddonWindowBody() {
+        if (ADDON_WINDOW_BODY === null) return;
+
+        ADDON_WINDOW_BODY.remove();
+        ADDON_WINDOW_BODY = null;
     }
 
 
@@ -196,7 +203,7 @@
 
     (function initialize() {
         if (localStorage.getItem(IDENTIFIER + "-settings" + "-isCreated") === "true") createSettingsBody();
-        if (localStorage.getItem(IDENTIFIER + "-addon_window" + "isCreated") === "true") createAddonWindowBody();
+        if (localStorage.getItem(IDENTIFIER + "-addon_window" + "-isCreated") === "true") createAddonWindowBody();
     })();
 
 
@@ -210,13 +217,13 @@
             if (!REWS_PD4.addons[ADDON_NAME].settings.enabled) return;
 
             if (
-                event.key === REWS_PD4.addons[ADDON_NAME].keybinds["mapInvite"].code &&
+                event.code === REWS_PD4.addons[ADDON_NAME].keybinds["mapInvite"].code &&
                 event.shiftKey === REWS_PD4.addons[ADDON_NAME].keybinds["mapInvite"].shift &&
                 event.ctrlKey === REWS_PD4.addons[ADDON_NAME].keybinds["mapInvite"].ctrl &&
                 event.altKey === REWS_PD4.addons[ADDON_NAME].keybinds["mapInvite"].alt
             ) checkPermissions("map");
             else if (
-                event.key === REWS_PD4.addons[ADDON_NAME].keybinds["nearbyInvite"].code &&
+                event.code === REWS_PD4.addons[ADDON_NAME].keybinds["nearbyInvite"].code &&
                 event.shiftKey === REWS_PD4.addons[ADDON_NAME].keybinds["nearbyInvite"].shift &&
                 event.ctrlKey === REWS_PD4.addons[ADDON_NAME].keybinds["nearbyInvite"].ctrl &&
                 event.altKey === REWS_PD4.addons[ADDON_NAME].keybinds["nearbyInvite"].alt
@@ -224,7 +231,7 @@
         });
 
         function checkPermissions(inviteType) {
-            const groupExists = Engine.party !== undefined || Engine.party.isParty();
+            const groupExists = Engine.party !== undefined && Engine.party.isParty();
 
             if (groupExists) {
                 let isLeader = false;
@@ -271,8 +278,8 @@
                 } else {
                     if (playerDistance > 1) return;
 
-                    if (REWS_PD4.addons[ADDON_NAME].settings.inviteUnknown && (player.d.relation === 1 || player.d.relation === 7)) _g(`party&a=inv&id=${playerData.id}`);
-                    if (REWS_PD4.addons[ADDON_NAME].settings.inviteClanEnemies && player.d.relation === 6) _g(`party&a=inv&id=${playerData.id}`);
+                    if (REWS_PD4.addons[ADDON_NAME].settings.inviteUnknown && (player.d.relation === 1 || player.d.relation === 7)) _g(`party&a=inv&id=${player.d.id}`);
+                    if (REWS_PD4.addons[ADDON_NAME].settings.inviteClanEnemies && player.d.relation === 6) _g(`party&a=inv&id=${player.d.id}`);
                 }
             });
         }
