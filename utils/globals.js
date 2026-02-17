@@ -6,6 +6,8 @@ REWS_PD4.globals = {};
 REWS_PD4.globals.identifier = "REWS_PD4";
 REWS_PD4.globals.url = "https://itsrews.github.io/panel-dodatkow-4";
 REWS_PD4.globals.date = new Date().getTime();
+REWS_PD4.globals.version = "4.0.0";
+REWS_PD4.globals.updateData = [];
 
 REWS_PD4.HTML = {};
 REWS_PD4.HTML.host = {};
