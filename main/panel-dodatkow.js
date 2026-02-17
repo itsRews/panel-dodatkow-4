@@ -113,6 +113,7 @@
             pageContent.classList.add(IDENTIFIER + "-page_content");
             pageContent.id = IDENTIFIER + "-page_content";
             pageContent.textContent = "ContentUnloaded";
+            pageContent.addEventListener("wheel", e => e.stopPropagation(), { passive: false });
             rightSide.append(pageContent);
         })();
 
