@@ -335,7 +335,6 @@ REWS_PD4.functions.templates.createKeybindsTable = (parent, headers, data) => {
         const body = document.createElement("tbody");
         body.classList.add(REWS_PD4.globals.identifier + "-table");
 
-        //
         for (let addonName in data) {
             const addon = data[addonName];
 
@@ -368,7 +367,7 @@ REWS_PD4.functions.templates.createKeybindsTable = (parent, headers, data) => {
                     checkbox.checked = config.shift === true;
                     checkbox.addEventListener("change", () => {
                         config.shift = checkbox.checked;
-                        localStorage.setItem(REWS_PD4.globals.identifier + `-${addonName}` + "-keybinds", JSON.stringify(data));
+                        localStorage.setItem(REWS_PD4.globals.identifier + `-${addonName}` + "-keybinds", JSON.stringify(addon));
                     });
 
                     cell.append(checkbox);
@@ -384,7 +383,7 @@ REWS_PD4.functions.templates.createKeybindsTable = (parent, headers, data) => {
                     checkbox.checked = config.ctrl === true;
                     checkbox.addEventListener("change", () => {
                         config.ctrl = checkbox.checked;
-                        localStorage.setItem(REWS_PD4.globals.identifier + `-${addonName}` + "-keybinds", JSON.stringify(data));
+                        localStorage.setItem(REWS_PD4.globals.identifier + `-${addonName}` + "-keybinds", JSON.stringify(addon));
                     });
 
                     cell.append(checkbox);
@@ -400,7 +399,7 @@ REWS_PD4.functions.templates.createKeybindsTable = (parent, headers, data) => {
                     checkbox.checked = config.alt === true;
                     checkbox.addEventListener("change", () => {
                         config.alt = checkbox.checked;
-                        localStorage.setItem(REWS_PD4.globals.identifier + `-${addonName}` + "-keybinds", JSON.stringify(data));
+                        localStorage.setItem(REWS_PD4.globals.identifier + `-${addonName}` + "-keybinds", JSON.stringify(addon));
                     });
 
                     cell.append(checkbox);
