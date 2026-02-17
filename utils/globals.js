@@ -345,6 +345,13 @@ REWS_PD4.functions.templates.createKeybindsTable = (parent, headers, data) => {
                 const row = document.createElement("tr");
                 row.classList.add(REWS_PD4.globals.identifier + "-table");
 
+                (function createAddonNameCell() {
+                    const cell = document.createElement("td");
+                    cell.classList.add(REWS_PD4.globals.identifier + "-table");
+                    cell.textContent = addonName;
+                    row.appendChild(cell);
+                })();
+
                 (function createActionCell() {
                     const cell = document.createElement("td");
                     cell.classList.add(REWS_PD4.globals.identifier + "-table");

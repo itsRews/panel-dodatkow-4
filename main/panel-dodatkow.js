@@ -198,7 +198,7 @@
         aboutTitle.textContent = "Przykład1 (do edycji w przyszlości)";
         newContent.append(aboutTitle);
 
-        const headers = ["Akcja", "Shift", "Ctrl", "Alt", "Przycisk"];
+        const headers = ["Dodatek", "Akcja", "Shift", "Ctrl", "Alt", "Przycisk"];
         const keybindData = REWS_PD4.addons.keybinds;
 
         REWS_PD4.functions.templates.createKeybindsTable(newContent, headers, keybindData);

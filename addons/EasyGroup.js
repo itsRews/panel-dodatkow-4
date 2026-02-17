@@ -62,7 +62,7 @@
         if (keybindsJson === null) {
             REWS_PD4.addons.keybinds[ADDON_NAME] = {
                 "invite": {
-                    "action": "EasyGroup: Zaproś graczy do grupy",
+                    "action": "Zaproś graczy do grupy",
                     "shift": false,
                     "ctrl": false,
                     "alt": false,
