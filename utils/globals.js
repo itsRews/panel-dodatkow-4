@@ -446,7 +446,6 @@ REWS_PD4.functions.templates.createKeybindsTable = (parent, headers, data) => {
 
                         config.code = event.code;
                         input.value = event.code;
-                        console.log(input.value);
 
                         localStorage.setItem(REWS_PD4.globals.identifier + `-${addonName}` + "-keybinds", JSON.stringify(addon));
 
@@ -455,7 +454,6 @@ REWS_PD4.functions.templates.createKeybindsTable = (parent, headers, data) => {
 
                     input.addEventListener("blur", () => {
                         input.value = config.code;
-                        console.log(input.value);
                     })
 
                     cell.append(input);
