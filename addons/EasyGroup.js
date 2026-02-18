@@ -192,7 +192,7 @@
 
         if (REWS_PD4.addons[ADDON_NAME].settings.showProfessionButtons) {
             const buttonsRow = document.createElement("div");
-            buttonsRow.classList.add(IDENTIFIER + "-buttons_row");
+            buttonsRow.classList.add(REWS_PD4.globals.identifier + "-addons" + "-buttons_row");
             content.append(buttonsRow);
 
             const playerListTitle = document.createElement("span");

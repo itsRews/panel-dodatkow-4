@@ -153,7 +153,7 @@
 
         if (REWS_PD4.addons[ADDON_NAME].settings.playerPriority) {
             const buttonsRow = document.createElement("div");
-            buttonsRow.classList.add(IDENTIFIER + "-buttons_row");
+            buttonsRow.classList.add(REWS_PD4.globals.identifier + "-addons" + "-buttons_row");
             content.append(buttonsRow);
 
             const playerListTitle = document.createElement("span");
@@ -165,13 +165,13 @@
             playerList.classList.add(IDENTIFIER + "-player_list_scrollable");
             content.append(playerList);
 
-            const options = ["addPriority", "clearPriority", "removePriority"];
+            const options = ["Dodaj do priorytetu", "Wyczysć listę priorytetów", "Usuń z priorytetów"];
             for (let option of options) {
                 REWS_PD4.functions.templates.createButton(buttonsRow, `> ${option}`, false, () => {
                     renderPlayersByOption(playerList, option);
                 });
             }
-            renderPlayersByOption(playerList, "listPriority");
+            renderPlayersByOption(playerList, "Usuń z priorytetów");
         }
     }
 
@@ -339,7 +339,7 @@
             }
 
             for (let i = 0; i < priorityMembers.length; i++) {
-                if (priorityMembers[i][9] === 0) _g(`party&a=inv&id=${clanMembers[i][0]}`);
+                if (priorityMembers[i][9] === 0) _g(`party&a=inv&id=${priorityMembers[i][0]}`);
             }
 
             for (let j = 0; j < clanMembers.length; j++) {

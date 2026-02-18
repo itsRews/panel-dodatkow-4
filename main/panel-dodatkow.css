@@ -402,7 +402,7 @@ table.REWS_PD4-table {
     margin-right: 20px;
 }
 
-.REWS_PD4-EasyGroup-buttons_row {
+.REWS_PD4-addons-buttons_row {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
