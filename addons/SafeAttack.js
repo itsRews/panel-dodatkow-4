@@ -166,7 +166,7 @@
                 txt: "Ok",
                 callback: function() {
                     Engine.hotKeys.changeKey("hotAttackNearPlayer", undefined, () => {});
-                    return 0;
+                    return 1;
                 }
             }, {
                 txt: "Wyjaśnienie",
@@ -178,9 +178,9 @@
                         txt: "Ok - Odbinduj atakowanie w Konfiguracji",
                         callback: function() {
                             Engine.hotKeys.changeKey("hotAttackNearPlayer", undefined, () => {
-                                return 0;
+                                return 1;
                             });
-                            return 0;
+                            return 1;
                         }
                     }]);
                     return 1;
