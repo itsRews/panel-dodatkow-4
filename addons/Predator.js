@@ -124,11 +124,13 @@
             selectNearestPlayer()
         });
         nearbyButton.style.width = "45%";
+        nearbyButton.style.marginRight = "3px";
 
         const cancelButton = REWS_PD4.functions.templates.createAddonWindowButton(twoButtons, "> Anuluj dobijanie", () => {
             cancelSelection()
         });
         cancelButton.style.width = "45%";
+        cancelButton.style.marginLeft = "3px";
 
 
         const twoTexts = document.createElement("div");
