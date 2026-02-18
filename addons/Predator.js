@@ -145,7 +145,7 @@
 
 
         const twoTexts = document.createElement("div");
-        twoTexts.classList.add(REWS_PD4.globals.identifier + "-vertical-row");
+        twoTexts.classList.add(REWS_PD4.globals.identifier + "-vertical-column");
         content.append(twoTexts);
 
         const selectedPlayerTitle = document.createElement("span");
@@ -164,6 +164,7 @@
 
         const playerList = document.createElement("div");
         playerList.classList.add(REWS_PD4.globals.identifier + "-addons" + "-player_list_scrollable");
+        playerList.style.height = "255px";
         content.append(playerList);
 
         setInterval(() => {
