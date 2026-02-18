@@ -108,9 +108,15 @@
 
             for (let key in defaultSettings) {
                 if (REWS_PD4.addons[ADDON_NAME].settings[key] === undefined) REWS_PD4.addons[ADDON_NAME].settings[key] = defaultSettings[key];
-
-                localStorage.setItem(IDENTIFIER + "-settings", JSON.stringify(REWS_PD4.addons[ADDON_NAME].settings));
             }
+
+            for (let key in REWS_PD4.addons[ADDON_NAME].settings) {
+                if (!defaultSettings.hasOwnProperty(key)) {
+                    delete REWS_PD4.addons[ADDON_NAME].settings[key];
+                }
+            }
+
+            localStorage.setItem(IDENTIFIER + "-settings", JSON.stringify(REWS_PD4.addons[ADDON_NAME].settings));
         }
     })();
 

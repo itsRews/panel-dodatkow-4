@@ -87,10 +87,16 @@
             REWS_PD4.addons[ADDON_NAME].keybinds = JSON.parse(keybindsJson);
 
             for (let key in defaultKeybinds) {
-                if (REWS_PD4.addons[ADDON_NAME].keybinds[key] === undefined) REWS_PD4.addons[ADDON_NAME].keybinds[key] = defaultKeybinds[key];
-
-                localStorage.setItem(IDENTIFIER + "-keybinds", JSON.stringify(REWS_PD4.addons[ADDON_NAME].keybinds));
+                if (REWS_PD4.addons[ADDON_NAME].keybinds[key] === undefined) REWS_PD4.addons[ADDON_NAME].settings[key] = defaultKeybinds[key];
             }
+
+            for (let key in REWS_PD4.addons[ADDON_NAME].keybinds) {
+                if (!defaultKeybinds.hasOwnProperty(key)) {
+                    delete REWS_PD4.addons[ADDON_NAME].keybinds[key];
+                }
+            }
+
+            localStorage.setItem(IDENTIFIER + "-keybinds", JSON.stringify(REWS_PD4.addons[ADDON_NAME].settings));
         }
     })();
 
@@ -115,9 +121,15 @@
 
             for (let key in defaultSettings) {
                 if (REWS_PD4.addons[ADDON_NAME].settings[key] === undefined) REWS_PD4.addons[ADDON_NAME].settings[key] = defaultSettings[key];
-
-                localStorage.setItem(IDENTIFIER + "-settings", JSON.stringify(REWS_PD4.addons[ADDON_NAME].settings));
             }
+
+            for (let key in REWS_PD4.addons[ADDON_NAME].settings) {
+                if (!defaultSettings.hasOwnProperty(key)) {
+                    delete REWS_PD4.addons[ADDON_NAME].settings[key];
+                }
+            }
+
+            localStorage.setItem(IDENTIFIER + "-settings", JSON.stringify(REWS_PD4.addons[ADDON_NAME].settings));
         }
     })();
 
