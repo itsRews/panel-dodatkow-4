@@ -292,7 +292,7 @@
 
         if (SELECTED_PLAYER_DATA === null) return;
 
-        if (!(Math.abs(Engine.hero.serverX - SELECTED_PLAYER_DATA.d.x) <= 2 && Math.abs(Engine.hero.serverY - SELECTED_PLAYER_DATA.d.y) <= 2)) return;
+        if (!(Math.abs(Engine.hero.lastServerX - SELECTED_PLAYER_DATA.d.x) <= 2 && Math.abs(Engine.hero.lastServerY - SELECTED_PLAYER_DATA.d.y) <= 2)) return;
 
         SELECTED_PLAYER_DATA.refreshEmotions();
         if (SELECTED_PLAYER_DATA.getOnSelfEmoList().length > 0) {
