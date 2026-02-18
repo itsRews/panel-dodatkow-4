@@ -309,13 +309,13 @@
                 if (cancelInviting) return;
             }
 
-            let playerDistance = Math.abs(Engine.hero.d.x - player.d.x) + Math.abs(Engine.hero.d.y - player.d.y);
+            let playerWithinDistance = (Math.abs(Engine.hero.d.x - player.d.x) <= 1 && Math.abs(Engine.hero.d.y - player.d.y) <= 1);
 
             if (player.d.relation === 2 || player.d.relation === 4 || player.d.relation === 5) {
-                if (inviteType === "nearby" && playerDistance > 1) return;
+                if (inviteType === "nearby" && playerWithinDistance) return;
                 _g(`party&a=inv&id=${player.d.id}`);
             } else {
-                if (playerDistance > 1) return;
+                if (playerWithinDistance) return;
 
                 if (REWS_PD4.addons[ADDON_NAME].settings.inviteUnknown && (player.d.relation === 1 || player.d.relation === 7)) _g(`party&a=inv&id=${player.d.id}`);
                 if (REWS_PD4.addons[ADDON_NAME].settings.inviteClanEnemies && player.d.relation === 6) _g(`party&a=inv&id=${player.d.id}`);
