@@ -6,7 +6,7 @@
     let SETTINGS_BODY = null;
     let ADDON_WINDOW_BODY = null;
     let PRIORITY_LIST = [];
-    let INTERVAL_ID = [];
+    let INTERVAL_ID = false;
 
 
     REWS_PD4.addons["GroupClan"] = {
@@ -353,24 +353,25 @@
                 inviteCooldown = false;
             }, 1000);
 
-            if (INTERVAL_ID === false) {
-                INTERVAL_ID = setInterval(() => {
-                    let elementsWithInnerClass = document.querySelectorAll(".inner");
+            if (!REWS_PD4.addons[ADDON_NAME].settings.removeAlerts) return;
+            if (INTERVAL_ID !== false) return;
 
-                    elementsWithInnerClass.forEach((element) => {
-                        const innerText = element.textContent;
-                        if (innerText.includes("Wysłano zaproszenie do") || innerText.includes("Ten gracz należy już do innej drużyny!")
-                            || innerText.includes("Ten gracz jest w trakcie walki!") || innerText.includes("Akcja nie została wykonana. Gracz jest zajęty!")
-                            || innerText.includes("W tej chwili nie można") || innerText.includes("większej drużyny")) {
-                            element.remove();
-                        }
-                    });
-                }, 100);
+            INTERVAL_ID = setInterval(() => {
+                let elementsWithInnerClass = document.querySelectorAll(".inner");
 
-                await new Promise(resolve => setTimeout(resolve, 7 * 1000));
-                clearInterval(INTERVAL_ID)
-                INTERVAL_ID = false;
-            }
+                elementsWithInnerClass.forEach((element) => {
+                    const innerText = element.textContent;
+                    if (innerText.includes("Wysłano zaproszenie do") || innerText.includes("Ten gracz należy już do innej drużyny!")
+                        || innerText.includes("Ten gracz jest w trakcie walki!") || innerText.includes("Akcja nie została wykonana. Gracz jest zajęty!")
+                        || innerText.includes("W tej chwili nie można") || innerText.includes("większej drużyny")) {
+                        element.remove();
+                    }
+                });
+            }, 100);
+
+            await new Promise(resolve => setTimeout(resolve, 7 * 1000));
+            clearInterval(INTERVAL_ID)
+            INTERVAL_ID = false;
         });
     }
 
