@@ -328,6 +328,7 @@
     if (REWS_PD4.addons[ADDON_NAME].settings.testDelayThreeHundred) testDelay = 300;
     else if (REWS_PD4.addons[ADDON_NAME].settings.testDelayDefault) {
         testDelay = 50;
+        let existingFunction = Engine.communication.onMessageWebSocket;
         Engine.communication.onMessageWebSocket = function(event) {
             existingFunction.apply(this, arguments);
             attacking();
