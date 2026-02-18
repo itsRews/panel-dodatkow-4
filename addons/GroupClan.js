@@ -171,7 +171,7 @@
             playerList.classList.add(IDENTIFIER + "-player_list_scrollable");
             content.append(playerList);
 
-            const options = ["Dodaj do priorytetu", "Wyczysć listę priorytetów", "Usuń/Pokaż listę priorytetów"];
+            const options = ["Dodaj do priorytetu", "Wyczysć listę priorytetów", "Usuń z/Pokaż listę priorytetów"];
             for (let option of options) {
                 REWS_PD4.functions.templates.createGroupClanButton(buttonsRow, `> ${option}`, false, () => {
                     renderPlayersByOption(playerList, option);

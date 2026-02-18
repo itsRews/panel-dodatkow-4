@@ -3,7 +3,7 @@
 // @description  Oficjalna wersja Panelu Dodatków autorstwa itsRews do gry Margonem.
 // @author       itsRews (10048792) // Discord: itsrews
 // @namespace    https://www.margonem.pl/profile/view,10048792
-// @version      4.0
+// @version      4.0.1
 // @updateURL    https://itsrews.github.io/panel-dodatkow-4/userscript/panel-dodatkow-4.meta.js
 // @downloadURL  https://itsrews.github.io/panel-dodatkow-4/userscript/panel-dodatkow-4.user.js
 // @match        *://*.margonem.pl/
@@ -18,21 +18,22 @@
 
 (async () => {
     async function waitForAllInit() {
+        const game_interface = getCookie("interface");
         return new Promise(resolve => {
             const intervalId = setInterval(() => {
-                if (typeof Engine !== 'undefined' && typeof Engine.hero !== 'undefined') {
-                    if (Engine.allInit === true) {
-                        clearInterval(intervalId);
-                        resolve(true);
-                    }
-                }
-                else {
-                    if (g.init === 5) {
-                        setInterval(() => {
+                if (game_interface === "ni") {
+                    if (typeof Engine !== 'undefined' && typeof Engine.hero !== 'undefined') {
+                        if (Engine.allInit === true) {
                             clearInterval(intervalId);
-                            resolve(false);
-                        }, 100);
+                            resolve(true);
+                        }
                     }
+                } else {
+                    /*if (g.init === 5) {
+
+                    }*/
+                    clearInterval(intervalId);
+                    resolve(false);
                 }
             }, 100);
         });

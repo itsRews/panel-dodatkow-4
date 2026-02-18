@@ -74,6 +74,7 @@
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
+    align-items: center;
 
     text-align: center;
 
@@ -111,6 +112,7 @@
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
+    align-items: center;
 
     background-color: #101010CC;
 
@@ -131,6 +133,7 @@
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
+    align-items: center;
 
     width: 40%;
 
@@ -153,6 +156,7 @@
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
+    align-items: center;
 
     width: 40%;
 
@@ -175,8 +179,9 @@
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
+    align-items: center;
 
-    width: 90px;
+    width: 100px;
 
     background-color: #101010CC;
 
@@ -197,6 +202,7 @@
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
+    align-items: center;
 
     width: 100px;
 
