@@ -175,11 +175,11 @@
             twoButtons.classList.add(IDENTIFIER + "-buttons_row");
             content.append(twoButtons);
 
-            REWS_PD4.functions.templates.createButton(twoButtons, "> Zaproś wszystkich", false, () => {
+            REWS_PD4.functions.templates.createEasyGroupButton(twoButtons, "> Zaproś wszystkich", false, () => {
                 invitePlayers("map");
             });
 
-            REWS_PD4.functions.templates.createButton(twoButtons, "> Zaproś graczy obok", false, () => {
+            REWS_PD4.functions.templates.createEasyGroupButton(twoButtons, "> Zaproś graczy obok", false, () => {
                 invitePlayers("nearby");
             });
         }
