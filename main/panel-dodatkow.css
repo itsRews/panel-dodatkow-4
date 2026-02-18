@@ -409,8 +409,20 @@ table.REWS_PD4-table {
     justify-content: space-around;
 }
 
-.REWS_PD4-EasyGroup-player_list {
+.REWS_PD4-addons-player_list_scrollable {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
+
+    width: 285px;
+
+    min-height: 10px;
+    max-height: 240px;
+
+    margin: 3px;
+
+    border-top: 2px solid silver;
+
+    overflow-y: scroll;
+    scrollbar-color: silver #101010AA;
 }

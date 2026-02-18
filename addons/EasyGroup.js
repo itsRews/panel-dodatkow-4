@@ -102,6 +102,7 @@
             "showMessages": false,
             "showInviteButtons": true,
             "showProfessionButtons": true,
+            "showGroupMembers": false,
             "showEnemies": false
         };
 
@@ -165,6 +166,7 @@
 
         REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(secondLeftSide, secondRightSide, "Pokazuj przyciski dodawania:", IDENTIFIER, ADDON_NAME, "showInviteButtons");
         REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(secondLeftSide, secondRightSide, "Pokazuj przyciski profesji:", IDENTIFIER, ADDON_NAME, "showProfessionButtons");
+        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(secondLeftSide, secondRightSide, "Pokazuj członków grupy:", IDENTIFIER, ADDON_NAME, "showGroupMembers");
         REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(secondLeftSide, secondRightSide, "Pokazuj wrogów:", IDENTIFIER, ADDON_NAME, "showEnemies");
 
     }
@@ -195,10 +197,11 @@
 
             const playerListTitle = document.createElement("span");
             playerListTitle.textContent = "- Lista graczy z daną profesją -";
+            playerListTitle.style.marginTop = "10px";
             content.append(playerListTitle);
 
             const playerList = document.createElement("div");
-            playerList.classList.add(IDENTIFIER + "-player_list");
+            playerList.classList.add(IDENTIFIER + "-player_list_scrollable");
             content.append(playerList);
 
             const professions = ["w", "p", "b", "m", "h", "t"];
@@ -244,11 +247,22 @@
             if (player.d.relation === 3) return;
             if (player.d.stasis === 1) return;
 
+            let playerPrefix = "[";
+
+            if (player.getKind() === "group") {
+                if (!REWS_PD4.addons[ADDON_NAME].settings.showGroupMembers) return;
+                playerPrefix += "G";
+            }
+
+            playerPrefix += "]";
+
+            if (playerPrefix === "[]") playerPrefix = "";
+
             if (!REWS_PD4.addons[ADDON_NAME].settings.showEnemies) {
                 if (player.d.relation === 1 || player.d.relation === 7 || player.d.relation === 6) return;
             }
 
-            REWS_PD4.functions.templates.createButton(parent, `> ${player.d.nick} ${player.d.lvl}${player.d.prof}`, false, () => {
+            REWS_PD4.functions.templates.createButton(parent, `> ${playerPrefix} ${player.d.nick} ${player.d.lvl}${player.d.prof}`, false, () => {
                 _g(`party&a=inv&id=${player.d.id}`);
             });
         });
