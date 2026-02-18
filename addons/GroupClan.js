@@ -138,8 +138,8 @@
 
         const content = document.getElementById(IDENTIFIER + "-addon_window" + "-content");
 
-        REWS_PD4.functions.templates.createAddonWindowButton(content, "> Zaproś klanowiczy", () => {
-            invitePlayers();
+        REWS_PD4.functions.templates.createSingleAddonWindowButton(content, "> Zaproś klanowiczy", () => {
+            checkPermissions();
         });
     }
 
