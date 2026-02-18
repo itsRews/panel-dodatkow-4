@@ -130,6 +130,7 @@
 
         REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "Włącz:", IDENTIFIER, ADDON_NAME, "enabled");
         REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "Priorytet osób na mapie:", IDENTIFIER, ADDON_NAME, "mapPriority");
+        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "Priorytet dla wyznaczonych osób:", IDENTIFIER, ADDON_NAME, "playerPriority");
         REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "Usuwaj komunikaty:", IDENTIFIER, ADDON_NAME, "removeAlerts");
         REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "Pokazuj komunikaty:", IDENTIFIER, ADDON_NAME, "showMessages");
     }
