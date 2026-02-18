@@ -3,7 +3,7 @@
 // @description  Oficjalna wersja Panelu Dodatków autorstwa itsRews do gry Margonem.
 // @author       itsRews (10048792) // Discord: itsrews
 // @namespace    https://www.margonem.pl/profile/view,10048792
-// @version      4.0.1
+// @version      4.0.3
 // @updateURL    https://itsrews.github.io/panel-dodatkow-4/userscript/panel-dodatkow-4.meta.js
 // @downloadURL  https://itsrews.github.io/panel-dodatkow-4/userscript/panel-dodatkow-4.user.js
 // @match        *://*.margonem.pl/

@@ -69,28 +69,6 @@
             }
         };
 
-        const keybindsJson = localStorage.getItem(IDENTIFIER + "-keybinds");
-        if (keybindsJson === null) {
-            REWS_PD4.addons[ADDON_NAME].keybinds = defaultKeybinds
-            localStorage.setItem(IDENTIFIER + "-keybinds", JSON.stringify(REWS_PD4.addons[ADDON_NAME].keybinds));
-        } else {
-            REWS_PD4.addons[ADDON_NAME].keybinds = JSON.parse(keybindsJson);
-
-            for (let key in defaultKeybinds) {
-                if (REWS_PD4.addons[ADDON_NAME].keybinds[key] === undefined) REWS_PD4.addons[ADDON_NAME].keybinds[key] = defaultKeybinds[key];
-            }
-
-            for (let key in REWS_PD4.addons[ADDON_NAME].keybinds) {
-                if (!defaultKeybinds.hasOwnProperty(key)) {
-                    delete REWS_PD4.addons[ADDON_NAME].keybinds[key];
-                }
-            }
-
-            localStorage.setItem(IDENTIFIER + "-keybinds", JSON.stringify(REWS_PD4.addons[ADDON_NAME].keybinds));
-        }
-    })();
-
-    (function setupSettings() {
         const defaultSettings = {
             "enabled": false,
             "mapPriority": true,
@@ -99,25 +77,7 @@
             "showMessages": false
         };
 
-        const settingsJson = localStorage.getItem(IDENTIFIER + "-settings");
-        if (settingsJson === null) {
-            REWS_PD4.addons[ADDON_NAME].settings = defaultSettings;
-            localStorage.setItem(IDENTIFIER + "-settings", JSON.stringify(REWS_PD4.addons[ADDON_NAME].settings));
-        } else {
-            REWS_PD4.addons[ADDON_NAME].settings = JSON.parse(settingsJson);
-
-            for (let key in defaultSettings) {
-                if (REWS_PD4.addons[ADDON_NAME].settings[key] === undefined) REWS_PD4.addons[ADDON_NAME].settings[key] = defaultSettings[key];
-            }
-
-            for (let key in REWS_PD4.addons[ADDON_NAME].settings) {
-                if (!defaultSettings.hasOwnProperty(key)) {
-                    delete REWS_PD4.addons[ADDON_NAME].settings[key];
-                }
-            }
-
-            localStorage.setItem(IDENTIFIER + "-settings", JSON.stringify(REWS_PD4.addons[ADDON_NAME].settings));
-        }
+        REWS_PD4.functions.loadSettings(defaultKeybinds, defaultSettings, IDENTIFIER, ADDON_NAME);
     })();
 
     function createSettingsBody() {
@@ -168,7 +128,7 @@
             content.append(playerListTitle);
 
             const playerList = document.createElement("div");
-            playerList.classList.add(IDENTIFIER + "-player_list_scrollable");
+            playerList.classList.add(REWS_PD4.globals.identifier + "-addons" + "-player_list_scrollable");
             content.append(playerList);
 
             const options = ["Dodaj do priorytetu", "Wyczyść listę priorytetów", "Usuń z/Pokaż listę priorytetów"];

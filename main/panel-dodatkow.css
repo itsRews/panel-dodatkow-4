@@ -435,6 +435,8 @@ table.REWS_PD4-table {
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-around;
+
+    width: 100%;
 }
 
 .REWS_PD4-addons-player_list_scrollable {

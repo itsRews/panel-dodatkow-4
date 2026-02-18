@@ -61,7 +61,7 @@
         }
     };
 
-    (function setupKeybinds() {
+    (function loadSettings() {
         const defaultKeybinds = {
             "mapInvite": {
                 "action": "Zaprasza do grupy sojuszników na całej mapie.",
@@ -79,28 +79,6 @@
             }
         };
 
-        const keybindsJson = localStorage.getItem(IDENTIFIER + "-keybinds");
-        if (keybindsJson === null || keybindsJson === "undefined") {
-            REWS_PD4.addons[ADDON_NAME].keybinds = defaultKeybinds
-            localStorage.setItem(IDENTIFIER + "-keybinds", JSON.stringify(REWS_PD4.addons[ADDON_NAME].keybinds));
-        } else {
-            REWS_PD4.addons[ADDON_NAME].keybinds = JSON.parse(keybindsJson);
-
-            for (let key in defaultKeybinds) {
-                if (REWS_PD4.addons[ADDON_NAME].keybinds[key] === undefined) REWS_PD4.addons[ADDON_NAME].settings[key] = defaultKeybinds[key];
-            }
-
-            for (let key in REWS_PD4.addons[ADDON_NAME].keybinds) {
-                if (!defaultKeybinds.hasOwnProperty(key)) {
-                    delete REWS_PD4.addons[ADDON_NAME].keybinds[key];
-                }
-            }
-
-            localStorage.setItem(IDENTIFIER + "-keybinds", JSON.stringify(REWS_PD4.addons[ADDON_NAME].settings));
-        }
-    })();
-
-    (function setupSettings() {
         const defaultSettings = {
             "enabled": false,
             "inviteUnknown": false,
@@ -112,26 +90,9 @@
             "showEnemies": false
         };
 
-        const settingsJson = localStorage.getItem(IDENTIFIER + "-settings");
-        if (settingsJson === null || settingsJson === "undefined") {
-            REWS_PD4.addons[ADDON_NAME].settings = defaultSettings;
-            localStorage.setItem(IDENTIFIER + "-settings", JSON.stringify(REWS_PD4.addons[ADDON_NAME].settings));
-        } else {
-            REWS_PD4.addons[ADDON_NAME].settings = JSON.parse(settingsJson);
-
-            for (let key in defaultSettings) {
-                if (REWS_PD4.addons[ADDON_NAME].settings[key] === undefined) REWS_PD4.addons[ADDON_NAME].settings[key] = defaultSettings[key];
-            }
-
-            for (let key in REWS_PD4.addons[ADDON_NAME].settings) {
-                if (!defaultSettings.hasOwnProperty(key)) {
-                    delete REWS_PD4.addons[ADDON_NAME].settings[key];
-                }
-            }
-
-            localStorage.setItem(IDENTIFIER + "-settings", JSON.stringify(REWS_PD4.addons[ADDON_NAME].settings));
-        }
+        REWS_PD4.functions.loadSettings(defaultKeybinds, defaultSettings, IDENTIFIER, ADDON_NAME);
     })();
+
 
     function createSettingsBody() {
         SETTINGS_BODY = REWS_PD4.functions.templates.createBody(REWS_PD4.HTML.host, IDENTIFIER + "-settings", `[REWS] ${ADDON_NAME} - Ustawienia`, `[R] ${ADDON_SHORTCUT}-U`, true);
@@ -190,7 +151,7 @@
 
         if (REWS_PD4.addons[ADDON_NAME].settings.showInviteButtons) {
             const twoButtons = document.createElement("div");
-            twoButtons.classList.add(IDENTIFIER + "-buttons_row");
+            twoButtons.classList.add(REWS_PD4.globals.identifier + "-addons" + "-buttons_row");
             content.append(twoButtons);
 
             REWS_PD4.functions.templates.createAddonWindowButton(twoButtons, "> Zaproś wszystkich", () => {
@@ -213,7 +174,7 @@
             content.append(playerListTitle);
 
             const playerList = document.createElement("div");
-            playerList.classList.add(IDENTIFIER + "-player_list_scrollable");
+            playerList.classList.add(REWS_PD4.globals.identifier + "-addons" + "-player_list_scrollable");
             content.append(playerList);
 
             const professions = ["w", "p", "b", "m", "h", "t"];
