@@ -220,15 +220,10 @@
             if (INTERVAL_ID !== false) return;
 
             INTERVAL_ID = setInterval(() => {
-                let elementsWithInnerClass = document.querySelectorAll(".inner");
+                let elementsWithInnerClass = document.getElementsByClassName("message");
 
-                elementsWithInnerClass.forEach((element) => {
-                    const innerText = element.textContent;
-                    if (innerText.includes("Wysłano zaproszenie do") || innerText.includes("Ten gracz należy już do innej drużyny!")
-                        || innerText.includes("Ten gracz jest w trakcie walki!") || innerText.includes("Akcja nie została wykonana. Gracz jest zajęty!")
-                        || innerText.includes("W tej chwili nie można") || innerText.includes("większej drużyny")) {
-                        element.remove();
-                    }
+                Object.values(elementsWithInnerClass).forEach(element => {
+                    element.remove();
                 });
             }, 100);
 
