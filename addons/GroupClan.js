@@ -143,9 +143,9 @@
 
         REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "Włącz:", IDENTIFIER, ADDON_NAME, "enabled");
         REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "Priorytet osób na mapie:", IDENTIFIER, ADDON_NAME, "mapPriority");
-        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "Priorytet dla wyznaczonych osób:", IDENTIFIER, ADDON_NAME, "playerPriority");
         REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "Usuwaj komunikaty:", IDENTIFIER, ADDON_NAME, "removeAlerts");
         REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "Pokazuj komunikaty:", IDENTIFIER, ADDON_NAME, "showMessages");
+        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "Okienko - System priorytetów:", IDENTIFIER, ADDON_NAME, "playerPriority");
     }
 
     function createAddonWindowBody() {
@@ -171,9 +171,9 @@
             playerList.classList.add(IDENTIFIER + "-player_list_scrollable");
             content.append(playerList);
 
-            const options = ["Dodaj do priorytetu", "Wyczysć listę priorytetów", "Usuń z priorytetów"];
+            const options = ["Dodaj do priorytetu", "Wyczysć listę priorytetów", "Usuń/Pokaż listę priorytetów"];
             for (let option of options) {
-                REWS_PD4.functions.templates.createButton(buttonsRow, `> ${option}`, false, () => {
+                REWS_PD4.functions.templates.createGroupClanButton(buttonsRow, `> ${option}`, false, () => {
                     renderPlayersByOption(playerList, option);
                 });
             }
@@ -216,7 +216,7 @@
         REWS_PD4.functions.removeAllChildren(parent);
 
         switch (option) {
-            case "addPriority":
+            case "Dodaj do priorytetu":
                 _g(`clan&a=members`, callback => {
                     let members = callback.members;
 
@@ -243,12 +243,12 @@
                 });
                 break;
 
-            case "clearPriority":
+            case "Wyczysć listę priorytetów":
                 PRIORITY_LIST = [];
                 localStorage.setItem(IDENTIFIER + "-priority_list", JSON.stringify(PRIORITY_LIST));
                 break;
 
-            case "removePriority":
+            case "Usuń/Pokaż listę priorytetów":
                 _g(`clan&a=members`, callback => {
                     let members = callback.members;
 

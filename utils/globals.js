@@ -291,6 +291,22 @@ REWS_PD4.functions.templates.createAddonWindowButton = (parent, text, onClick) =
     });
 }
 
+REWS_PD4.functions.templates.createGroupClanButton = (parent, text, onClick) => {
+    const button = document.createElement("div");
+    button.classList.add(REWS_PD4.globals.identifier + "-GroupClan" + "-invite_button");
+    parent.append(button);
+
+    const button_label = document.createElement("label");
+    button_label.textContent = text;
+    button.append(button_label);
+
+    button.addEventListener("mousedown", () => {
+        if (typeof onClick === "function") {
+            onClick();
+        }
+    });
+}
+
 REWS_PD4.functions.templates.createSingleAddonWindowButton = (parent, text, onClick) => {
     const button = document.createElement("div");
     button.classList.add(REWS_PD4.globals.identifier + "-addons" + "-single_button");
