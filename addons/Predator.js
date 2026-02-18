@@ -83,8 +83,9 @@
             "testDistanceOne": false,
             "testDistanceThree": true,
             "testDelayThreeHundred": false,
-            "testDelayFifty": true,
-            "testDelayWebsocket": false
+            "testDelayNone": true,
+            "testCheckingFifty": false,
+            "testCheckingWebsocket": true
         };
 
         REWS_PD4.functions.loadSettings(defaultKeybinds, defaultSettings, IDENTIFIER, ADDON_NAME);
@@ -117,8 +118,9 @@
         REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "TEST: dystans 1:", IDENTIFIER, ADDON_NAME, "testDistanceOne");
         REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "TEST: dystans 3:", IDENTIFIER, ADDON_NAME, "testDistanceThree");
         REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "TEST: opóźnienie 300:", IDENTIFIER, ADDON_NAME, "testDelayThreeHundred");
-        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "TEST: opóźnienie 50:", IDENTIFIER, ADDON_NAME, "testDelayFifty");
-        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "TEST: opóźnienie WS:", IDENTIFIER, ADDON_NAME, "testDelayWebsocket");
+        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "TEST: opóźnienie brak:", IDENTIFIER, ADDON_NAME, "testDelayNone");
+        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "TEST: checker 50:", IDENTIFIER, ADDON_NAME, "testCheckingFifty");
+        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "TEST: checker WS:", IDENTIFIER, ADDON_NAME, "testCheckingWebsocket");
 
 
 
@@ -315,20 +317,27 @@
 
         attackTried++;
 
-        window._g(`fight&a=attack&id=${SELECTED_PLAYER_ID}`);
-
-        if (attackTried >= 2) allowAttacking = false;
-
         setTimeout(() => {
-            attackTried--;
 
-            if (attackTried < 2) allowAttacking = true;
-        }, 2000);
+            window._g(`fight&a=attack&id=${SELECTED_PLAYER_ID}`);
+
+            if (attackTried >= 2) allowAttacking = false;
+
+            setTimeout(() => {
+                attackTried--;
+
+                if (attackTried < 2) allowAttacking = true;
+            }, 2000);
+
+        }, testDelay);
     }
 
-    if (REWS_PD4.addons[ADDON_NAME].settings.testDelayThreeHundred) setInterval(attacking, 300);
-    else if (REWS_PD4.addons[ADDON_NAME].settings.testDelayFifty) setInterval(attacking, 50);
-    else if (REWS_PD4.addons[ADDON_NAME].settings.testDelayWebsocket) {
+
+    if (REWS_PD4.addons[ADDON_NAME].settings.testDelayThreeHundred) testDelay = 300;
+    if (REWS_PD4.addons[ADDON_NAME].settings.testDelayNone) testDelay = 0;
+
+    if (REWS_PD4.addons[ADDON_NAME].settings.testCheckingFifty) setInterval(attacking, 50);
+    if (REWS_PD4.addons[ADDON_NAME].settings.testCheckingWebsocket) {
         let existingFunction = Engine.communication.onMessageWebSocket;
         Engine.communication.onMessageWebSocket = function (event) {
             existingFunction.apply(this, arguments);
