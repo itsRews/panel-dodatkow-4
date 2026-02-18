@@ -158,16 +158,14 @@
     justify-content: space-between;
     align-items: center;
 
-    width: 40%;
-
     background-color: #101010CC;
 
     border: 2px solid silver;
     border-radius: 10px;
 
-    padding: 5px;
+    padding: 7px;
 
-    margin: 4px;
+    margin-top: 4px;
 }
 
 .REWS_PD4-EasyGroup-invite_button:hover {
