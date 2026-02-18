@@ -282,9 +282,11 @@
         if (REWS_PD4.addons[ADDON_NAME].settings.testDistanceOne) allowMoveDistance = 1;
         else if (REWS_PD4.addons[ADDON_NAME].settings.testDistanceThree) allowMoveDistance = 3;
 
-
         if (SELECTED_PLAYER_ID === null) return;
-        SELECTED_PLAYER_DATA = Engine.others.getById(SELECTED_PLAYER_ID);
+
+        let fetchedData = Engine.others.getById(SELECTED_PLAYER_ID);
+        if (fetchedData === null) return;
+        SELECTED_PLAYER_DATA = fetchedData;
     }
 
     setInterval(fetchPlayerData, 100);
