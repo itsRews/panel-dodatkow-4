@@ -275,7 +275,7 @@ REWS_PD4.functions.templates.createAddonButton = (parent, text, onClick) => {
     });
 }
 
-REWS_PD4.functions.templates.createEasyGroupButton = (parent, text, onClick) => {
+REWS_PD4.functions.templates.createAddonWindowButton = (parent, text, onClick) => {
     const button = document.createElement("div");
     button.classList.add(REWS_PD4.globals.identifier + "-EasyGroup" + "-invite_button");
     parent.append(button);
