@@ -117,19 +117,18 @@
 
         const twoButtons = document.createElement("div");
         twoButtons.classList.add(REWS_PD4.globals.identifier + "-addons" + "-buttons_row");
-        twoButtons.style.width = "60%";
         content.append(twoButtons);
 
         const nearbyButton = REWS_PD4.functions.templates.createAddonWindowButton(twoButtons, "> Dobijaj najbliższego", () => {
             selectNearestPlayer()
         });
-        nearbyButton.style.width = "45%";
+        nearbyButton.style.width = "80px";
         nearbyButton.style.marginRight = "3px";
 
         const cancelButton = REWS_PD4.functions.templates.createAddonWindowButton(twoButtons, "> Anuluj dobijanie", () => {
             cancelSelection()
         });
-        cancelButton.style.width = "45%";
+        cancelButton.style.width = "80px";
         cancelButton.style.marginLeft = "3px";
 
 
