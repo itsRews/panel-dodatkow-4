@@ -1,4 +1,4 @@
-﻿(() => {
+﻿(async () => {
     const ADDON_NAME = "GroupClan";
     const ADDON_SHORTCUT = "GC";
 
@@ -6,6 +6,7 @@
     let SETTINGS_BODY = null;
     let ADDON_WINDOW_BODY = null;
     let PRIORITY_LIST = [];
+    let INTERVAL_ID = [];
 
 
     REWS_PD4.addons["GroupClan"] = {
@@ -77,9 +78,8 @@
 
             for (let key in defaultKeybinds) {
                 if (REWS_PD4.addons[ADDON_NAME].keybinds[key] === undefined) REWS_PD4.addons[ADDON_NAME].keybinds[key] = defaultKeybinds[key];
-
-                localStorage.setItem(IDENTIFIER + "-keybinds", JSON.stringify(REWS_PD4.addons[ADDON_NAME].keybinds));
             }
+            localStorage.setItem(IDENTIFIER + "-keybinds", JSON.stringify(REWS_PD4.addons[ADDON_NAME].keybinds));
         }
     })();
 
@@ -195,6 +195,8 @@
                 };
             }
         })();
+
+        PRIORITY_LIST = JSON.parse(localStorage.getItem(IDENTIFIER + "-priority_list"));
     })();
 
     function renderPlayersByOption(parent, option) {
@@ -222,6 +224,7 @@
                     for (let j = 0; j < clanMembers.length; j++) {
                         REWS_PD4.functions.templates.createButton(parent, `> ${clanMembers[j][1]} ${clanMembers[j][2]}${clanMembers[j][4]}`, false, () => {
                             PRIORITY_LIST.push(clanMembers[j][0]);
+                            localStorage.setItem(IDENTIFIER + "-priority_list", JSON.stringify(PRIORITY_LIST));
                         });
                     }
                 });
@@ -229,6 +232,7 @@
 
             case "clearPriority":
                 PRIORITY_LIST = [];
+                localStorage.setItem(IDENTIFIER + "-priority_list", JSON.stringify(PRIORITY_LIST));
                 break;
 
             case "removePriority":
@@ -250,8 +254,9 @@
                     }
 
                     for (let j = 0; j < priorityMembers.length; j++) {
-                        REWS_PD4.functions.templates.createButton(parent, `> ${clanMembers[j][1]} ${clanMembers[j][2]}${clanMembers[j][4]}`, false, () => {
-                            PRIORITY_LIST[PRIORITY_LIST.indexOf(priorityMembers[j][0])] = undefined;
+                        REWS_PD4.functions.templates.createButton(parent, `> ${priorityMembers[j][1]} ${priorityMembers[j][2]}${priorityMembers[j][4]}`, false, () => {
+                            PRIORITY_LIST = PRIORITY_LIST.filter(id => id !== priorityMembers[j][0]);
+                            localStorage.setItem(IDENTIFIER + "-priority_list", JSON.stringify(PRIORITY_LIST));
                         });
                     }
                 });
@@ -301,7 +306,7 @@
     }
 
     let inviteCooldown = false;
-    function invitePlayers() {
+    async function invitePlayers() {
         if (inviteCooldown) return;
         inviteCooldown = true;
 
@@ -309,7 +314,7 @@
 
         if (REWS_PD4.addons[ADDON_NAME].settings.mapPriority) inviteOnMap();
 
-        _g(`clan&a=members`, callback => {
+        _g(`clan&a=members`, async callback => {
             let members = callback.members;
 
             let priorityMembers = [];
@@ -326,7 +331,7 @@
                 }
             }
 
-            for (let i = 0; i < clanMembers.length; i++) {
+            for (let i = 0; i < priorityMembers.length; i++) {
                 if (priorityMembers[i][9] === 0) _g(`party&a=inv&id=${clanMembers[i][0]}`);
             }
 
@@ -334,7 +339,28 @@
                 if (clanMembers[j][9] === 0) _g(`party&a=inv&id=${clanMembers[j][0]}`);
             }
 
-            setTimeout(() => {inviteCooldown = false;}, 1000);
+            setTimeout(() => {
+                inviteCooldown = false;
+            }, 1000);
+
+            if (INTERVAL_ID === false) {
+                INTERVAL_ID = setInterval(() => {
+                    let elementsWithInnerClass = document.querySelectorAll(".inner");
+
+                    elementsWithInnerClass.forEach((element) => {
+                        const innerText = element.textContent;
+                        if (innerText.includes("Wysłano zaproszenie do") || innerText.includes("Ten gracz należy już do innej drużyny!")
+                            || innerText.includes("Ten gracz jest w trakcie walki!") || innerText.includes("Akcja nie została wykonana. Gracz jest zajęty!")
+                            || innerText.includes("W tej chwili nie można") || innerText.includes("większej drużyny")) {
+                            element.remove();
+                        }
+                    });
+                }, 100);
+
+                await new Promise(resolve => setTimeout(resolve, 7 * 1000));
+                clearInterval(INTERVAL_ID)
+                INTERVAL_ID = false;
+            }
         });
     }
 
