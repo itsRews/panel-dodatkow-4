@@ -370,10 +370,14 @@ table.REWS_PD4-table {
 
 .REWS_PD4-addons-settings_title {
     padding: 3px 2px 3px 0;
+
+    margin-left: 20px;
 }
 
 .REWS_PD4-addons-settings_checkbox {
     padding: 3px 2px 3px 0;
+
+    margin-right: 20px;
 }
 
 .REWS_PD4-EasyGroup-buttons_row {
