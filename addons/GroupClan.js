@@ -79,6 +79,13 @@
             for (let key in defaultKeybinds) {
                 if (REWS_PD4.addons[ADDON_NAME].keybinds[key] === undefined) REWS_PD4.addons[ADDON_NAME].keybinds[key] = defaultKeybinds[key];
             }
+
+            for (let key in REWS_PD4.addons[ADDON_NAME].keybinds) {
+                if (!defaultKeybinds.hasOwnProperty(key)) {
+                    delete REWS_PD4.addons[ADDON_NAME].keybinds[key];
+                }
+            }
+
             localStorage.setItem(IDENTIFIER + "-keybinds", JSON.stringify(REWS_PD4.addons[ADDON_NAME].keybinds));
         }
     })();
