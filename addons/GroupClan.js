@@ -196,7 +196,6 @@
         })();
     })();
 
-//"addPriority", "clearPriority", "removePriority"
     function renderPlayersByOption(parent, option) {
         REWS_PD4.functions.removeAllChildren(parent);
 
@@ -257,43 +256,6 @@
                 });
                 break;
         }
-
-        _g(`clan&a=members`, callback => {
-            let members = callback.members;
-
-            let priorityMembers = [];
-            let clanMembers = [];
-            let currentMember = [];
-
-            for (let i = 0; i < members.length; i++) {
-                currentMember.push(members[i]);
-
-                if (currentMember.length === 11) {
-                    if (PRIORITY_LIST.includes(currentMember[0])) priorityMembers.push(currentMember);
-                    else clanMembers.push(currentMember);
-                    currentMember = [];
-                }
-            }
-
-            for (let j = 0; j < clanMembers.length; j++) {
-                if (clanMembers[j][9] === 0) _g(`party&a=inv&id=${clanMembers[j][0]}`);
-            }
-        });
-
-
-        Object.values(Engine.others.check()).forEach(player => {
-            if (player.d.prof !== profession) return;
-            if (player.d.relation === 3) return;
-            if (player.d.stasis === 1) return;
-
-            if (!REWS_PD4.addons[ADDON_NAME].settings.showEnemies) {
-                if (player.d.relation === 1 || player.d.relation === 7 || player.d.relation === 6) return;
-            }
-
-            REWS_PD4.functions.templates.createButton(parent, `> ${player.d.nick} ${player.d.lvl}${player.d.prof}`, false, () => {
-                _g(`party&a=inv&id=${player.d.id}`);
-            });
-        });
     }
 
 
