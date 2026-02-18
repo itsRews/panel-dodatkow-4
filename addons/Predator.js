@@ -206,7 +206,7 @@
                 });
             }
 
-            REWS_PD4.functions.templates.createButton(parent, `> ${battleIndicator} ${player.d.nick} ${player.d.lvl}${player.d.prof}`, false, () => {
+            REWS_PD4.functions.templates.createButton(playerList, `> ${battleIndicator} ${player.d.nick} ${player.d.lvl}${player.d.prof}`, false, () => {
                 selectPlayer(player.d.id, player.d.nick);
             });
         });
