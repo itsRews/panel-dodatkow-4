@@ -72,12 +72,18 @@
 
 .REWS_PD4-addons-content {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: nowrap;
 
     border-top: 2px solid silver;
 
     padding: 10px;
+}
+
+.REWS_PD4-addons-combined_content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
 }
 
 .REWS_PD4-top {

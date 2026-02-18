@@ -10,7 +10,6 @@
 
     REWS_PD4.addons["EasyGroup"] = {
         clickedOnMainPanel() {
-            //sets up the right-side content page.
             const title = document.getElementById(REWS_PD4.globals.identifier + "-main" + "-page_title");
             const content = document.getElementById(REWS_PD4.globals.identifier + "-main" + "-page_content");
             REWS_PD4.functions.removeAllChildren(content);
@@ -126,13 +125,17 @@
         generalSettingsTitle.textContent = "- Ogólne -";
         content.append(generalSettingsTitle);
 
+        const combinedContent = document.createElement("div");
+        combinedContent.classList.add(REWS_PD4.globals.identifier + "-addons" + "-combined_content");
+        content.append(combinedContent);
+
         const firstLeftSide = document.createElement("div");
         firstLeftSide.classList.add(REWS_PD4.globals.identifier + "-addons" + "-settings_left_side");
-        content.append(firstLeftSide);
+        combinedContent.append(firstLeftSide);
 
         const firstRightSide = document.createElement("div");
         firstRightSide.classList.add(REWS_PD4.globals.identifier + "-addons" + "-settings_right_side");
-        content.append(firstRightSide);
+        combinedContent.append(firstRightSide);
 
         REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "Włącz:", IDENTIFIER, ADDON_NAME);
         REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "Zapraszaj obcych:", IDENTIFIER, ADDON_NAME);
@@ -143,13 +146,17 @@
         windowSettingsTitle.textContent = "- Ustawienia okienka -";
         content.append(windowSettingsTitle);
 
+        const secondCombinedContent = document.createElement("div");
+        secondCombinedContent.classList.add(REWS_PD4.globals.identifier + "-addons" + "-combined_content");
+        content.append(secondCombinedContent);
+
         const secondLeftSide = document.createElement("div");
         secondLeftSide.classList.add(REWS_PD4.globals.identifier + "-addons" + "-settings_left_side");
-        content.append(secondLeftSide);
+        secondCombinedContent.append(secondLeftSide);
 
         const secondRightSide = document.createElement("div");
         secondRightSide.classList.add(REWS_PD4.globals.identifier + "-addons" + "-settings_right_side");
-        content.append(secondRightSide);
+        secondCombinedContent.append(secondRightSide);
 
         REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(secondLeftSide, secondRightSide, "Pokazuj przycisk dodawania:", IDENTIFIER, ADDON_NAME);
         REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(secondLeftSide, secondRightSide, "Pokazuj przyciski profesji:", IDENTIFIER, ADDON_NAME);
