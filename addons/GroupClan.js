@@ -5,7 +5,6 @@
     const IDENTIFIER = REWS_PD4.globals.identifier + `-${ADDON_NAME}`;
     let SETTINGS_BODY = null;
     let ADDON_WINDOW_BODY = null;
-    let PROFESSION_WINDOW_INTERVAL = null;
 
 
     REWS_PD4.addons["GroupClan"] = {
@@ -239,10 +238,10 @@
             }
 
             for (let j = 0; j < clanMembers.length; j++) {
-                if (clanMembers[j][9] === 9) _g(`party&a=inv&id=${clanMembers[j][0]}`);
+                if (clanMembers[j][9] === 0) _g(`party&a=inv&id=${clanMembers[j][0]}`);
             }
 
-            setTimeout(() => {inviteCooldown = true;}, 1000);
+            setTimeout(() => {inviteCooldown = false;}, 1000);
         });
     }
 
