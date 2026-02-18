@@ -145,7 +145,7 @@
 
 
         const twoTexts = document.createElement("div");
-        twoTexts.classList.add(REWS_PD4.globals.identifier + "-horizontal-row");
+        twoTexts.classList.add(REWS_PD4.globals.identifier + "-vertical-row");
         content.append(twoTexts);
 
         const selectedPlayerTitle = document.createElement("span");
