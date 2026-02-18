@@ -92,7 +92,13 @@
             (function listAddons() {
                 REWS_PD4.globals.addonList.forEach(addon => {
                     REWS_PD4.functions.templates.createButton(buttonColumn, `> ${addon}`, true, () => {
-                        REWS_PD4.addons[addon].clickedOnMainPanel();
+                        try {
+                            REWS_PD4.addons["asd"].clickedOnMainPanel();
+                        } catch ({ name, message }) {
+                            if (name === "TypeError") {
+                                message(`Dodatek "${addon}" nie jest włączony.`);
+                            }
+                        }
                     });
                 });
             })();
