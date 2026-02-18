@@ -1,6 +1,6 @@
 ﻿(() => {
-    const ADDON_NAME = "ClanGroup";
-    const ADDON_SHORTCUT = "CG";
+    const ADDON_NAME = "GroupClan";
+    const ADDON_SHORTCUT = "GC";
 
     const IDENTIFIER = REWS_PD4.globals.identifier + `-${ADDON_NAME}`;
     let SETTINGS_BODY = null;
@@ -8,13 +8,13 @@
     let PROFESSION_WINDOW_INTERVAL = null;
 
 
-    REWS_PD4.addons["ClanGroup"] = {
+    REWS_PD4.addons["GroupClan"] = {
         clickedOnMainPanel() {
             const title = document.getElementById(REWS_PD4.globals.identifier + "-main" + "-page_title");
             const content = document.getElementById(REWS_PD4.globals.identifier + "-main" + "-page_content");
             REWS_PD4.functions.removeAllChildren(content);
 
-            title.textContent = "ClanGroup";
+            title.textContent = "GroupClan";
 
             const newContent = document.createElement("div");
             newContent.classList.add(REWS_PD4.globals.identifier + "-main" + "-page_layout");
@@ -201,12 +201,12 @@
             });
 
             if (!isLeader) {
-                if (REWS_PD4.addons[ADDON_NAME].settings.showMessages) message("[R] CG: Nie jesteś dowódcą grupy.");
+                if (REWS_PD4.addons[ADDON_NAME].settings.showMessages) message("[R] GC: Nie jesteś dowódcą grupy.");
                 return;
             }
 
             if (playerCount === 10) {
-                if (REWS_PD4.addons[ADDON_NAME].settings.showMessages) message("[R] CG: Grupa jest pełna.");
+                if (REWS_PD4.addons[ADDON_NAME].settings.showMessages) message("[R] GC: Grupa jest pełna.");
                 return;
             }
         }
@@ -219,7 +219,7 @@
         if (inviteCooldown) return;
         inviteCooldown = true;
 
-        if (REWS_PD4.addons[ADDON_NAME].settings.showMessages) message("[R] CG: Rozpoczęto zapraszanie graczy...");
+        if (REWS_PD4.addons[ADDON_NAME].settings.showMessages) message("[R] GC: Rozpoczęto zapraszanie graczy...");
 
         if (REWS_PD4.addons[ADDON_NAME].settings.mapPriority) inviteOnMap();
 

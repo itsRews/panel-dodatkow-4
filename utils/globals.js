@@ -8,7 +8,7 @@ REWS_PD4.globals.url = "https://itsrews.github.io/panel-dodatkow-4";
 REWS_PD4.globals.date = new Date().getTime();
 REWS_PD4.globals.version = "4.0.0";
 REWS_PD4.globals.updateData = [];
-REWS_PD4.globals.addonList = ["EasyGroup", "SafeAttack"];
+REWS_PD4.globals.addonList = ["EasyGroup", "SafeAttack", "GroupClan"];
 
 REWS_PD4.addons = REWS_PD4.addons || {};
 
