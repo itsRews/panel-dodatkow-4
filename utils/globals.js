@@ -25,6 +25,7 @@ REWS_PD4.functions.removeAllChildren = element => {
 }
 
 
+
 REWS_PD4.functions.templates = {};
 
 REWS_PD4.functions.templates.makeDraggable = (parent, element, identifier, onClick) => {

@@ -177,7 +177,9 @@
                     `, [{
                         txt: "Ok - Odbinduj atakowanie w Konfiguracji",
                         callback: function() {
-                            Engine.hotKeys.changeKey("hotAttackNearPlayer", undefined, () => {});
+                            Engine.hotKeys.changeKey("hotAttackNearPlayer", undefined, () => {
+                                return 0;
+                            });
                             return 0;
                         }
                     }]);
