@@ -189,12 +189,16 @@
             buttonsRow.classList.add(IDENTIFIER + "-buttons_row");
             content.append(buttonsRow);
 
+            const playerList = document.createElement("div");
+            playerList.classList.add(IDENTIFIER + "-player_list");
+            content.append(playerList);
+
             const professions = ["w", "p", "b", "m", "h", "t"];
             for (let profession of professions) {
                 REWS_PD4.functions.templates.createButton(buttonsRow, `> ${profession}`, false, () => {
                     if (PROFESSION_WINDOW_INTERVAL !== null) clearInterval(PROFESSION_WINDOW_INTERVAL);
 
-                    renderPlayersByProfession(buttonsRow, profession);
+                    renderPlayersByProfession(playerList, profession);
 
                     PROFESSION_WINDOW_INTERVAL = setInterval(renderPlayersByProfession, 500, buttonsRow, profession);
                 });

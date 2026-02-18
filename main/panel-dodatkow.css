@@ -382,3 +382,9 @@ table.REWS_PD4-table {
     flex-wrap: nowrap;
     justify-content: space-around;
 }
+
+.REWS_PD4-EasyGroup-player_list {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
