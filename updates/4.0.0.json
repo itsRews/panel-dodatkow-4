@@ -4,5 +4,6 @@
   { "addon": "EasyGroup", "changes": "Naprawiono sposób na sprawdzanie czy można dodać graczy do grupy." },
   { "addon": "EasyGroup", "changes": "Zaktualizowano wygląd dodatku." },
   { "addon": "EasyGroup", "changes": "Dodano funkcjonalność dodatku GroupManager jako okienko." },
-  { "addon": "EasyGroup", "changes": "Dodano przyciski do manualnego zapraszania graczy w przypadku używania dodatków z telefonu." }
+  { "addon": "EasyGroup", "changes": "Dodano przyciski do manualnego zapraszania graczy w przypadku używania dodatków z telefonu." },
+  { "addon": "GroupManager", "changes": "Usunięto dodatek." }
 ]
