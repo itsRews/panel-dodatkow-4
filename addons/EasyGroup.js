@@ -59,45 +59,61 @@
     };
 
     (function setupKeybinds() {
+        const defaultKeybinds = {
+            "mapInvite": {
+                "action": "Zaprasza do grupy sojuszników na całej mapie.",
+                "shift": false,
+                "ctrl": false,
+                "alt": false,
+                "code": "KeyV"
+            },
+            "nearbyInvite": {
+                "action": "Zaprasza do grupy sojuszników obok twojej postaci.",
+                "shift": true,
+                "ctrl": false,
+                "alt": false,
+                "code": "KeyV"
+            }
+        };
+
         const keybindsJson = localStorage.getItem(IDENTIFIER + "-keybinds");
         if (keybindsJson === null) {
-            REWS_PD4.addons[ADDON_NAME].keybinds = {
-                "mapInvite": {
-                    "action": "Zaprasza do grupy sojuszników na całej mapie.",
-                    "shift": false,
-                    "ctrl": false,
-                    "alt": false,
-                    "code": "KeyV"
-                },
-                "nearbyInvite": {
-                    "action": "Zaprasza do grupy sojuszników obok twojej postaci.",
-                    "shift": true,
-                    "ctrl": false,
-                    "alt": false,
-                    "code": "KeyV"
-                }
-            }
+            REWS_PD4.addons[ADDON_NAME].keybinds = defaultKeybinds
             localStorage.setItem(IDENTIFIER + "-keybinds", JSON.stringify(REWS_PD4.addons[ADDON_NAME].keybinds));
         } else {
             REWS_PD4.addons[ADDON_NAME].keybinds = JSON.parse(keybindsJson);
+
+            for (let key in defaultKeybinds) {
+                if (REWS_PD4.addons[ADDON_NAME].keybinds[key] === undefined) REWS_PD4.addons[ADDON_NAME].keybinds[key] = defaultKeybinds[key];
+
+                localStorage.setItem(IDENTIFIER + "-keybinds", JSON.stringify(REWS_PD4.addons[ADDON_NAME].keybinds));
+            }
         }
     })();
 
     (function setupSettings() {
+        const defaultSettings = {
+            "enabled": false,
+            "inviteUnknown": false,
+            "inviteClanEnemies": false,
+            "showMessages": false,
+            "showInviteButtons": true,
+            "showProfessionButtons": true,
+            "showEnemies": false
+        };
+
         const settingsJson = localStorage.getItem(IDENTIFIER + "-settings");
         if (settingsJson === null) {
-            REWS_PD4.addons[ADDON_NAME].settings = {
-                "enabled": false,
-                "inviteUnknown": false,
-                "inviteClanEnemies": false,
-                "showMessages": false,
-                "showInviteButtons": true,
-                "showProfessionButtons": true,
-                "showEnemies": false
-            }
+            REWS_PD4.addons[ADDON_NAME].settings = defaultSettings;
             localStorage.setItem(IDENTIFIER + "-settings", JSON.stringify(REWS_PD4.addons[ADDON_NAME].settings));
         } else {
             REWS_PD4.addons[ADDON_NAME].settings = JSON.parse(settingsJson);
+
+            for (let key in defaultSettings) {
+                if (REWS_PD4.addons[ADDON_NAME].settings[key] === undefined) REWS_PD4.addons[ADDON_NAME].settings[key] = defaultSettings[key];
+
+                localStorage.setItem(IDENTIFIER + "-settings", JSON.stringify(REWS_PD4.addons[ADDON_NAME].settings));
+            }
         }
     })();
 
