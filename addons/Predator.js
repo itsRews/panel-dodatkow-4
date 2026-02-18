@@ -80,12 +80,6 @@
         const defaultSettings = {
             "enabled": false,
             "showMessages": false,
-            "testDistanceOne": false,
-            "testDistanceThree": true,
-            "testDelayThreeHundred": false,
-            "testDelayNone": true,
-            "testCheckingFifty": false,
-            "testCheckingWebsocket": true
         };
 
         REWS_PD4.functions.loadSettings(defaultKeybinds, defaultSettings, IDENTIFIER, ADDON_NAME);
@@ -114,16 +108,6 @@
 
         REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "Włącz:", IDENTIFIER, ADDON_NAME, "enabled");
         REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "Pokazuj komunikaty:", IDENTIFIER, ADDON_NAME, "showMessages");
-
-        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "TEST: dystans 1:", IDENTIFIER, ADDON_NAME, "testDistanceOne");
-        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "TEST: dystans 3:", IDENTIFIER, ADDON_NAME, "testDistanceThree");
-        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "TEST: opóźnienie 300:", IDENTIFIER, ADDON_NAME, "testDelayThreeHundred");
-        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "TEST: opóźnienie brak:", IDENTIFIER, ADDON_NAME, "testDelayNone");
-        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "TEST: checker 50:", IDENTIFIER, ADDON_NAME, "testCheckingFifty");
-        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "TEST: checker WS:", IDENTIFIER, ADDON_NAME, "testCheckingWebsocket");
-
-
-
     }
 
     function createAddonWindowBody() {
@@ -133,6 +117,7 @@
 
         const twoButtons = document.createElement("div");
         twoButtons.classList.add(REWS_PD4.globals.identifier + "-addons" + "-buttons_row");
+        twoButtons.style.width = "70%";
         content.append(twoButtons);
 
         REWS_PD4.functions.templates.createAddonWindowButton(twoButtons, "> Dobijaj najbliższego", () => {
@@ -217,13 +202,7 @@
 
 
 
-    let limited = false;
-    let allowDistance = 2;
-    let allowMoveDistance = 0;
-    let testDelay = 0;
-    let cancelAttacking = false;
-    let allowAttacking = true;
-    let attackTried = 0;
+
 
     //addon
     document.addEventListener("keyup", event => {
@@ -282,9 +261,6 @@
     }
 
     function fetchPlayerData() {
-        if (REWS_PD4.addons[ADDON_NAME].settings.testDistanceOne) allowMoveDistance = 1;
-        else if (REWS_PD4.addons[ADDON_NAME].settings.testDistanceThree) allowMoveDistance = 3;
-
         if (SELECTED_PLAYER_ID === null) return;
 
         let fetchedData = Engine.others.getById(SELECTED_PLAYER_ID);
@@ -297,55 +273,47 @@
 
     setInterval(fetchPlayerData, 100);
 
+    /*
+
+    Do przetestowania:
+    1. wywalić check <= 1
+    2. dodać atakowanie ignorując pvpprotected x1
+    .inMove
+
+     */
+    let cancelAttacking = false;
+    let allowAttacking = true;
+    let attackTried = 0;
     function attacking() {
         cancelAttacking = false;
-        limited = false;
 
         if (SELECTED_PLAYER_DATA === null) return;
 
-        if (SELECTED_PLAYER_DATA.inMove === true) allowDistance = allowMoveDistance;
-        else allowDistance = 2;
+        if (!(Math.abs(Engine.hero.serverX - SELECTED_PLAYER_DATA.d.x) <= 2 && Math.abs(Engine.hero.serverY - SELECTED_PLAYER_DATA.d.y) <= 2)) return;
 
-        if (!(Math.abs(Engine.hero.d.x - SELECTED_PLAYER_DATA.d.x) <= allowDistance && Math.abs(Engine.hero.d.y - SELECTED_PLAYER_DATA.d.y) <= allowDistance)) return;
-
+        SELECTED_PLAYER_DATA.refreshEmotions();
         if (SELECTED_PLAYER_DATA.getOnSelfEmoList().length > 0) {
             Object.values(SELECTED_PLAYER_DATA.getOnSelfEmoList()).forEach(emotion => {
-                if (emotion.type === "battle") cancelAttacking = true;
-                else if (emotion.type === "pvpprotected") limited = true;
+                if (emotion.type === "battle" || emotion.type === "pvpprotected") cancelAttacking = true;
             });
         }
 
         if (cancelAttacking) return;
         if (!allowAttacking) return;
-        if (limited && attackTried >= 1) return;
 
-        attackTried++;
-
-        setTimeout(() => {
-
+        if (attackTried < 2) {
             window._g(`fight&a=attack&id=${SELECTED_PLAYER_ID}`);
-
-            if (attackTried >= 2) allowAttacking = false;
-
+            attackTried++;
             setTimeout(() => {
                 attackTried--;
-
-                if (attackTried < 2) allowAttacking = true;
             }, 2000);
-
-        }, testDelay);
+        }
     }
 
 
-    if (REWS_PD4.addons[ADDON_NAME].settings.testDelayThreeHundred) testDelay = 300;
-    if (REWS_PD4.addons[ADDON_NAME].settings.testDelayNone) testDelay = 0;
-
-    if (REWS_PD4.addons[ADDON_NAME].settings.testCheckingFifty) setInterval(attacking, 50);
-    if (REWS_PD4.addons[ADDON_NAME].settings.testCheckingWebsocket) {
-        let existingFunction = Engine.communication.onMessageWebSocket;
-        Engine.communication.onMessageWebSocket = function (event) {
-            existingFunction.apply(this, arguments);
-            attacking();
-        }
+    let existingFunction = Engine.communication.onMessageWebSocket;
+    Engine.communication.onMessageWebSocket = function (event) {
+        existingFunction.apply(this, arguments);
+        attacking();
     }
 })();
