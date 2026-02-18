@@ -291,7 +291,7 @@
 
         if (SELECTED_PLAYER_DATA === null) return;
 
-        if (SELECTED_PLAYER_DATA.inMove === true) allowDistance = 3;
+        if (SELECTED_PLAYER_DATA.inMove === true) allowDistance = allowMoveDistance;
         else allowDistance = 2;
 
         if (!(Math.abs(Engine.hero.d.x - playerAttacked.d.x) <= allowDistance && Math.abs(Engine.hero.d.y - playerAttacked.d.y) <= allowDistance)) return;
