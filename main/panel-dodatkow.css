@@ -75,6 +75,8 @@
     flex-direction: column;
     flex-wrap: nowrap;
 
+    text-align: center;
+
     border-top: 2px solid silver;
 
     padding: 10px;
@@ -352,7 +354,7 @@ table.REWS_PD4-table {
     padding: 3px 2px 3px 0;
 }
 
-.REWS_PD4-EasyGroup-invite_buttons {
+.REWS_PD4-EasyGroup-buttons_row {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;

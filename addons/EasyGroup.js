@@ -144,6 +144,7 @@
 
         const windowSettingsTitle = document.createElement("span");
         windowSettingsTitle.textContent = "- Ustawienia okienka -";
+        windowSettingsTitle.style.marginTop = "13px";
         content.append(windowSettingsTitle);
 
         const secondCombinedContent = document.createElement("div");
