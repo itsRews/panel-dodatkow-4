@@ -138,6 +138,7 @@
 
         const selectedPlayerTitle = document.createElement("span");
         selectedPlayerTitle.textContent = "Obecnie dobijany gracz:"
+        selectedPlayerTitle.style.marginTop = "10px";
         twoTexts.append(selectedPlayerTitle);
 
 
