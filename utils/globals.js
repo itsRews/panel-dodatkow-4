@@ -500,7 +500,7 @@ REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox = (leftSide, right
     leftSide.append(titleText);
 
     const checkbox = document.createElement("input");
-    checkbox.classList.add(identifier + "-settings_checkbox");
+    checkbox.classList.add(REWS_PD4.globals.identifier + "-addons" + "-settings_checkbox");
     checkbox.type = "checkbox";
     checkbox.checked = REWS_PD4.addons[addonName].settings[setting];
     checkbox.addEventListener("change", () => {
