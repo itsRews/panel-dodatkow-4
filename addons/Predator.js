@@ -83,7 +83,8 @@
             "testDistanceOne": false,
             "testDistanceThree": true,
             "testDelayThreeHundred": false,
-            "testDelayDefault": true
+            "testDelayFifty": true,
+            "testDelayWebsocket": false
         };
 
         REWS_PD4.functions.loadSettings(defaultKeybinds, defaultSettings, IDENTIFIER, ADDON_NAME);
@@ -116,7 +117,9 @@
         REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "TEST: dystans 1:", IDENTIFIER, ADDON_NAME, "testDistanceOne");
         REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "TEST: dystans 3:", IDENTIFIER, ADDON_NAME, "testDistanceThree");
         REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "TEST: opóźnienie 300:", IDENTIFIER, ADDON_NAME, "testDelayThreeHundred");
-        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "TEST: opóźnienie normalne:", IDENTIFIER, ADDON_NAME, "testDelayDefault");
+        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "TEST: opóźnienie 50:", IDENTIFIER, ADDON_NAME, "testDelayFifty");
+        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "TEST: opóźnienie WS:", IDENTIFIER, ADDON_NAME, "testDelayWebsocket");
+
 
 
     }
@@ -262,7 +265,8 @@
     }
 
     function cancelSelection() {
-        SELECTED_PLAYERS_TITLE.textContent = "-"
+        SELECTED_PLAYERS_TITLE.textContent = "-";
+        SELECTED_PLAYER_DATA = null;
         SELECTED_PLAYER_ID = null;
     }
 
@@ -271,7 +275,7 @@
     function selectPlayer(id, nick) {
         SELECTED_PLAYERS_TITLE.textContent = nick;
         SELECTED_PLAYER_ID = id;
-        message(`Rozpoczęto dobijanie gracza ${nearestPlayerName}`);
+        message(`Rozpoczęto dobijanie gracza ${nick}`);
     }
 
     function fetchPlayerData() {
@@ -296,12 +300,6 @@
 
         if (!(Math.abs(Engine.hero.d.x - SELECTED_PLAYER_DATA.d.x) <= allowDistance && Math.abs(Engine.hero.d.y - SELECTED_PLAYER_DATA.d.y) <= allowDistance)) return;
 
-        if (player.getEmoLength() > 0) {
-            Object.values(player.getOnSelfEmoList()).forEach(emotion => {
-                if (emotion.type === "battle" || emotion.type === "pvpprotected") battleIndicator = "[W]";
-            });
-        }
-
         if (SELECTED_PLAYER_DATA.getOnSelfEmoList().length > 0) {
             Object.values(SELECTED_PLAYER_DATA.getOnSelfEmoList()).forEach(emotion => {
                 if (emotion.type === "battle") cancelAttacking = true;
@@ -309,6 +307,7 @@
             });
         }
 
+        if (cancelAttacking) return;
         if (!allowAttacking) return;
         if (limited && attackTried >= 1) return;
 
@@ -325,17 +324,13 @@
         }, 2000);
     }
 
-    if (REWS_PD4.addons[ADDON_NAME].settings.testDelayThreeHundred) testDelay = 300;
-    else if (REWS_PD4.addons[ADDON_NAME].settings.testDelayDefault) {
-        testDelay = 50;
+    if (REWS_PD4.addons[ADDON_NAME].settings.testDelayThreeHundred) setInterval(attacking, 300);
+    else if (REWS_PD4.addons[ADDON_NAME].settings.testDelayFifty) setInterval(attacking, 50);
+    else if (REWS_PD4.addons[ADDON_NAME].settings.testDelayWebsocket) {
         let existingFunction = Engine.communication.onMessageWebSocket;
-        Engine.communication.onMessageWebSocket = function(event) {
+        Engine.communication.onMessageWebSocket = function (event) {
             existingFunction.apply(this, arguments);
             attacking();
         }
     }
-
-    setInterval(attacking, testDelay);
-    let existingFunction = Engine.communication.onMessageWebSocket;
-
 })();
