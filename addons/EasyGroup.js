@@ -159,7 +159,7 @@
         secondRightSide.classList.add(REWS_PD4.globals.identifier + "-addons" + "-settings_right_side");
         secondCombinedContent.append(secondRightSide);
 
-        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(secondLeftSide, secondRightSide, "Pokazuj przycisk dodawania:", IDENTIFIER, ADDON_NAME, "showInviteButtons");
+        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(secondLeftSide, secondRightSide, "Pokazuj przyciski dodawania:", IDENTIFIER, ADDON_NAME, "showInviteButtons");
         REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(secondLeftSide, secondRightSide, "Pokazuj przyciski profesji:", IDENTIFIER, ADDON_NAME, "showProfessionButtons");
         REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(secondLeftSide, secondRightSide, "Pokazuj wrogów:", IDENTIFIER, ADDON_NAME, "showEnemies");
 
@@ -200,10 +200,10 @@
 
                     renderPlayersByProfession(playerList, profession);
 
-                    PROFESSION_WINDOW_INTERVAL = setInterval(renderPlayersByProfession, 500, buttonsRow, profession);
+                    PROFESSION_WINDOW_INTERVAL = setInterval(renderPlayersByProfession, 500, playerList, profession);
                 });
             }
-            renderPlayersByProfession(buttonsRow, "w");
+            renderPlayersByProfession(playerList, "w");
         }
     }
 
