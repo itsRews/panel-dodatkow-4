@@ -93,7 +93,7 @@
                 REWS_PD4.globals.addonList.forEach(addon => {
                     REWS_PD4.functions.templates.createButton(buttonColumn, `> ${addon}`, true, () => {
                         try {
-                            REWS_PD4.addons["asd"].clickedOnMainPanel();
+                            REWS_PD4.addons[addon].clickedOnMainPanel();
                         } catch ({ name, message }) {
                             if (name === "TypeError") {
                                 message(`Dodatek "${addon}" nie jest włączony.`);
