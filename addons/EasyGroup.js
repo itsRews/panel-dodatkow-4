@@ -76,6 +76,13 @@
                 "ctrl": false,
                 "alt": false,
                 "code": "KeyV"
+            },
+            "thirteenAwayInvite": {
+                "action": "Zaprasza do grupy sojuszników 13 kratek od ciebie.",
+                "shift": false,
+                "ctrl": true,
+                "alt": false,
+                "code": "KeyV"
             }
         };
 
@@ -258,6 +265,12 @@
             event.ctrlKey === REWS_PD4.addons[ADDON_NAME].keybinds["nearbyInvite"].ctrl &&
             event.altKey === REWS_PD4.addons[ADDON_NAME].keybinds["nearbyInvite"].alt
         ) checkPermissions("nearby");
+        else if (
+            event.code === REWS_PD4.addons[ADDON_NAME].keybinds["thirteenAwayInvite"].code &&
+            event.shiftKey === REWS_PD4.addons[ADDON_NAME].keybinds["thirteenAwayInvite"].shift &&
+            event.ctrlKey === REWS_PD4.addons[ADDON_NAME].keybinds["thirteenAwayInvite"].ctrl &&
+            event.altKey === REWS_PD4.addons[ADDON_NAME].keybinds["thirteenAwayInvite"].alt
+        ) checkPermissions("thirteenAway");
     });
 
     function checkPermissions(inviteType) {
@@ -301,9 +314,11 @@
             }
 
             let playerWithinDistance = (Math.abs(Engine.hero.d.x - player.d.x) <= 1 && Math.abs(Engine.hero.d.y - player.d.y) <= 1);
+            let thirteenAwayDistance = (Math.abs(Engine.hero.d.x - player.d.x) <= 13 && Math.abs(Engine.hero.d.y - player.d.y) <= 13);
 
             if (player.d.relation === 2 || player.d.relation === 4 || player.d.relation === 5) {
-                if (inviteType === "nearby" && playerWithinDistance) return;
+                if (inviteType === "nearby" && !playerWithinDistance) return;
+                if (inviteType === "thirteenAway" && !thirteenAwayDistance) return;
                 _g(`party&a=inv&id=${player.d.id}`);
             } else {
                 if (playerWithinDistance) return;

@@ -5,7 +5,6 @@
     const IDENTIFIER = REWS_PD4.globals.identifier + `-${ADDON_NAME}`;
     let SETTINGS_BODY = null;
     let ADDON_WINDOW_BODY = null;
-    let PRIORITY_LIST = [];
     let INTERVAL_ID = false;
 
 
@@ -72,7 +71,6 @@
         const defaultSettings = {
             "enabled": false,
             "mapPriority": true,
-            "playerPriority": false,
             "removeAlerts": true,
             "showMessages": false
         };
@@ -104,9 +102,7 @@
         REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "Włącz:", IDENTIFIER, ADDON_NAME, "enabled");
         REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "Priorytet osób na mapie:", IDENTIFIER, ADDON_NAME, "mapPriority");
         REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "Usuwaj komunikaty:", IDENTIFIER, ADDON_NAME, "removeAlerts");
-        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "Pokazuj komunikaty:", IDENTIFIER, ADDON_NAME, "showMessages");
-        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "Okienko - System priorytetów:", IDENTIFIER, ADDON_NAME, "playerPriority");
-    }
+        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "Pokazuj komunikaty:", IDENTIFIER, ADDON_NAME, "showMessages");}
 
     function createAddonWindowBody() {
         ADDON_WINDOW_BODY = REWS_PD4.functions.templates.createBody(REWS_PD4.HTML.host, IDENTIFIER + "-addon_window", `[REWS] ${ADDON_NAME}`, `[R] ${ADDON_SHORTCUT}`, true);
@@ -116,30 +112,6 @@
         REWS_PD4.functions.templates.createSingleAddonWindowButton(content, "> Zaproś klanowiczy", () => {
             checkPermissions();
         });
-
-        if (REWS_PD4.addons[ADDON_NAME].settings.playerPriority) {
-            const buttonsRow = document.createElement("div");
-            buttonsRow.classList.add(REWS_PD4.globals.identifier + "-addons" + "-buttons_row");
-            content.append(buttonsRow);
-
-            const playerListTitle = document.createElement("span");
-            playerListTitle.textContent = "- -";
-            playerListTitle.style.marginTop = "10px";
-            content.append(playerListTitle);
-
-            const playerList = document.createElement("div");
-            playerList.classList.add(REWS_PD4.globals.identifier + "-addons" + "-player_list_scrollable");
-            content.append(playerList);
-
-            const options = ["Dodaj do priorytetu", "Wyczyść listę priorytetów", "Usuń z/Pokaż listę priorytetów"];
-            for (let option of options) {
-                REWS_PD4.functions.templates.createGroupClanButton(buttonsRow, `> ${option}`, false, () => {
-                    renderPlayersByOption(playerList, option);
-                    this.remove();
-                });
-            }
-            renderPlayersByOption(playerList, "Usuń z/Pokaż listę priorytetów");
-        }
     }
 
     function closeSettingsBody() {
@@ -169,70 +141,7 @@
                 };
             }
         })();
-
-        PRIORITY_LIST = localStorage.getItem(IDENTIFIER + "-priority_list") ? JSON.parse(localStorage.getItem(IDENTIFIER + "-priority_list")) : [];
     })();
-
-    function renderPlayersByOption(parent, option) {
-        REWS_PD4.functions.removeAllChildren(parent);
-
-        switch (option) {
-            case "Dodaj do priorytetu":
-                _g(`clan&a=members`, callback => {
-                    let members = callback.members;
-
-                    let clanMembers = [];
-                    let currentMember = [];
-
-                    for (let i = 0; i < members.length; i++) {
-                        currentMember.push(members[i]);
-
-                        if (currentMember.length === 11) {
-                            if (!PRIORITY_LIST.includes(currentMember[0])) clanMembers.push(currentMember);
-                            currentMember = [];
-                        }
-                    }
-
-                    for (let j = 0; j < clanMembers.length; j++) {
-                        REWS_PD4.functions.templates.createButton(parent, `> ${clanMembers[j][1]} ${clanMembers[j][2]}${clanMembers[j][4]}`, false, () => {
-                            PRIORITY_LIST.push(clanMembers[j][0]);
-                            localStorage.setItem(IDENTIFIER + "-priority_list", JSON.stringify(PRIORITY_LIST));
-                        });
-                    }
-                });
-                break;
-
-            case "Wyczyść listę priorytetów":
-                PRIORITY_LIST = [];
-                localStorage.setItem(IDENTIFIER + "-priority_list", JSON.stringify(PRIORITY_LIST));
-                break;
-
-            case "Usuń z/Pokaż listę priorytetów":
-                _g(`clan&a=members`, callback => {
-                    let members = callback.members;
-
-                    let priorityMembers = [];
-                    let currentMember = [];
-
-                    for (let i = 0; i < members.length; i++) {
-                        currentMember.push(members[i]);
-
-                        if (currentMember.length === 11) {
-                            if (PRIORITY_LIST.includes(currentMember[0])) priorityMembers.push(currentMember);
-                            currentMember = [];
-                        }
-                    }
-
-                    for (let j = 0; j < priorityMembers.length; j++) {
-                        REWS_PD4.functions.templates.createButton(parent, `> ${priorityMembers[j][1]} ${priorityMembers[j][2]}${priorityMembers[j][4]}`, false, () => {
-                            PRIORITY_LIST = PRIORITY_LIST.filter(id => id !== priorityMembers[j][0]);
-                            localStorage.setItem(IDENTIFIER + "-priority_list", JSON.stringify(PRIORITY_LIST));
-                        });
-                    }
-                });
-                break;
-        }
-    }
 
 
 
@@ -287,7 +196,6 @@
         _g(`clan&a=members`, async callback => {
             let members = callback.members;
 
-            let priorityMembers = [];
             let clanMembers = [];
             let currentMember = [];
 
@@ -295,14 +203,9 @@
                 currentMember.push(members[i]);
 
                 if (currentMember.length === 11) {
-                    if (PRIORITY_LIST.includes(currentMember[0])) priorityMembers.push(currentMember);
-                    else clanMembers.push(currentMember);
+                    clanMembers.push(currentMember);
                     currentMember = [];
                 }
-            }
-
-            for (let i = 0; i < priorityMembers.length; i++) {
-                if (priorityMembers[i][9] === 0) _g(`party&a=inv&id=${priorityMembers[i][0]}`);
             }
 
             for (let j = 0; j < clanMembers.length; j++) {

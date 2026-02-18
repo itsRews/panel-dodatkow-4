@@ -430,14 +430,7 @@ table.REWS_PD4-table {
     margin-right: 20px;
 }
 
-.REWS_PD4-addons-buttons_row {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-around;
 
-    width: 100%;
-}
 
 .REWS_PD4-addons-player_list_scrollable {
     display: flex;
@@ -446,8 +439,6 @@ table.REWS_PD4-table {
 
     width: 285px;
 
-    min-height: 10px;
-    height: 10px;
     max-height: 240px;
 
     margin: 3px;
@@ -456,4 +447,25 @@ table.REWS_PD4-table {
 
     overflow-y: scroll;
     scrollbar-color: silver #101010AA;
+}
+
+
+
+
+
+
+
+.REWS_PD4-horizontal-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+
+    width: 100%;
+}
+
+.REWS_PD4-vertical-column {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
 }
