@@ -10,7 +10,7 @@
     let SELECTED_PLAYER_DATA = null;
 
 
-    REWS_PD4.addons["SafeAttack"] = {
+    REWS_PD4.addons["Predator"] = {
         clickedOnMainPanel() {
             const title = document.getElementById(REWS_PD4.globals.identifier + "-main" + "-page_title");
             const content = document.getElementById(REWS_PD4.globals.identifier + "-main" + "-page_content");
