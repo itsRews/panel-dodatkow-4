@@ -23,6 +23,10 @@
             const descriptionText = "Dodatek który ułatwia tworzenie grupy z wszystkich osób na mapie."
             REWS_PD4.functions.templates.createPageSection(newContent, descriptionTitle, descriptionText);
 
+            const windowTitle = "Okienko"
+            const windowText = "W okienku są dwa przyciski do zapraszania, docelowo używane do zapraszania graczy gdy jesteś na telefonie. Dodatkowo, okienko opcje pokazywania graczy zależnie od ich profesji, a po kliknięciu zaprasza danego gracza."
+            REWS_PD4.functions.templates.createPageSection(newContent, windowTitle, windowText);
+
             const buttonBundle = document.createElement("div");
             buttonBundle.classList.add(REWS_PD4.globals.identifier + "-addons" + "-button_bundle");
             content.append(buttonBundle);
