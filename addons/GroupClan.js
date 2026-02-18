@@ -171,13 +171,14 @@
             playerList.classList.add(IDENTIFIER + "-player_list_scrollable");
             content.append(playerList);
 
-            const options = ["Dodaj do priorytetu", "Wyczysć listę priorytetów", "Usuń z/Pokaż listę priorytetów"];
+            const options = ["Dodaj do priorytetu", "Wyczyść listę priorytetów", "Usuń z/Pokaż listę priorytetów"];
             for (let option of options) {
                 REWS_PD4.functions.templates.createGroupClanButton(buttonsRow, `> ${option}`, false, () => {
                     renderPlayersByOption(playerList, option);
+                    this.remove();
                 });
             }
-            renderPlayersByOption(playerList, "Usuń z priorytetów");
+            renderPlayersByOption(playerList, "Usuń z/Pokaż listę priorytetów");
         }
     }
 
@@ -209,7 +210,7 @@
             }
         })();
 
-        PRIORITY_LIST = JSON.parse(localStorage.getItem(IDENTIFIER + "-priority_list"));
+        PRIORITY_LIST = localStorage.getItem(IDENTIFIER + "-priority_list") ? JSON.parse(localStorage.getItem(IDENTIFIER + "-priority_list")) : [];
     })();
 
     function renderPlayersByOption(parent, option) {
@@ -220,7 +221,6 @@
                 _g(`clan&a=members`, callback => {
                     let members = callback.members;
 
-                    let priorityMembers = [];
                     let clanMembers = [];
                     let currentMember = [];
 
@@ -228,8 +228,7 @@
                         currentMember.push(members[i]);
 
                         if (currentMember.length === 11) {
-                            if (PRIORITY_LIST.includes(currentMember[0])) priorityMembers.push(currentMember);
-                            else clanMembers.push(currentMember);
+                            if (!PRIORITY_LIST.includes(currentMember[0])) clanMembers.push(currentMember);
                             currentMember = [];
                         }
                     }
@@ -243,17 +242,16 @@
                 });
                 break;
 
-            case "Wyczysć listę priorytetów":
+            case "Wyczyść listę priorytetów":
                 PRIORITY_LIST = [];
                 localStorage.setItem(IDENTIFIER + "-priority_list", JSON.stringify(PRIORITY_LIST));
                 break;
 
-            case "Usuń/Pokaż listę priorytetów":
+            case "Usuń z/Pokaż listę priorytetów":
                 _g(`clan&a=members`, callback => {
                     let members = callback.members;
 
                     let priorityMembers = [];
-                    let clanMembers = [];
                     let currentMember = [];
 
                     for (let i = 0; i < members.length; i++) {
@@ -261,7 +259,6 @@
 
                         if (currentMember.length === 11) {
                             if (PRIORITY_LIST.includes(currentMember[0])) priorityMembers.push(currentMember);
-                            else clanMembers.push(currentMember);
                             currentMember = [];
                         }
                     }
