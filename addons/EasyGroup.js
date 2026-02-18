@@ -80,7 +80,7 @@
         };
 
         const keybindsJson = localStorage.getItem(IDENTIFIER + "-keybinds");
-        if (keybindsJson === null) {
+        if (keybindsJson === null || keybindsJson === "undefined") {
             REWS_PD4.addons[ADDON_NAME].keybinds = defaultKeybinds
             localStorage.setItem(IDENTIFIER + "-keybinds", JSON.stringify(REWS_PD4.addons[ADDON_NAME].keybinds));
         } else {
@@ -113,7 +113,7 @@
         };
 
         const settingsJson = localStorage.getItem(IDENTIFIER + "-settings");
-        if (settingsJson === null) {
+        if (settingsJson === null || settingsJson === "undefined") {
             REWS_PD4.addons[ADDON_NAME].settings = defaultSettings;
             localStorage.setItem(IDENTIFIER + "-settings", JSON.stringify(REWS_PD4.addons[ADDON_NAME].settings));
         } else {
