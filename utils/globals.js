@@ -291,7 +291,7 @@ REWS_PD4.functions.templates.createAddonWindowButton = (parent, text, onClick) =
     });
 }
 
-REWS_PD4.functions.templates.createAddonWindowButtoncreateSingleAddonWindowButton = (parent, text, onClick) => {
+REWS_PD4.functions.templates.createSingleAddonWindowButton = (parent, text, onClick) => {
     const button = document.createElement("div");
     button.classList.add(REWS_PD4.globals.identifier + "-addons" + "-single_button");
     parent.append(button);
