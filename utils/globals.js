@@ -477,7 +477,7 @@ REWS_PD4.functions.templates.createPageSection = (parent, title, text) => {
     parent.append(description);
 }
 
-REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox = (leftSide, rightSide, title, identifier, addonName) => {
+REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox = (leftSide, rightSide, title, identifier, addonName, setting) => {
     const titleText = document.createElement("span");
     titleText.classList.add(REWS_PD4.globals.identifier + "-addons" + "-settings_title");
     titleText.textContent = title;
@@ -486,9 +486,9 @@ REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox = (leftSide, right
     const checkbox = document.createElement("input");
     checkbox.classList.add(identifier + "-settings_checkbox");
     checkbox.type = "checkbox";
-    checkbox.checked = REWS_PD4.addons[addonName].settings.showMessages;
+    checkbox.checked = REWS_PD4.addons[addonName].settings[setting];
     checkbox.addEventListener("change", () => {
-        REWS_PD4.addons[addonName].settings.showMessages = checkbox.checked;
+        REWS_PD4.addons[addonName].settings[setting] = checkbox.checked;
         localStorage.setItem(identifier + "-settings", JSON.stringify(REWS_PD4.addons[addonName].settings));
     });
     rightSide.append(checkbox);

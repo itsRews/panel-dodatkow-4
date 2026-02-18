@@ -137,10 +137,10 @@
         firstRightSide.classList.add(REWS_PD4.globals.identifier + "-addons" + "-settings_right_side");
         combinedContent.append(firstRightSide);
 
-        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "Włącz:", IDENTIFIER, ADDON_NAME);
-        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "Zapraszaj obcych:", IDENTIFIER, ADDON_NAME);
-        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "Dodawaj wrogów klanu:", IDENTIFIER, ADDON_NAME);
-        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "Pokazuj komunikaty:", IDENTIFIER, ADDON_NAME);
+        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "Włącz:", IDENTIFIER, ADDON_NAME, "enabled");
+        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "Zapraszaj obcych:", IDENTIFIER, ADDON_NAME, "inviteUnknown");
+        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "Dodawaj wrogów klanu:", IDENTIFIER, ADDON_NAME, "inviteClanEnemies");
+        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "Pokazuj komunikaty:", IDENTIFIER, ADDON_NAME, "showMessages");
 
         const windowSettingsTitle = document.createElement("span");
         windowSettingsTitle.textContent = "- Ustawienia okienka -";
@@ -159,9 +159,9 @@
         secondRightSide.classList.add(REWS_PD4.globals.identifier + "-addons" + "-settings_right_side");
         secondCombinedContent.append(secondRightSide);
 
-        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(secondLeftSide, secondRightSide, "Pokazuj przycisk dodawania:", IDENTIFIER, ADDON_NAME);
-        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(secondLeftSide, secondRightSide, "Pokazuj przyciski profesji:", IDENTIFIER, ADDON_NAME);
-        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(secondLeftSide, secondRightSide, "Pokazuj wrogów:", IDENTIFIER, ADDON_NAME);
+        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(secondLeftSide, secondRightSide, "Pokazuj przycisk dodawania:", IDENTIFIER, ADDON_NAME, "showInviteButtons");
+        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(secondLeftSide, secondRightSide, "Pokazuj przyciski profesji:", IDENTIFIER, ADDON_NAME, "showProfessionButtons");
+        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(secondLeftSide, secondRightSide, "Pokazuj wrogów:", IDENTIFIER, ADDON_NAME, "showEnemies");
 
     }
 
