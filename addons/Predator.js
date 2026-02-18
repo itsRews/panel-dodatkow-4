@@ -294,7 +294,7 @@
         if (SELECTED_PLAYER_DATA.inMove === true) allowDistance = allowMoveDistance;
         else allowDistance = 2;
 
-        if (!(Math.abs(Engine.hero.d.x - playerAttacked.d.x) <= allowDistance && Math.abs(Engine.hero.d.y - playerAttacked.d.y) <= allowDistance)) return;
+        if (!(Math.abs(Engine.hero.d.x - SELECTED_PLAYER_DATA.d.x) <= allowDistance && Math.abs(Engine.hero.d.y - SELECTED_PLAYER_DATA.d.y) <= allowDistance)) return;
 
         if (player.getEmoLength() > 0) {
             Object.values(player.getOnSelfEmoList()).forEach(emotion => {
@@ -302,8 +302,8 @@
             });
         }
 
-        if (playerAttacked.getOnSelfEmoList().length > 0) {
-            Object.values(playerAttacked.getOnSelfEmoList()).forEach(emotion => {
+        if (SELECTED_PLAYER_DATA.getOnSelfEmoList().length > 0) {
+            Object.values(SELECTED_PLAYER_DATA.getOnSelfEmoList()).forEach(emotion => {
                 if (emotion.type === "battle") cancelAttacking = true;
                 else if (emotion.type === "pvpprotected") limited = true;
             });
