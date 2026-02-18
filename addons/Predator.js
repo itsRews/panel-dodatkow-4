@@ -153,7 +153,7 @@
 
         const playerList = document.createElement("div");
         playerList.classList.add(REWS_PD4.globals.identifier + "-addons" + "-player_list_scrollable");
-        playerList.style.height = "220px";
+        playerList.style.width = "220px";
         content.append(playerList);
 
         setInterval(() => {
