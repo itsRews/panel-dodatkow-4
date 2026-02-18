@@ -430,7 +430,14 @@ table.REWS_PD4-table {
     margin-right: 20px;
 }
 
+.REWS_PD4-addons-buttons_row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
 
+    width: 100%;
+}
 
 .REWS_PD4-addons-player_list_scrollable {
     display: flex;
