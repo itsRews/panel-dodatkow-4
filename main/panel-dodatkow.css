@@ -170,7 +170,7 @@
     background-color: #353535CC;
 }
 
-.REWS_PD4-addons-invite_button {
+.REWS_PD4-addons-single_button {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -188,7 +188,7 @@
     margin: 4px;
 }
 
-.REWS_PD4-addons-invite_button:hover {
+.REWS_PD4-addons-single_button:hover {
     background-color: #353535CC;
 }
 
