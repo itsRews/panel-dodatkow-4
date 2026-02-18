@@ -193,6 +193,10 @@
             buttonsRow.classList.add(IDENTIFIER + "-buttons_row");
             content.append(buttonsRow);
 
+            const playerListTitle = document.createElement("span");
+            playerListTitle.textContent = "- Lista graczy z daną profesją -";
+            content.append(playerListTitle);
+
             const playerList = document.createElement("div");
             playerList.classList.add(IDENTIFIER + "-player_list");
             content.append(playerList);
