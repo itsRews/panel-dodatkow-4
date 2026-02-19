@@ -269,7 +269,7 @@
 
         let fetchedData = Engine.others.getById(SELECTED_PLAYER_ID);
         if (fetchedData === undefined) {
-            SELECTED_PLAYER_DATA = null;
+            SELECTED_PLAYER_DATA = undefined;
             return;
         }
         SELECTED_PLAYER_DATA = fetchedData;
