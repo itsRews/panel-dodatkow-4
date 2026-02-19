@@ -292,8 +292,6 @@ REWS_PD4.functions.templates.createButton = (parent, text, checkbox, onClick) =>
         } else {
             localStorage.setItem(identifier + "-expanded", "false");
         }
-
-        return button;
     }
 
     button.addEventListener("mousedown", () => {
@@ -301,6 +299,8 @@ REWS_PD4.functions.templates.createButton = (parent, text, checkbox, onClick) =>
             onClick();
         }
     });
+
+    return button;
 }
 
 REWS_PD4.functions.templates.createAddonButton = (parent, text, onClick) => {
