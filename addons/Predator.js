@@ -268,11 +268,12 @@
         if (SELECTED_PLAYER_ID === null) return;
 
         let fetchedData = Engine.others.getById(SELECTED_PLAYER_ID);
-        if (fetchedData === undefined) {
-            SELECTED_PLAYER_DATA = undefined;
+        if (fetchedData === undefined || fetchedData === null) {
+            SELECTED_PLAYER_DATA = null;
             return;
+        } else {
+            SELECTED_PLAYER_DATA = fetchedData;
         }
-        SELECTED_PLAYER_DATA = fetchedData;
     }
 
     setInterval(fetchPlayerData, 100);
