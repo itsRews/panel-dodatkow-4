@@ -148,7 +148,7 @@
 
         const playerListTitle = document.createElement("span");
         playerListTitle.textContent = "- Gracze do dobijania -";
-        playerListTitle.style.marginTop = "10px";
+        playerListTitle.style.marginTop = "5px";
         content.append(playerListTitle);
 
         const playerList = document.createElement("div");

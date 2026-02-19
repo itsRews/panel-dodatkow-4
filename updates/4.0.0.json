@@ -5,5 +5,8 @@
   { "addon": "EasyGroup", "changes": "Zaktualizowano wygląd dodatku." },
   { "addon": "EasyGroup", "changes": "Dodano funkcjonalność dodatku GroupManager jako okienko." },
   { "addon": "EasyGroup", "changes": "Dodano przyciski do manualnego zapraszania graczy w przypadku używania dodatków z telefonu." },
-  { "addon": "GroupManager", "changes": "Usunięto dodatek." }
+  { "addon": "GroupManager", "changes": "Usunięto dodatek." },
+  { "addon": "Predator", "changes": "Zmieniono system dobijania." },
+  { "addon": "EntryTimeout", "changes": "Zaktualizowano dodatek o kopalnie 64." },
+  { "addon": "EntryTimeout", "changes": "Naprawiono błędne dodawanie timera w przypadku wyjścia z pułapki." }
 ]

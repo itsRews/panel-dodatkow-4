@@ -25,16 +25,13 @@ REWS_PD4.functions.removeAllChildren = element => {
 }
 
 REWS_PD4.functions.loadSettings = (defaultKeybinds, defaultSettings, identifier, addonName) => {
-
-
-
     (function setupKeybinds() {
         const keybindsJson = localStorage.getItem(identifier + "-keybinds");
         if (keybindsJson === null || keybindsJson === "undefined") {
             REWS_PD4.addons[addonName].keybinds = defaultKeybinds
             localStorage.setItem(identifier + "-keybinds", JSON.stringify(REWS_PD4.addons[addonName].keybinds));
         } else {
-            REWS_PD4.addons[addonName].keybinds = JSON.parse(keybindsJson);
+            REWS_PD4.addons[addonName].keybinds = JSON.parse(keybindsJson).keybinds;
 
             for (let key in defaultKeybinds) {
                 if (REWS_PD4.addons[addonName].keybinds[key] === undefined) REWS_PD4.addons[addonName].keybinds[key] = defaultKeybinds[key];
@@ -54,7 +51,7 @@ REWS_PD4.functions.loadSettings = (defaultKeybinds, defaultSettings, identifier,
             REWS_PD4.addons[addonName].settings = defaultSettings;
             localStorage.setItem(identifier + "-settings", JSON.stringify(REWS_PD4.addons[addonName].settings));
         } else {
-            REWS_PD4.addons[addonName].settings = JSON.parse(settingsJson);
+            REWS_PD4.addons[addonName].settings = JSON.parse(settingsJson).settings;
 
             for (let key in defaultSettings) {
                 if (REWS_PD4.addons[addonName].settings[key] === undefined) REWS_PD4.addons[addonName].settings[key] = defaultSettings[key];
