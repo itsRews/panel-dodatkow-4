@@ -476,7 +476,7 @@ REWS_PD4.functions.templates.createKeybindsTable = (parent, headers, data) => {
                     checkbox.checked = config.shift === true;
                     checkbox.addEventListener("change", () => {
                         config.shift = checkbox.checked;
-                        localStorage.setItem(REWS_PD4.globals.identifier + `-${addonName}` + "-keybinds", JSON.stringify(addon));
+                        localStorage.setItem(REWS_PD4.globals.identifier + `-${addonName}` + "-keybinds", JSON.stringify(keybinds));
                     });
 
                     cell.append(checkbox);
@@ -493,7 +493,7 @@ REWS_PD4.functions.templates.createKeybindsTable = (parent, headers, data) => {
                     checkbox.checked = config.ctrl === true;
                     checkbox.addEventListener("change", () => {
                         config.ctrl = checkbox.checked;
-                        localStorage.setItem(REWS_PD4.globals.identifier + `-${addonName}` + "-keybinds", JSON.stringify(addon));
+                        localStorage.setItem(REWS_PD4.globals.identifier + `-${addonName}` + "-keybinds", JSON.stringify(keybinds));
                     });
 
                     cell.append(checkbox);
@@ -510,7 +510,7 @@ REWS_PD4.functions.templates.createKeybindsTable = (parent, headers, data) => {
                     checkbox.checked = config.alt === true;
                     checkbox.addEventListener("change", () => {
                         config.alt = checkbox.checked;
-                        localStorage.setItem(REWS_PD4.globals.identifier + `-${addonName}` + "-keybinds", JSON.stringify(addon));
+                        localStorage.setItem(REWS_PD4.globals.identifier + `-${addonName}` + "-keybinds", JSON.stringify(keybinds));
                     });
 
                     cell.append(checkbox);
@@ -537,7 +537,7 @@ REWS_PD4.functions.templates.createKeybindsTable = (parent, headers, data) => {
                         config.code = event.code;
                         input.value = event.code;
 
-                        localStorage.setItem(REWS_PD4.globals.identifier + `-${addonName}` + "-keybinds", JSON.stringify(addon));
+                        localStorage.setItem(REWS_PD4.globals.identifier + `-${addonName}` + "-keybinds", JSON.stringify(keybinds));
 
                         input.blur();
                     });
