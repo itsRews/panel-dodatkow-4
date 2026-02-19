@@ -109,7 +109,10 @@
         serverMessage.apply(this, arguments);
         const eventData = JSON.parse(event.data);
 
-        if (eventData.town) {
+        if (eventData.town &&
+            !lastMap.includes(" - pułapka") &&
+            REWS_PD4.addons[ADDON_NAME].settings["enabled"]
+        ) {
             if (!lastMap.includes(" - pułapka")) {
                 switch (eventData.town.name) {
                     case "Kopalnia Krwawej Pychy":
@@ -134,7 +137,7 @@
                 }
             }
 
-            lastMap = eventData.town.name;
         }
+        lastMap = eventData.town.name;
     }
 })();
