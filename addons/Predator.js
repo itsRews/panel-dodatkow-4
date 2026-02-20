@@ -276,7 +276,7 @@
         }
     }
 
-    setInterval(fetchPlayerData, 100);
+    setInterval(fetchPlayerData, 25);
 
     /*
 
