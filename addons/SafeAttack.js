@@ -69,7 +69,6 @@
 
         const defaultSettings = {
             "enabled": false,
-            "showMessages": false
         };
 
         REWS_PD4.functions.loadSettings(defaultKeybinds, defaultSettings, IDENTIFIER, ADDON_NAME);
@@ -97,7 +96,6 @@
         combinedContent.append(firstRightSide);
 
         REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "Włącz:", IDENTIFIER, ADDON_NAME, "enabled");
-        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "Pokazuj komunikaty:", IDENTIFIER, ADDON_NAME, "showMessages");
     }
 
     function createAddonWindowBody() {
@@ -178,8 +176,6 @@
 
 
     function attack() {
-        if (REWS_PD4.addons[ADDON_NAME].settings.showMessages) message("[R] SA: Atakowanie wrogów.");
-
         Object.values(Engine.others.check()).forEach(player => {
             if (!(Math.abs(Engine.hero.d.x - player.d.x) <= 2 && Math.abs(Engine.hero.d.y - player.d.y) <= 2)) return;
 

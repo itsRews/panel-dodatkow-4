@@ -79,7 +79,6 @@
 
         const defaultSettings = {
             "enabled": false,
-            "showMessages": false,
         };
 
         REWS_PD4.functions.loadSettings(defaultKeybinds, defaultSettings, IDENTIFIER, ADDON_NAME);
@@ -107,7 +106,6 @@
         combinedContent.append(firstRightSide);
 
         REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "Włącz:", IDENTIFIER, ADDON_NAME, "enabled");
-        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "Pokazuj komunikaty:", IDENTIFIER, ADDON_NAME, "showMessages");
     }
 
     function createAddonWindowBody() {
@@ -270,7 +268,6 @@
         let fetchedData = Engine.others.getById(SELECTED_PLAYER_ID);
         if (fetchedData === undefined || fetchedData === null) {
             SELECTED_PLAYER_DATA = null;
-            return;
         } else {
             SELECTED_PLAYER_DATA = fetchedData;
         }
@@ -306,9 +303,10 @@
         if (cancelAttacking) return;
         if (!allowAttacking) return;
 
+        attackTried++;
+
         if (attackTried < 2) {
             window._g(`fight&a=attack&id=${SELECTED_PLAYER_ID}`);
-            attackTried++;
             setTimeout(() => {
                 attackTried--;
             }, 2000);

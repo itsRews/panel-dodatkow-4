@@ -72,7 +72,6 @@
             "enabled": false,
             "mapPriority": true,
             "removeAlerts": true,
-            "showMessages": false
         };
 
         REWS_PD4.functions.loadSettings(defaultKeybinds, defaultSettings, IDENTIFIER, ADDON_NAME);
@@ -102,7 +101,7 @@
         REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "Włącz:", IDENTIFIER, ADDON_NAME, "enabled");
         REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "Priorytet osób na mapie:", IDENTIFIER, ADDON_NAME, "mapPriority");
         REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "Usuwaj komunikaty:", IDENTIFIER, ADDON_NAME, "removeAlerts");
-        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "Pokazuj komunikaty:", IDENTIFIER, ADDON_NAME, "showMessages");}
+    }
 
     function createAddonWindowBody() {
         ADDON_WINDOW_BODY = REWS_PD4.functions.templates.createBody(REWS_PD4.HTML.host, IDENTIFIER + "-addon_window", `[REWS] ${ADDON_NAME}`, `[R] ${ADDON_SHORTCUT}`, true);
@@ -170,15 +169,9 @@
                 playerCount++;
             });
 
-            if (!isLeader) {
-                if (REWS_PD4.addons[ADDON_NAME].settings.showMessages) message("[R] GC: Nie jesteś dowódcą grupy.");
-                return;
-            }
+            if (!isLeader) return;
 
-            if (playerCount === 10) {
-                if (REWS_PD4.addons[ADDON_NAME].settings.showMessages) message("[R] GC: Grupa jest pełna.");
-                return;
-            }
+            if (playerCount === 10) return;
         }
 
         invitePlayers();
@@ -188,8 +181,6 @@
     async function invitePlayers() {
         if (inviteCooldown) return;
         inviteCooldown = true;
-
-        if (REWS_PD4.addons[ADDON_NAME].settings.showMessages) message("[R] GC: Rozpoczęto zapraszanie graczy...");
 
         if (REWS_PD4.addons[ADDON_NAME].settings.mapPriority) inviteOnMap();
 

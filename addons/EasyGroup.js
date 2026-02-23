@@ -83,6 +83,20 @@
                 "ctrl": true,
                 "alt": false,
                 "code": "KeyV"
+            },
+            "disbandGroup": {
+                "action": "Rozwiązuje grupe której jesteś dowódcą.",
+                "shift": true,
+                "ctrl": false,
+                "alt": false,
+                "code": "KeyB"
+            },
+            "leaveGroup": {
+                "action": "Wychodzi z grupy w której jesteś członkiem.",
+                "shift": true,
+                "ctrl": false,
+                "alt": false,
+                "code": "KeyB"
             }
         };
 
@@ -90,7 +104,6 @@
             "enabled": false,
             "inviteUnknown": false,
             "inviteClanEnemies": false,
-            "showMessages": false,
             "showInviteButtons": true,
             "showProfessionButtons": true,
             "showGroupMembers": false,
@@ -125,7 +138,6 @@
         REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "Włącz:", IDENTIFIER, ADDON_NAME, "enabled");
         REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "Zapraszaj obcych:", IDENTIFIER, ADDON_NAME, "inviteUnknown");
         REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "Dodawaj wrogów klanu:", IDENTIFIER, ADDON_NAME, "inviteClanEnemies");
-        REWS_PD4.functions.templates.createAddonSettingsTitleCheckbox(firstLeftSide, firstRightSide, "Pokazuj komunikaty:", IDENTIFIER, ADDON_NAME, "showMessages");
 
         const windowSettingsTitle = document.createElement("span");
         windowSettingsTitle.textContent = "- Ustawienia okienka -";
@@ -271,27 +283,80 @@
             event.ctrlKey === REWS_PD4.addons[ADDON_NAME].keybinds["thirteenAwayInvite"].ctrl &&
             event.altKey === REWS_PD4.addons[ADDON_NAME].keybinds["thirteenAwayInvite"].alt
         ) checkPermissions("thirteenAway");
+        else if (
+            event.code === REWS_PD4.addons[ADDON_NAME].keybinds["disbandGroup"].code &&
+            event.shiftKey === REWS_PD4.addons[ADDON_NAME].keybinds["disbandGroup"].shift &&
+            event.ctrlKey === REWS_PD4.addons[ADDON_NAME].keybinds["disbandGroup"].ctrl &&
+            event.altKey === REWS_PD4.addons[ADDON_NAME].keybinds["disbandGroup"].alt
+        ) disbandOrLeave("disband");
+        else if (
+            event.code === REWS_PD4.addons[ADDON_NAME].keybinds["leaveGroup"].code &&
+            event.shiftKey === REWS_PD4.addons[ADDON_NAME].keybinds["leaveGroup"].shift &&
+            event.ctrlKey === REWS_PD4.addons[ADDON_NAME].keybinds["leaveGroup"].ctrl &&
+            event.altKey === REWS_PD4.addons[ADDON_NAME].keybinds["leaveGroup"].alt
+        ) disbandOrLeave("leave");
     });
 
-    function checkPermissions(inviteType) {
-        const groupExists = Engine.party !== undefined && Engine.party.isParty();
+    let HERO_IS_LEADER = false;
+    let HERO_HAS_PARTY = false;
+    let PLAYER_COUNT = 0;
+    function checkGroupState() {
+        (e => {
+            Engine.communication.dispatcher.on_party = function(...args){
+                HERO_HAS_PARTY = !!args[0].members;
 
-        if (groupExists) {
-            let isLeader = false;
-            let playerCount = 0;
+                PLAYER_COUNT = Object.keys(args[0].members).length;
 
-            Engine.party.getMembers().forEach(member => {
-                if (member.isHero && member.leader) isLeader = true;
-                playerCount++;
-            });
+                if (args[0].members) {
+                    Object.values(args[0].members).forEach(member => {
+                        if (member.account !== Engine.hero.d.account) return;
+                        HERO_IS_LEADER = member.hasOwnProperty("commander") && member.commander === 1;
+                    });
+                }
+                e.apply(this,args);
+            }
+        })(Engine.communication.dispatcher.on_party)
+    }
+    checkGroupState();
 
-            if (!isLeader) {
-                if (REWS_PD4.addons[ADDON_NAME].settings.showMessages) message("[R] EG: Nie jesteś dowódcą grupy.");
+
+    function disbandOrLeave(action) {
+
+        if (!HERO_HAS_PARTY) return;
+
+        if (action === "disband") {
+
+            if (!HERO_IS_LEADER) return;
+
+            _g('party&a=disband');
+
+        } else if (action === "leave") {
+
+            if (HERO_IS_LEADER) {
+
+                let newLeaderId;
+                Engine.party.getMembers().values().some(player => {
+                    if (player.isHero === true) return false;
+
+                    newLeaderId = player.accountId;
+                    return true;
+                });
+
+                _g(`party&a=give&id=${newLeaderId}`);
                 return;
             }
 
-            if (playerCount === 10) {
-                if (REWS_PD4.addons[ADDON_NAME].settings.showMessages) message("[R] EG: Grupa jest pełna.");
+            _g(`party&a=rm&id=${Engine.hero.d.id}`);
+        }
+    }
+
+    function checkPermissions(inviteType) {
+        if (HERO_HAS_PARTY) {
+            if (!HERO_IS_LEADER) {
+                return;
+            }
+
+            if (PLAYER_COUNT === 10) {
                 return;
             }
         }
@@ -300,7 +365,6 @@
     }
 
     function invitePlayers(inviteType) {
-        if (REWS_PD4.addons[ADDON_NAME].settings.showMessages) message("[R] EG: Rozpoczęto zapraszanie graczy...");
         Object.values(Engine.others.check()).forEach(player => {
             let cancelInviting = false;
 
