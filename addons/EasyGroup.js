@@ -305,9 +305,9 @@
             Engine.communication.dispatcher.on_party = function(...args){
                 HERO_HAS_PARTY = !!args[0].members;
 
-                PLAYER_COUNT = Object.keys(args[0].members).length;
-
                 if (args[0].members) {
+                    PLAYER_COUNT = Object.keys(args[0].members).length;
+
                     Object.values(args[0].members).forEach(member => {
                         if (member.account !== Engine.hero.d.account) return;
                         HERO_IS_LEADER = member.hasOwnProperty("commander") && member.commander === 1;
