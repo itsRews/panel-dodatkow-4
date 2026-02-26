@@ -302,15 +302,14 @@
 
         if (cancelAttacking) return;
         if (!allowAttacking) return;
+        if (attackTried >= 2) return;
 
         attackTried++;
 
-        if (attackTried < 2) {
-            window._g(`fight&a=attack&id=${SELECTED_PLAYER_ID}`);
-            setTimeout(() => {
-                attackTried--;
-            }, 2000);
-        }
+        window._g(`fight&a=attack&id=${SELECTED_PLAYER_ID}`);
+        setTimeout(() => {
+            attackTried--;
+        }, 2000);
     }
 
 
