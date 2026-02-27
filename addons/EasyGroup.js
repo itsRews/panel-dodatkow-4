@@ -343,7 +343,6 @@
                 });
 
                 _g(`party&a=give&id=${newLeaderId}`);
-                return;
             }
 
             _g(`party&a=rm&id=${Engine.hero.d.id}`);
